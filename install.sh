@@ -294,7 +294,8 @@ configure_shell() {
     fi
     
     echo ""
-    read -p "$(echo -e ${YELLOW}Do you want to set Fish as your default shell? [y/N]:${NC} " -n 1 -r
+    echo -e "${YELLOW}Do you want to set Fish as your default shell? [y/N]:${NC}"
+    read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         chsh -s "$FISH_PATH"
