@@ -1,0 +1,19 @@
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Export with timestamps
+exports/*_??????_??????.txt
+
+# IDE
+.vscode/
+.idea/
