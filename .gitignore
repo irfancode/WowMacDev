@@ -1,19 +1,69 @@
-# OS files
+# ============================================
+# macOS
+# ============================================
 .DS_Store
 .AppleDouble
 .LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
 
-# Logs
-*.log
-
-# Temporary files
+# ============================================
+# IDE and Editors
+# ============================================
+.vscode/
+.idea/
 *.swp
 *.swo
 *~
+\#*\#
+.\#*
 
-# Export with timestamps
+# ============================================
+# Logs
+# ============================================
+*.log
+logs/
+
+# ============================================
+# Temporary Files
+# ============================================
+*.tmp
+*.bak
+*.temp
+.tmp.*
+
+# ============================================
+# Timestamped Exports (auto-generated)
+# ============================================
 exports/*_??????_??????.txt
+exports/*_??????_??????.log
 
-# IDE
-.vscode/
-.idea/
+# Keep only the main files
+!exports/*.txt
+!exports/*.log
+
+# ============================================
+# Private/Personal Configs
+# ============================================
+# Uncomment if you want to ignore personal configs:
+# configs/personal/
+# exports/private/
+
+# ============================================
+# Build artifacts
+# ============================================
+*.dmg
+*.pkg
+*.zip
+
+# ============================================
+# Secrets (NEVER commit these!)
+# ============================================
+*.pem
+*.key
+.env
+.env.*
+credentials.json
+secrets/
