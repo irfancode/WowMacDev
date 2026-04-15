@@ -1,0 +1,22 @@
+title: Irfan's Terminal Setup
+email: irfan@example.com
+description: >-
+  A powerful, beautiful terminal configuration featuring Ghostty, Zellij, and Starship.
+baseurl: "/dotfiles"
+url: "https://irfancode.github.io"
+github:
+  repo: "https://github.com/irfancode/dotfiles"
+  branch: "main"
+
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+collections:
+  posts:
+    permalink: /blog/:title/
