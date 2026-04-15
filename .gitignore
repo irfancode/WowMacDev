@@ -1,0 +1,14 @@
+# OS files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Temporary files
+.tmp/
+.cache/
+
+# Sensitive data (if any)
+*.key
+*.pem
+.env
