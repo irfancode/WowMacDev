@@ -35,7 +35,7 @@ alias zqi='zoxide query --interactive'
 # Ctrl+T: Search files
 # Alt+C: cd into directory
 # ═══════════════════════════════════════════════════════════
-eval "$(fzf --zsh)"
+# Key bindings (defined at end of file after compinit)
 
 # ── fzf colors and options ─────────────────────────────────
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
@@ -242,10 +242,49 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # ═══════════════════════════════════════════════════════════
-# Plugins (if using a plugin manager)
+# ZSH COMPLETION SYSTEM
 # ═══════════════════════════════════════════════════════════
-# Uncomment if using zsh plugins
-# plugins=(git fzf zoxide docker npm node)
+autoload -Uz compinit
+compinit
+
+# Speed up completion
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
+# Case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# Group completions by type
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:matches' group-name ''
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+
+# Colorful completions
+zstyle ':completion:*' list-colors "${LS_COLORS}"
+
+# Menu selection
+zstyle ':completion:*' menu select
+
+# Complete in the middle of words
+setopt COMPLETE_IN_WORD
+
+# Don't beep on completion
+unsetopt LIST_BEEP
+
+# Show completion menu on first TAB
+setopt MENU_COMPLETE
+
+# ═══════════════════════════════════════════════════════════
+# FZF TAB COMPLETION
+# Press TAB to fuzzy complete
+# ═══════════════════════════════════════════════════════════
+# Use fzf for completion with TAB
+source $(brew --prefix)/opt/fzf/shell/completion.zsh 2>/dev/null
+source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
+
+# Set up fzf completion for commands
+eval "$(fzf --zsh)"
 
 # ═══════════════════════════════════════════════════════════
 # WELCOME MESSAGE
