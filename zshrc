@@ -3,6 +3,20 @@
 # Ghostty + Zellij + Productivity Setup
 # ═══════════════════════════════════════════════════════════
 
+# ── Lean AI Stack Configuration ─────────────────────────────
+# Optimized for 8GB M1 Mac - minimize RAM/CPU usage
+
+# Ollama environment (local LLM runtime)
+export OLLAMA_MAX_LOADED_MODELS=1
+export OLLAMA_NUM_PARALLEL=1
+export OLLAMA_CTX_SIZE=2048
+export OLLAMA_KEEP_ALIVE=15m
+export OLLAMA_FLASH_ATTENTION=1
+
+# aichat settings
+export AICHAVT_PROVIDER=ollama
+export AICHAVT_MODEL=llama3.2:3b
+
 # ── Source Profile Files ────────────────────────────────────
 # Source .profile for PATH additions
 [ -f "$HOME/.profile" ] && . "$HOME/.profile"
@@ -270,28 +284,12 @@ zstyle ':completion:*' menu select
 setopt COMPLETE_IN_WORD
 
 # Don't beep on completion
-unsetopt LIST_BEEP
 
-# Show completion menu on first TAB
-setopt MENU_COMPLETE
-
-# ═══════════════════════════════════════════════════════════
 # FZF TAB COMPLETION
-# Press TAB to fuzzy complete
-# ═══════════════════════════════════════════════════════════
-# Use fzf for completion with TAB
-source $(brew --prefix)/opt/fzf/shell/completion.zsh 2>/dev/null
-source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
-
-# Set up fzf completion for commands
-eval "$(fzf --zsh)"
-
-# ═══════════════════════════════════════════════════════════
-# WELCOME MESSAGE
-# ═══════════════════════════════════════════════════════════
-# Uncomment to show a welcome message
-# echo ""
-# echo "  Ghostty + Zellij + Catppuccin Mocha"
-# echo "  Type 'zj' for Zellij, 'lg' for Lazygit"
-# echo "  Press Ctrl+\` for quick terminal (Ghostty)"
-# echo ""
+# Uses fzf completion if available (from Nix or brew)
+if [[ -n "$commands[fzf]" ]]; then
+  # completion.zsh handles TAB completion
+  # key-bindings.zsh handles Ctrl+R, Ctrl+T, Alt+C
+  source /nix/store/6dr0p0qp5kndwhhkxbvjbsmfml5dpnws-fzf-0.71.0/share/fzf/completion.zsh 2>/dev/null
+  source /nix/store/6dr0p0qp5kndwhhkxbvjbsmfml5dpnws-fzf-0.71.0/share/fzf/key-bindings.zsh 2>/dev/null
+fi
