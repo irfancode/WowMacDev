@@ -154,6 +154,46 @@ Contributions welcome! Open issues or PRs.
 
 ---
 
+---
+
+## 📦 Nix Package Management
+
+I use **Nix** for declarative, reproducible package management across all my machines.
+
+### Installation
+
+```bash
+# Install Nix
+sh <(curl https://nixos.org/nix/install) --daemon
+
+# Clone dotfiles
+git clone https://github.com/irfancode/dotfiles.git ~/dotfiles
+
+# Enter Nix shell with all tools
+cd ~/dotfiles/nix && nix-shell shell.nix
+```
+
+### Packages Managed by Nix
+
+| Category | Tools |
+|----------|-------|
+| **Editors** | neovim |
+| **Languages** | nodejs_22, python312, go, rust, ruby_3_3 |
+| **CLI** | bat, eza, fd, fzf, ripgrep, tmux |
+| **Productivity** | starship, zellij, zoxide, yazi, lazygit |
+| **Dev Tools** | git, github-cli, hugo, httpie |
+
+### Benefits
+
+- ✅ **Reproducible** — Same packages everywhere
+- ✅ **Rollbacks** — Instant recovery
+- ✅ **Multi-version** — nodejs_18 AND nodejs_20
+- ✅ **Isolated deps** — No conflict hell
+
+See [nix/README.md](./nix/README.md) for full documentation.
+
+---
+
 <p align="center">
   Made with ❤️ for terminal enthusiasts<br>
   <a href="https://github.com/irfancode/dotfiles">⭐ Star this repo</a>
