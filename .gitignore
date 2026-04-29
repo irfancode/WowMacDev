@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+*~
+
+# Cargo/Rust
+.cargo/
+target/
+Cargo.lock
+Cargo/
+bin/
+pkg/
+
+# VS Code
+.vscode/
+
+# Backup
+*.bak
+*.old
+*.swp
+
+# docs/images placeholders
+docs/
+images/
+
+# Config - exclude scripts
+.local/
+.bashrc
+.zshrc
+.config/
