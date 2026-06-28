@@ -1,0 +1,106 @@
+{
+  "captured_at": "2026-06-27T23:30:00Z",
+  "hostname": "Singularity",
+  "os": {
+    "name": "macOS",
+    "version": "27.0",
+    "build": "26A5368g",
+    "kernel": "Darwin 27.0.0",
+    "uptime_hours": 9.5
+  },
+  "hardware": {
+    "model": "MacBook Air (Mac16,12)",
+    "chip": "Apple M4",
+    "cores": "10 (4P + 6E)",
+    "memory_gb": 16,
+    "storage_gb": 245,
+    "storage_used_gb": 191,
+    "storage_free_gb": 54
+  },
+  "shell": {
+    "type": "zsh",
+    "config": ".zshrc + .zprofile",
+    "prompt": "Starship (Catppuccin Mocha)",
+    "plugins": ["zsh-autosuggestions", "zsh-syntax-highlighting", "zoxide", "fzf"]
+  },
+  "terminal": {
+    "app": "Ghostty 1.3.1",
+    "theme": "Catppuccin Mocha",
+    "font": "JetBrainsMono NF 16px",
+    "opacity": 0.88,
+    "blur": 30
+  },
+  "editors": {
+    "primary": "Neovim (LazyVim)",
+    "secondary": "vim"
+  },
+  "package_managers": {
+    "homebrew_formulae": 55,
+    "homebrew_casks": 12,
+    "mas_apps": ["uBlock Origin Lite"],
+    "cargo_packages": ["du-dust"],
+    "npm_globals": ["corepack"],
+    "pip_packages": ["certifi", "cffi", "cryptography", "pydantic"]
+  },
+  "homebrew_core": [
+    "age", "ansible", "awscli", "azure-cli", "btop", "doggo", "duf",
+    "glances", "helm", "helmfile", "htop", "httpie", "k9s", "kind",
+    "kubernetes-cli", "kustomize", "mas", "mtr", "ncdu", "openjdk",
+    "packer", "podman", "procs", "python@3.12", "python@3.13",
+    "python@3.14", "rustup", "sops", "speedtest-cli", "tldr", "tlrc",
+    "terraform", "tree", "yq"
+  ],
+  "homebrew_casks": [
+    "1password-cli", "gcloud-cli", "ghostty", "microsoft-powerpoint",
+    "microsoft-word", "notion", "onedrive", "orbstack", "rectangle",
+    "whatsapp", "zoom"
+  ],
+  "dev_toolchains": {
+    "node": "v22.23.1",
+    "python": "3.14.6 (default), 3.13.14, 3.12.13",
+    "go": "1.26.4",
+    "rust": "1.96.0",
+    "java": "OpenJDK 26.0.1",
+    "docker": "29.4.0 (via OrbStack 2.2.1)",
+    "k8s": "kubectl v1.36.2, kind, helm v4.2.2, helmfile, kustomize, k9s",
+    "terraform": "1.15.7",
+    "ansible": "core 2.21.1",
+    "aws": "aws-cli 2.35.11",
+    "azure": "azure-cli 2.87.0",
+    "gcloud": "latest (via cask)"
+  },
+  "standalone_cli_tools": [
+    "bat", "fzf", "gh", "lazygit", "lsd", "nvim", "rg",
+    "starship", "zoxide", "update-tools"
+  ],
+  "applications": {
+    "browsers": ["Firefox Nightly", "Zen.app", "Dia.app"],
+    "office": ["Microsoft Word", "Microsoft PowerPoint", "ONLYOFFICE", "Notion"],
+    "communication": ["WhatsApp", "Spark Desktop", "zoom.us"],
+    "cloud_storage": ["OneDrive"],
+    "utilities": ["Rectangle", "Ghostty", "OrbStack", "Raycast"]
+  },
+  "finder_favorites": [
+    "Developer", "GitHub", "Documents", "Downloads", "Desktop",
+    "OneDrive", "nlb-intelligence", "FastFox", "phi4-web", "rsumly"
+  ],
+  "projects_at_home": [
+    "nlb-intelligence", "FastFox", "phi4-web", "mlx-env",
+    "rsumly", "keeper", "CURATED_BOOKMARKS.md"
+  ],
+  "fonts": ["Iosevka Nerd Font (full family)"],
+  "key_macos_preferences": {
+    "dark_mode": true,
+    "dock_autohide": true,
+    "dock_magnification": true,
+    "key_repeat": "fast (1/10)",
+    "tap_to_click": true,
+    "finder_list_view": true,
+    "finder_show_hidden": true
+  },
+  "launch_agents": [
+    "com.google.GoogleUpdater.wake",
+    "com.google.keystone.agent",
+    "com.irfan.tool-updater"
+  ]
+}

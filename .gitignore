@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Backup files
+*.backup.*
+
+# Brew lock
+Brewfile.lock.json
