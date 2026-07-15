@@ -1,0 +1,189 @@
+# ──────────────────────────────────────────────────
+# Monokai Pro Starship Prompt Configuration
+# Inspired by Monokai Pro color palette
+# ──────────────────────────────────────────────────
+
+### Format
+format = """
+[](#2D2A2E)\
+$os\
+$username\
+[](bg:#403E41 fg:#2D2A2E)\
+$directory\
+$git_branch\
+$git_status\
+[](fg:#403E41)\
+$fill\
+$nodejs\
+$python\
+$rust\
+$golang\
+[](fg:#403E41)\
+$cmd_duration\
+$line_break\
+$character\
+"""
+
+### Right Prompt
+right_format = """
+$time\
+"""
+
+### Character
+[character]
+success_symbol = "[▶](bold #A9DC76)"
+error_symbol = "[▶](bold #FF6188)"
+vicmd_symbol = "[N](bold #AB9DF2)"
+
+### Directory
+[directory]
+truncation_length = 3
+truncation_symbol = "…/"
+style = "bg:#2D2A2E fg:#78DCE8"
+home_symbol = "~"
+read_only = " 🔒"
+format = " [ $path ]($style)"
+
+### Git Branch
+[git_branch]
+format = " [$symbol$branch]($style)"
+style = "bg:#2D2A2E fg:#AB9DF2"
+symbol = "⎇ "
+truncation_length = 15
+truncation_symbol = "…/"
+ignore_branches = ["main", "master", "develop"]
+
+### Git Status
+[git_status]
+format = '[$all_status$ahead_behind]($style)'
+style = "bg:#2D2A2E fg:#FFD866"
+conflicted = "🏳"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕${count}"
+up_to_date = "●"
+untracked = "?"
+stashed = "📦"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+### Node.js
+[nodejs]
+format = "via [$symbol$version]($style)"
+style = "bg:#2D2A2E fg:#A9DC76"
+symbol = "⬢ "
+version_format = "${raw}"
+detect_extensions = ["js", "jsx", "ts", "tsx", "mjs", "cjs"]
+detect_files = ["package.json", ".node-version", "package-lock.json", "yarn.lock", "pnpm-lock.yaml"]
+detect_folders = ["node_modules", ".yarn"]
+
+### Python
+[python]
+format = "via [$symbol$version]($style)"
+style = "bg:#2D2A2E fg:#FFD866"
+symbol = " "
+version_format = "${raw}"
+pyenv_version_name = true
+detect_extensions = ["py", "pyw"]
+detect_files = ["requirements.txt", "Pipfile", "pyproject.toml", "setup.py", "setup.cfg", ".python-version", "MANIFEST.in"]
+detect_folders = [".venv", "venv", "env", ".env", "virtualenv"]
+
+### Rust
+[rust]
+format = "via [$symbol$version]($style)"
+style = "bg:#2D2A2E fg:#FC9867"
+symbol = "🦀 "
+version_format = "${raw}"
+
+### Go
+[golang]
+format = "via [$symbol$version]($style)"
+style = "bg:#2D2A2E fg:#78DCE8"
+symbol = "🐹 "
+version_format = "${raw}"
+
+### Command Duration
+[cmd_duration]
+format = "⏱️  [$duration]($style)"
+style = "fg:#69676C"
+show_milliseconds = true
+min_time = 500
+
+### Time
+[time]
+format = "[$time]($style)"
+style = "fg:#69676C"
+disabled = false
+time_format = "%H:%M"
+utc_time_offset = "local"
+
+### OS
+[os]
+disabled = false
+style = "bg:#2D2A2E fg:#FF6188"
+
+### Username
+[username]
+show_always = false
+style_user = "bg:#2D2A2E fg:#FF6188"
+style_root = "bg:#2D2A2E fg:#FF6188"
+format = "[$user]($style)"
+
+### Fill
+[fill]
+style = "fg:#403E41"
+symbol = "─"
+
+### Status
+[status]
+disabled = false
+style = "bg:#2D2A2E fg:#FF6188"
+format = "[$symbol$status_common_meaning]($style)"
+map_symbol = true
+recognize_signal_code = true
+
+### Shell
+[shell]
+disabled = false
+format = "[$indicator]($style)"
+
+### Jobs
+[jobs]
+style = "bg:#2D2A2E fg:#FFD866"
+symbol = "✦ "
+format = "[$symbol$number]($style)"
+threshold = 1
+
+### Memory
+[memory_usage]
+disabled = true
+style = "bg:#2D2A2E fg:#A9DC76"
+format = "via $symbol[$ram_pct]($style)"
+threshold = 75
+
+### Container
+[container]
+style = "bg:#2D2A2E fg:#FF6188"
+symbol = "⬢"
+format = "[$symbol $name]($style)"
+
+### Line Break
+[line_break]
+disabled = false
+
+### Palette Override (Monokai Pro colors as fallback)
+[palette]
+background = "#2D2A2E"
+foreground = "#FCFCFA"
+red = "#FF6188"
+green = "#A9DC76"
+yellow = "#FFD866"
+blue = "#78DCE8"
+magenta = "#AB9DF2"
+cyan = "#78DCE8"
+comment = "#69676C"
+selection = "#403E41"
+orange = "#FC9867"
+white = "#FCFCFA"
