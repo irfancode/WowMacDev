@@ -1,19 +1,19 @@
 <#
 .SYNOPSIS
-  Monokai Pro Terminal Theme Installer for Windows
+  Chroma Terminal Theme Installer for Windows
 
 .DESCRIPTION
-  Detects Windows Terminal, Hyper, Alacritty, Warp terminals and applies Monokai Pro themes.
+  Detects Windows Terminal, Hyper, Alacritty, Warp terminals and applies Chroma themes.
   Optionally installs JetBrainsMono Nerd Font, oh-my-posh prompt, and CLI tools via winget.
 
 .PARAMETER Theme
-  Theme name to apply (monokai-pro, octagon, ristretto, spectrum, machine, classic, zen, protorium, relaxed, amber)
+  Theme name to apply (spectrum, octagon, ristretto, machine, classic, zen, protorium, relaxed, amber)
 
 .PARAMETER Font
   Install JetBrainsMono Nerd Font
 
 .PARAMETER Prompt
-  Install oh-my-posh prompt with Monokai Pro config
+  Install oh-my-posh prompt with Chroma theme config
 
 .PARAMETER Tools
   Install CLI tools via winget
@@ -59,8 +59,8 @@ if ($PSVersionTable.PSVersion.Major -lt $requiredPSVersion) {
 # Theme definitions
 # ──────────────────────────────────────────────
 $script:Themes = @{
-  "monokai-pro" = @{
-    Display     = "Monokai Pro"
+  "spectrum" = @{
+    Display     = "Chroma Spectrum"
     Background  = "#2D2A2E"
     Foreground  = "#FCFCFA"
     Black       = "#2D2A2E"
@@ -103,21 +103,6 @@ $script:Themes = @{
     White       = "#FCFCFA"
     BrightBlack = "#1A1A1C"
     Comment     = "#5C5C5C"
-  }
-  "spectrum" = @{
-    Display     = "Filter Spectrum"
-    Background  = "#2D2A2E"
-    Foreground  = "#FCFCFA"
-    Black       = "#2D2A2E"
-    Red         = "#FF6188"
-    Green       = "#A9DC76"
-    Yellow      = "#FFD866"
-    Blue        = "#78DCE8"
-    Magenta     = "#FC9867"
-    Cyan        = "#AB9DF2"
-    White       = "#FCFCFA"
-    BrightBlack = "#1A1A1C"
-    Comment     = "#69676C"
   }
   "machine" = @{
     Display     = "Filter Machine"
@@ -212,7 +197,7 @@ $script:Themes = @{
 }
 
 $script:ThemeNames = @(
-  "monokai-pro", "octagon", "ristretto", "spectrum", "machine",
+  "spectrum", "octagon", "ristretto", "machine",
   "classic", "zen", "protorium", "relaxed", "amber"
 )
 
@@ -290,9 +275,9 @@ function Apply-WindowsTerminal($themeName) {
   if (-not $targetPath) {
     Write-Warn "Windows Terminal settings.json not found. Creating a theme scheme file instead."
     # Create a scheme file that can be manually imported
-    $schemesDir = "$env:USERPROFILE\.config\monokai-pro-terminal"
+    $schemesDir = "$env:USERPROFILE\.config\chroma-terminal"
     New-Item -ItemType Directory -Force -Path $schemesDir | Out-Null
-    $schemeFile = Join-Path $schemesDir "MonokaiPro-$themeName.json"
+    $schemeFile = Join-Path $schemesDir "Chroma-$themeName.json"
     $schemeJson = @{
       name = $colors.Display
       background = $colors.Background
@@ -428,7 +413,7 @@ function Apply-Alacritty($themeName) {
   New-Item -ItemType Directory -Force -Path $configDir | Out-Null
 
   $themeBlock = @"
-# --- Monokai Pro Theme: $($colors.Display) ---
+# --- Chroma Theme: $($colors.Display) ---
 [colors.primary]
 background = "$($colors.Background)"
 foreground = "$($colors.Foreground)"
@@ -460,13 +445,13 @@ blue = "$($colors.Blue)"
 magenta = "$($colors.Magenta)"
 cyan = "$($colors.Cyan)"
 white = "$($colors.White)"
-# --- End Monokai Pro Theme ---
+# --- End Chroma Theme ---
 "@
 
   if (Test-Path $configFile) {
     $content = Get-Content $configFile -Raw -Encoding UTF8
-    if ($content -match '# --- Monokai Pro Theme') {
-      $content = $content -replace '(?s)# --- Monokai Pro Theme.*?# --- End Monokai Pro Theme ---', ''
+    if ($content -match '# --- Chroma Theme') {
+      $content = $content -replace '(?s)# --- Chroma Theme.*?# --- End Chroma Theme ---', ''
       Set-Content $configFile $content -Encoding UTF8
     }
   }
@@ -480,9 +465,9 @@ function Apply-Warp($themeName) {
   $warpDir = "$env:USERPROFILE\.warp\themes"
   New-Item -ItemType Directory -Force -Path $warpDir | Out-Null
 
-  $filePath = "$warpDir\monokai-pro-$themeName.yaml"
-  $themeContent = @"
-# Monokai Pro Theme: $($colors.Display)
+$filePath = "$warpDir\chroma-$themeName.yaml"
+$themeContent = @"
+# Chroma Theme: $($colors.Display)
 accent: "$($colors.Magenta)"
 background: "$($colors.Background)"
 details: "$($colors.Comment)"
@@ -539,7 +524,7 @@ function Install-Fonts {
 
   # Fallback to direct download
   $fontUrl = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-  $tmpDir = "$env:TEMP\monokai-pro-fonts"
+  $tmpDir = "$env:TEMP\chroma-fonts"
   $zipFile = "$tmpDir\JetBrainsMono.zip"
 
   New-Item -ItemType Directory -Force -Path $tmpDir | Out-Null
@@ -617,10 +602,10 @@ function Install-OhMyPosh {
     Write-Ok "oh-my-posh installed"
   }
 
-  # Install Monokai Pro theme for oh-my-posh
+  # Install Chroma theme for oh-my-posh
   $ompThemesDir = "$env:USERPROFILE\AppData\Local\Programs\oh-my-posh\themes"
   $scriptDir = Split-Path -Parent $PSCommandPath
-  $themeFile = Join-Path $scriptDir "monokai-pro-omp.json"
+  $themeFile = Join-Path $scriptDir "chroma-omp.json"
 
   if (Test-Path $ompThemesDir) {
     if (Test-Path $themeFile) {
@@ -628,7 +613,7 @@ function Install-OhMyPosh {
       Write-Ok "Copied oh-my-posh theme to $ompThemesDir"
     } else {
       # Create an oh-my-posh theme from the current colors
-      $colors = $script:Themes["monokai-pro"]
+      $colors = $script:Themes["spectrum"]
       $ompTheme = @{
         "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
         blocks = @(
@@ -664,13 +649,13 @@ function Install-OhMyPosh {
   $profileDir = Split-Path $profilePath -Parent
   New-Item -ItemType Directory -Force -Path $profileDir | Out-Null
 
-  $initLine = "oh-my-posh init pwsh --config '$( Join-Path $ompThemesDir "monokai-pro-omp.json" )' | Invoke-Expression"
+  $initLine = "oh-my-posh init pwsh --config '$( Join-Path $ompThemesDir "chroma-omp.json" )' | Invoke-Expression"
   $profileContent = Get-Content $profilePath -Raw -ErrorAction SilentlyContinue
 
   if ($profileContent -match "oh-my-posh init") {
     Write-Ok "oh-my-posh already initialized in profile"
   } else {
-    Add-Content $profilePath "`n# Monokai Pro Terminal - oh-my-posh prompt`n$initLine`n" -Encoding UTF8
+    Add-Content $profilePath "`n# Chroma Terminal - oh-my-posh prompt`n$initLine`n" -Encoding UTF8
     Write-Ok "Added oh-my-posh init to PowerShell profile"
   }
 }
@@ -731,7 +716,7 @@ function Install-Tools {
 function Main {
   Write-Host ""
   Write-Host "╔══════════════════════════════════════╗" -ForegroundColor White
-  Write-Host "║  Monokai Pro Terminal Theme Installer ║" -ForegroundColor White
+  Write-Host "║  Chroma Terminal Theme Installer      ║" -ForegroundColor White
   Write-Host "╚══════════════════════════════════════╝" -ForegroundColor White
   Write-Host ""
 
@@ -784,8 +769,8 @@ function Main {
     } elseif ($script:Themes.ContainsKey($choice.ToLower())) {
       $script:SelectedTheme = $choice.ToLower()
     } else {
-      $script:SelectedTheme = "monokai-pro"
-      Write-Warn "Invalid choice, using default: monokai-pro"
+      $script:SelectedTheme = "spectrum"
+      Write-Warn "Invalid choice, using default: spectrum"
     }
 
     Show-Preview $script:SelectedTheme

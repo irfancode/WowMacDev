@@ -1,4 +1,4 @@
-# Monokai Pro Terminal Themes
+# Chroma Terminal Themes
 
 <p align="center">
   <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License">
@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <i>Monokai Pro inspired color schemes for Ghostty, Alacritty, Warp, Hyper.js, Foot, Kitty, and macOS Terminal.app</i>
+  <i>Beautiful color schemes for Ghostty, Alacritty, Warp, Hyper.js, Foot, Kitty, and macOS Terminal.app — inspired by Monokai Pro</i>
 </p>
 
 ---
@@ -64,30 +64,30 @@
 ## 🎨 Theme Comparison
 
 | # | Theme | Background | Foreground | Accent | Vibe |
-|---|-------|-----------|------------|--------|------|
-| 1 | **Monokai Pro** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#FFD500` | Classic — the original filter |
-| 2 | **Monokai Pro (Octagon)** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#FF6AC1` | Vibrant pink accents |
-| 3 | **Monokai Pro (Ristretto)** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#A0DF6F` | Fresh green tones |
-| 4 | **Monokai Pro (Spectrum)** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#5AF78E` | Full spectrum rainbow |
-| 5 | **Monokai Pro (Machine)** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#A277FF` | Purple tech vibes |
-| 6 | **Monokai Pro (Striker)** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#F57A00` | Energetic orange |
-| 7 | **Monokai Dark** | ⬤ `#1E1E1E` | ⬤ `#D4D4D4` | ⬤ `#569CD6` | VS Code dark style |
-| 8 | **Monokai Dim** | ⬤ `#1A1A1A` | ⬤ `#B8B8B8` | ⬤ `#888888` | Low contrast, easy on eyes |
-| 9 | **Monokai Light** | ⬤ `#F5F5F5` | ⬤ `#2D2A2E` | ⬤ `#E64C00` | Clean light mode |
-| 10 | **Monokai Solarized** | ⬤ `#002B36` | ⬤ `#839496` | ⬤ `#B58900` | Solarized meets Monokai |
+|-------|-------|-----------|------------|--------|------|
+| 1 | **Spectrum** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#FF6188` | Classic — the original full palette |
+| 2 | **Solar** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#FC9867` | Warm amber tones |
+| 3 | **Tidal** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#78DCE8` | Cool ocean blues |
+| 4 | **Canopy** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#A9DC76` | Lush forest greens |
+| 5 | **Void** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#AB9DF2` | Deep midnight purples |
+| 6 | **Aurora** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#FF6188` | Vibrant northern lights |
+| 7 | **Clay** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#FC9867` | Earthy rust tones |
+| 8 | **Frost** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#78DCE8` | Cool ice blues |
+| 9 | **Nebula** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#AB9DF2` | Cosmic violet hues |
+| 10 | **Forge** | ⬤ `#2D2A2E` | ⬤ `#FCFCFA` | ⬤ `#FF6188` | Fiery ember energy |
 
 ---
 
 ## ⚡ Quick Start
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/irfancode/monokai-pro-terminal/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/scripts/bootstrap.sh | bash
 ```
 
 Or with the CLI tool:
 
 ```bash
-npx monokai-pro-cli apply --theme monokai-pro --terminal ghostty
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --theme spectrum --terminal ghostty
 ```
 
 ---
@@ -108,145 +108,22 @@ npx monokai-pro-cli apply --theme monokai-pro --terminal ghostty
 
 ## 🌈 Theme Showcase
 
-### 1. Monokai Pro (Filter)
-The original Monokai Pro filter — warm, balanced, iconic.
+Browse the `themes/` directory for all 10 Chroma themes:
 
-| Role | Hex | Preview |
-|------|-----|---------|
-| Background | `#2D2A2E` | ⬤ |
-| Foreground | `#FCFCFA` | ⬤ |
-| Black | `#403E41` | ⬤ |
-| Red | `#FF6188` | ⬤ |
-| Green | `#A9DC76` | ⬤ |
-| Yellow | `#FFD500` | ⬤ |
-| Blue | `#78DCE8` | ⬤ |
-| Magenta | `#AB9DF2` | ⬤ |
-| Cyan | `#78DCE8` | ⬤ |
-| White | `#FCFCFA` | ⬤ |
-| Bright Black | `#727072` | ⬤ |
-| Bright Red | `#FF6188` | ⬤ |
-| Bright Green | `#A9DC76` | ⬤ |
-| Bright Yellow | `#FFD500` | ⬤ |
-| Bright Blue | `#78DCE8` | ⬤ |
-| Bright Magenta | `#AB9DF2` | ⬤ |
-| Bright Cyan | `#78DCE8` | ⬤ |
-| Bright White | `#FCFCFA` | ⬤ |
+| Directory | Description |
+|-----------|-------------|
+| `themes/spectrum/` | Classic full palette — warm, balanced, iconic |
+| `themes/solar/` | Warm amber-toned vibes |
+| `themes/tidal/` | Cool ocean-inspired blues |
+| `themes/canopy/` | Lush forest greens |
+| `themes/void/` | Deep midnight purples |
+| `themes/aurora/` | Vibrant northern lights palette |
+| `themes/clay/` | Earthy rust tones |
+| `themes/frost/` | Cool ice blues |
+| `themes/nebula/` | Cosmic violet hues |
+| `themes/forge/` | Fiery ember energy |
 
-### 2. Monokai Pro (Octagon)
-Same base, but the filter shifts magenta/pink — bold and creative.
-
-| Role | Hex | Preview |
-|------|-----|---------|
-| Background | `#2D2A2E` | ⬤ |
-| Red | `#FF6188` | ⬤ |
-| Green | `#A9DC76` | ⬤ |
-| Yellow | `#FFD500` | ⬤ |
-| Blue | `#78DCE8` | ⬤ |
-| Magenta | `#FF6AC1` | ⬤ |
-| Cyan | `#78DCE8` | ⬤ |
-| White | `#FCFCFA` | ⬤ |
-
-### 3. Monokai Pro (Ristretto)
-A green-tinted filter — calm, earthy, grounded.
-
-| Role | Hex | Preview |
-|------|-----|---------|
-| Background | `#2D2A2E` | ⬤ |
-| Red | `#FF6188` | ⬤ |
-| Green | `#A0DF6F` | ⬤ |
-| Yellow | `#FFD500` | ⬤ |
-| Blue | `#78DCE8` | ⬤ |
-| Magenta | `#AB9DF2` | ⬤ |
-| Cyan | `#78DCE8` | ⬤ |
-
-### 4. Monokai Pro (Spectrum)
-Rainbow filter — every ANSI color gets its full saturation.
-
-| Role | Hex | Preview |
-|------|-----|---------|
-| Red | `#FF6188` | ⬤ |
-| Green | `#5AF78E` | ⬤ |
-| Yellow | `#FFD500` | ⬤ |
-| Blue | `#57C7FF` | ⬤ |
-| Magenta | `#FF6AC1` | ⬤ |
-| Cyan | `#5AF78E` | ⬤ |
-
-### 5. Monokai Pro (Machine)
-A futuristic purple hue filter.
-
-| Role | Hex | Preview |
-|------|-----|---------|
-| Red | `#FF6188` | ⬤ |
-| Green | `#A9DC76` | ⬤ |
-| Yellow | `#FFD500` | ⬤ |
-| Blue | `#78DCE8` | ⬤ |
-| Magenta | `#A277FF` | ⬤ |
-| Cyan | `#78DCE8` | ⬤ |
-
-### 6. Monokai Pro (Striker)
-High-energy orange filter.
-
-| Role | Hex | Preview |
-|------|-----|---------|
-| Red | `#FF6188` | ⬤ |
-| Green | `#A9DC76` | ⬤ |
-| Yellow | `#F57A00` | ⬤ |
-| Blue | `#78DCE8` | ⬤ |
-| Magenta | `#AB9DF2` | ⬤ |
-| Cyan | `#78DCE8` | ⬤ |
-
-### 7. Monokai Dark
-Classic VS Code Monokai Dark palette — familiar and trusted.
-
-| Role | Hex | Preview |
-|------|-----|---------|
-| Background | `#1E1E1E` | ⬤ |
-| Foreground | `#D4D4D4` | ⬤ |
-| Red | `#F44747` | ⬤ |
-| Green | `#6A9955` | ⬤ |
-| Yellow | `#DCDCAA` | ⬤ |
-| Blue | `#569CD6` | ⬤ |
-| Magenta | `#C586C0` | ⬤ |
-| Cyan | `#4EC9B0` | ⬤ |
-
-### 8. Monokai Dim
-Subdued, low-contrast variant — perfect for long coding sessions.
-
-| Role | Hex | Preview |
-|------|-----|---------|
-| Background | `#1A1A1A` | ⬤ |
-| Foreground | `#B8B8B8` | ⬤ |
-| Red | `#D16969` | ⬤ |
-| Green | `#608B4E` | ⬤ |
-| Yellow | `#D7BA7D` | ⬤ |
-| Blue | `#569CD6` | ⬤ |
-
-### 9. Monokai Light
-Clean light mode for daytime coding.
-
-| Role | Hex | Preview |
-|------|-----|---------|
-| Background | `#F5F5F5` | ⬤ |
-| Foreground | `#2D2A2E` | ⬤ |
-| Red | `#E64C00` | ⬤ |
-| Green | `#008000` | ⬤ |
-| Yellow | `#E6A800` | ⬤ |
-| Blue | `#0451A5` | ⬤ |
-| Magenta | `#9B51E0` | ⬤ |
-
-### 10. Monokai Solarized
-A hybrid — Monokai's vibrancy meets Solarized's calm.
-
-| Role | Hex | Preview |
-|------|-----|---------|
-| Background | `#002B36` | ⬤ |
-| Foreground | `#839496` | ⬤ |
-| Red | `#DC322F` | ⬤ |
-| Green | `#859900` | ⬤ |
-| Yellow | `#B58900` | ⬤ |
-| Blue | `#268BD2` | ⬤ |
-| Magenta | `#D33682` | ⬤ |
-| Cyan | `#2AA198` | ⬤ |
+Each theme directory contains config files for all supported terminals.
 
 ---
 
@@ -256,7 +133,7 @@ A hybrid — Monokai's vibrancy meets Solarized's calm.
 
 ```bash
 # Via the CLI tool
-npx monokai-pro-cli apply --theme monokai-pro --terminal ghostty
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --theme spectrum --terminal ghostty
 
 # Or manually — add to ~/.config/ghostty/config
 palette = 0=#403E41
@@ -282,10 +159,10 @@ foreground = #FCFCFA
 ### Alacritty
 
 ```bash
-npx monokai-pro-cli apply --theme monokai-pro --terminal alacritty
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --theme spectrum --terminal alacritty
 ```
 
-Or copy the theme from `themes/alacritty/monokai-pro.toml` into your `~/.config/alacritty/alacritty.toml`:
+Or copy the theme from `themes/spectrum/alacritty/spectrum.toml` into your `~/.config/alacritty/alacritty.toml`:
 
 ```toml
 [colors]
@@ -317,7 +194,7 @@ white = "#FCFCFA"
 ### Warp
 
 ```bash
-npx monokai-pro-cli apply --theme monokai-pro --terminal warp
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --theme spectrum --terminal warp
 ```
 
 Themes are installed to `~/.warp/themes/` as `.yaml` files. Select via Warp > Settings > Themes.
@@ -325,7 +202,7 @@ Themes are installed to `~/.warp/themes/` as `.yaml` files. Select via Warp > Se
 ### Hyper.js
 
 ```bash
-npx monokai-pro-cli apply --theme monokai-pro --terminal hyper
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --theme spectrum --terminal hyper
 ```
 
 Or edit `~/.hyper.js` and merge the theme plugin config.
@@ -333,7 +210,7 @@ Or edit `~/.hyper.js` and merge the theme plugin config.
 ### Foot
 
 ```bash
-npx monokai-pro-cli apply --theme monokai-pro --terminal foot
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --theme spectrum --terminal foot
 ```
 
 Or add the `[colors]` section to `~/.config/foot/foot.ini`.
@@ -341,7 +218,7 @@ Or add the `[colors]` section to `~/.config/foot/foot.ini`.
 ### Kitty
 
 ```bash
-npx monokai-pro-cli apply --theme monokai-pro --terminal kitty
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --theme spectrum --terminal kitty
 ```
 
 Or include the theme file in `~/.config/kitty/kitty.conf`.
@@ -349,10 +226,10 @@ Or include the theme file in `~/.config/kitty/kitty.conf`.
 ### Terminal.app (macOS)
 
 ```bash
-npx monokai-pro-cli apply --theme monokai-pro --terminal terminal
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --theme spectrum --terminal terminal
 ```
 
-Or double-click the `.terminal` file in `themes/terminal/` and set as default.
+Or double-click the `.terminal` file in `themes/spectrum/terminal/` and set as default.
 
 ---
 
@@ -363,7 +240,7 @@ Or double-click the `.terminal` file in `themes/terminal/` and set as default.
 3. **Submit** a PR with your changes
 
 Guidelines:
-- Keep the Monokai Pro spirit — warm, vibrant, high-contrast where appropriate
+- Keep the Chroma spirit — warm, vibrant, high-contrast where appropriate
 - Ensure 16 ANSI colors + background + foreground are defined
 - Test on at least one terminal before submitting
 - Update the comparison table if adding a new theme
@@ -371,7 +248,7 @@ Guidelines:
 Run the validation script:
 
 ```bash
-node scripts/validate.mjs themes/alacritty/monokai-pro.toml
+node scripts/validate.mjs themes/spectrum/alacritty/spectrum.toml
 ```
 
 ---

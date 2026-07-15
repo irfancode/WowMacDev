@@ -12,9 +12,9 @@ So here's the question: why would you settle for the default look?
 
 Your terminal is one of the most important tools you use. It's where you run your code, manage your files, interact with Git, spin up containers, deploy to production, and SSH into servers. Making it look good isn't vanity — it's **ergonomics**. A well-configured terminal reduces eye strain, speeds up recognition of file types and git status, and honestly? It makes you *want* to work.
 
-In this guide, I'll walk you through transforming a boring, out-of-the-box terminal into a **modern, beautiful, supercharged development environment** — step by step. By the end, you'll have a terminal that's not only gorgeous (thanks to Monokai Pro themes) but genuinely more productive, with fuzzy finding, syntax-highlighted file previews, a lightning-fast prompt, and one-command setup for the future.
+In this guide, I'll walk you through transforming a boring, out-of-the-box terminal into a **modern, beautiful, supercharged development environment** — step by step. By the end, you'll have a terminal that's not only gorgeous (thanks to Chroma themes) but genuinely more productive, with fuzzy finding, syntax-highlighted file previews, a lightning-fast prompt, and one-command setup for the future.
 
-I created the [Monokai Pro Terminal Themes](https://github.com/irfancode/monokai-pro-terminal) collection to bring Wimer Hazenberg's iconic color schemes to every major terminal emulator. This guide builds on that work and adds the full stack of modern CLI tooling.
+I created the [Chroma Terminal Themes](https://github.com/irfancode/chroma-terminal) collection to bring beautiful color schemes to every major terminal emulator. This guide builds on that work and adds the full stack of modern CLI tooling.
 
 Let's do this.
 
@@ -133,30 +133,30 @@ Already on your Mac! It supports custom themes via `.terminal` files. Not as fea
 
 ---
 
-## Step 2: Apply a Beautiful Theme (Monokai Pro)
+## Step 2: Apply a Beautiful Theme
 
-Now that you have a modern terminal, let's make it beautiful. I've ported Monokai Pro — Wimer Hazenberg's masterpiece — to every major terminal emulator with **10 unique variants**.
+Now that you have a modern terminal, let's make it beautiful. I've created **10 unique Chroma variants** for every major terminal emulator.
 
 ### Choose Your Theme
 
 | Theme | Best For |
 |-------|----------|
-| **Monokai Pro** | The classic — warm, balanced, timeless |
-| **Monokai Pro (Octagon)** | When you want pink/magenta accents |
-| **Monokai Pro (Ristretto)** | Green-tinted, earthy and calm |
-| **Monokai Pro (Spectrum)** | Rainbow — every color pops |
-| **Monokai Pro (Machine)** | Purple hues, futuristic feel |
-| **Monokai Pro (Striker)** | Energetic orange accents |
-| **Monokai Dark** | VS Code veteran — familiar |
-| **Monokai Dim** | Low contrast, late-night coding |
-| **Monokai Light** | Clean light mode for daytime |
-| **Monokai Solarized** | Hybrid — Monokai + Solarized |
+| **Spectrum** | The classic full palette — warm, balanced |
+| **Solar** | Warm amber tones — bold and creative |
+| **Tidal** | Cool ocean blues — calm and focused |
+| **Canopy** | Lush forest greens — earthy and grounded |
+| **Void** | Deep midnight purples — futuristic feel |
+| **Aurora** | Vibrant northern lights — every color pops |
+| **Clay** | Earthy rust tones — warm and natural |
+| **Frost** | Cool ice blues — crisp and clean |
+| **Nebula** | Cosmic violet hues — creative energy |
+| **Forge** | Fiery ember glow — intense and warm |
 
 ### One-Command Install
 
 ```bash
-# Install the Monokai Pro theme for your terminal
-npx monokai-pro-cli apply --theme monokai-pro --terminal ghostty
+# Install the Chroma theme for your terminal
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --theme spectrum --terminal ghostty
 ```
 
 Replace `ghostty` with `alacritty`, `warp`, `hyper`, `foot`, `kitty`, or `terminal`.
@@ -312,9 +312,9 @@ eval "$(starship init bash)"
 starship init fish | source
 ```
 
-### Custom Monokai Pro Starship Config
+### Custom Chroma Starship Config
 
-Now for the magic — a custom Starship config that perfectly matches your Monokai Pro terminal theme:
+Now for the magic — a custom Starship config that perfectly matches your Chroma terminal theme:
 
 ```toml
 # ~/.config/starship.toml
@@ -380,7 +380,7 @@ Save this as `~/.config/starship.toml` and restart your terminal. You'll see:
 ❯ _
 ```
 
-Every section color-coded in Monokai Pro's palette. Beautiful.
+Every section color-coded in Chroma's palette. Beautiful.
 
 ---
 
@@ -422,13 +422,13 @@ sudo pacman -S bat   # Arch
 alias cat="bat"
 ```
 
-Now `cat package.json` shows JSON with full syntax highlighting, line numbers, and a Monokai Pro-compatible theme. Install the bat theme:
+Now `cat package.json` shows JSON with full syntax highlighting, line numbers, and a Chroma-compatible theme. Install the bat theme:
 
 ```bash
-# Use Monokai Pro inspired theme
+# Use Chroma inspired theme
 bat cache --build
 mkdir -p "$(bat --config-dir)/themes"
-# Copy monokai-pro.tmTheme into that directory
+# Copy a .tmTheme file into that directory
 bat cache --build
 ```
 
@@ -539,26 +539,26 @@ alias reload="source ~/.zshrc"
 
 ## Step 6: The One-Cmd Setup
 
-Tired of configuring everything by hand? I created **`monokai-pro-cli`** — a single CLI tool that automates the entire process.
+Tired of configuring everything by hand? I created **`chroma-cli`** — a single CLI tool that automates the entire process.
 
 ```bash
-npx monokai-pro-cli apply --theme monokai-pro --terminal ghostty
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --theme spectrum --terminal ghostty
 ```
 
 But it can do more:
 
 ```bash
 # List available themes
-npx monokai-pro-cli list
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli \| bash -s -- --list-themes
 
 # Preview a theme in your terminal
-npx monokai-pro-cli preview --theme monokai-spectrum
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --preview spectrum
 
 # Apply theme + install font
-npx monokai-pro-cli setup --theme monokai-pro --terminal ghostty --font JetBrainsMono
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --theme spectrum --terminal ghostty --font
 
 # Apply to all detected terminals
-npx monokai-pro-cli apply --all
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --all
 ```
 
 The CLI tool auto-detects your terminal, validates the config file, applies the theme, and creates a backup of your original config — all in one command.
@@ -579,8 +579,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   brew install --cask font-jetbrains-mono-nerd-font
 fi
 
-# 2. Apply Monokai Pro theme
-npx monokai-pro-cli setup --theme monokai-pro --terminal ghostty --font JetBrainsMono
+# 2. Apply Chroma theme
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash -s -- --theme spectrum --terminal ghostty --font
 
 # 3. Install Starship prompt
 curl -sS https://starship.rs/install.sh | sh
@@ -589,7 +589,7 @@ curl -sS https://starship.rs/install.sh | sh
 brew install eza bat ripgrep fd zoxide fzf
 
 # 5. Apply Starship config
-curl -fsSL https://raw.githubusercontent.com/irfancode/monokai-pro-terminal/main/starship.toml \
+curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/starship.toml \
   -o ~/.config/starship.toml
 
 # 6. Add aliases
@@ -663,7 +663,7 @@ For **PowerShell** users who want to stay native:
 Install-Module -Name Terminal-Icons -Repository PSGallery
 Install-Module -Name PSReadLine -AllowPrerelease -Force
 
-# Set Monokai Pro colors
+# Set Chroma colors
 $Host.UI.RawUI.BackgroundColor = "#2D2A2E"
 $Host.UI.RawUI.ForegroundColor = "#FCFCFA"
 ```
@@ -675,11 +675,11 @@ $Host.UI.RawUI.ForegroundColor = "#FCFCFA"
 Let's recap what we did:
 
 1. ✅ **Installed a modern terminal** — GPU-accelerated, true color, ligatures
-2. ✅ **Applied Monokai Pro theme** — 10 stunning variants for every taste
+2. ✅ **Applied Chroma theme** — 10 stunning variants for every taste
 3. ✅ **Installed JetBrainsMono Nerd Font** — crisp with beautiful icons
 4. ✅ **Configured Starship prompt** — informative, color-coded, fast
 5. ✅ **Added modern CLI tools** — eza, bat, fd, ripgrep, zoxide, fzf
-6. ✅ **Created a one-cmd setup** — `npx monokai-pro-cli apply`
+6. ✅ **Created a one-cmd setup** — `chroma-cli`
 7. ✅ **Learned cross-platform tips** — Linux, macOS, Windows
 
 The difference between a default terminal and a supercharged one is night and day. You'll navigate faster, see more context at a glance, and — I'll say it — actually enjoy opening your terminal.
@@ -694,7 +694,7 @@ Your terminal is now a beautiful, productive environment. Here are some ideas fo
 - **neovim** — if you want to go full terminal-based IDE
 - **atuin** — shell history with search and sync
 
-And if you want to create new themes or port Monokai Pro to another terminal emulator, check out the [GitHub repo](https://github.com/irfancode/monokai-pro-terminal) — contributions are always welcome.
+And if you want to create new themes or port Chroma to another terminal emulator, check out the [GitHub repo](https://github.com/irfancode/chroma-terminal) — contributions are always welcome.
 
 ---
 
@@ -702,8 +702,8 @@ And if you want to create new themes or port Monokai Pro to another terminal emu
   <b>Made with ❤️ by <a href="https://github.com/irfancode">irfancode</a></b>
 </p>
 <p align="center">
-  <i>Monokai Pro Terminal Themes — 10 beautiful themes for 7 terminal emulators</i><br>
-  <a href="https://github.com/irfancode/monokai-pro-terminal">GitHub</a> ·
+  <i>Chroma Terminal — 10 beautiful themes for 7 terminal emulators</i><br>
+  <a href="https://github.com/irfancode/chroma-terminal">GitHub</a> ·
   <a href="https://monokai.pro/inspiration">Monokai Pro</a> ·
   <a href="https://starship.rs">Starship</a> ·
   <a href="https://www.nerdfonts.com">Nerd Fonts</a>

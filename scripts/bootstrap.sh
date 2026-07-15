@@ -1,24 +1,24 @@
 #!/usr/bin/env bash
 #
-# bootstrap.sh — Monokai Pro Terminal Theme Installer (Linux & macOS)
+# bootstrap.sh — Chroma Terminal Theme Installer (Linux & macOS)
 #
 # Usage: bash bootstrap.sh [theme-name] [options]
 #   Options:
 #     --font       Install JetBrainsMono Nerd Font
-#     --prompt     Install Starship prompt with Monokai Pro config
+#     --prompt     Install Starship prompt with Chroma theme config
 #     --tools      Install common CLI tools (eza, bat, fd, ripgrep, zoxide, fzf)
 #     --all        Install everything (font, prompt, tools)
 #     --help       Show this help message
 #
-#   Available themes: monokai-pro, octagon, ristretto, spectrum, machine,
-#                     classic, zen, protorium, relaxed, amber
+#   Available themes: spectrum, octagon, ristretto, machine, classic, zen,
+#                     protorium, relaxed, amber
 #
 #   Examples:
 #     bash bootstrap.sh                    # Interactive mode
 #     bash bootstrap.sh octagon            # Apply Octagon theme
 #     bash bootstrap.sh spectrum --font    # Apply Spectrum + install font
 #     bash bootstrap.sh --all              # Interactive theme + everything
-#     bash bootstrap.sh monokai-pro --all  # Full setup with Monokai Pro
+#     bash bootstrap.sh spectrum --all     # Full setup with Chroma Spectrum
 #
 
 set -euo pipefail
@@ -38,25 +38,25 @@ CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 
 # ──────────────────────────────────────────────
-# Theme definitions (10 Monokai Pro variants)
+# Theme definitions (10 Chroma variants)
 # ──────────────────────────────────────────────
 declare -A THEME_BG THEME_FG THEME_BLACK THEME_RED THEME_GREEN THEME_YELLOW
 declare -A THEME_BLUE THEME_MAGENTA THEME_CYAN THEME_WHITE THEME_BRBG THEME_COMMENT
 
 init_theme_colors() {
-  # Monokai Pro (original)
-  THEME_BG[monokai-pro]="#2D2A2E"
-  THEME_FG[monokai-pro]="#FCFCFA"
-  THEME_BLACK[monokai-pro]="#2D2A2E"
-  THEME_RED[monokai-pro]="#FF6188"
-  THEME_GREEN[monokai-pro]="#A9DC76"
-  THEME_YELLOW[monokai-pro]="#FFD866"
-  THEME_BLUE[monokai-pro]="#78DCE8"
-  THEME_MAGENTA[monokai-pro]="#AB9DF2"
-  THEME_CYAN[monokai-pro]="#78DCE8"
-  THEME_WHITE[monokai-pro]="#FCFCFA"
-  THEME_BRBG[monokai-pro]="#1A1A1C"
-  THEME_COMMENT[monokai-pro]="#69676C"
+  # Chroma Spectrum
+  THEME_BG[spectrum]="#2D2A2E"
+  THEME_FG[spectrum]="#FCFCFA"
+  THEME_BLACK[spectrum]="#2D2A2E"
+  THEME_RED[spectrum]="#FF6188"
+  THEME_GREEN[spectrum]="#A9DC76"
+  THEME_YELLOW[spectrum]="#FFD866"
+  THEME_BLUE[spectrum]="#78DCE8"
+  THEME_MAGENTA[spectrum]="#AB9DF2"
+  THEME_CYAN[spectrum]="#78DCE8"
+  THEME_WHITE[spectrum]="#FCFCFA"
+  THEME_BRBG[spectrum]="#1A1A1C"
+  THEME_COMMENT[spectrum]="#69676C"
 
   # Filter Octagon
   THEME_BG[octagon]="#2D2A2E"
@@ -85,20 +85,6 @@ init_theme_colors() {
   THEME_WHITE[ristretto]="#FCFCFA"
   THEME_BRBG[ristretto]="#1A1A1C"
   THEME_COMMENT[ristretto]="#5C5C5C"
-
-  # Filter Spectrum
-  THEME_BG[spectrum]="#2D2A2E"
-  THEME_FG[spectrum]="#FCFCFA"
-  THEME_BLACK[spectrum]="#2D2A2E"
-  THEME_RED[spectrum]="#FF6188"
-  THEME_GREEN[spectrum]="#A9DC76"
-  THEME_YELLOW[spectrum]="#FFD866"
-  THEME_BLUE[spectrum]="#78DCE8"
-  THEME_MAGENTA[spectrum]="#FC9867"
-  THEME_CYAN[spectrum]="#AB9DF2"
-  THEME_WHITE[spectrum]="#FCFCFA"
-  THEME_BRBG[spectrum]="#1A1A1C"
-  THEME_COMMENT[spectrum]="#69676C"
 
   # Filter Machine
   THEME_BG[machine]="#2D2A2E"
@@ -186,12 +172,12 @@ init_theme_colors() {
 }
 
 THEME_NAMES=(
-  "monokai-pro" "octagon" "ristretto" "spectrum" "machine"
+  "spectrum" "octagon" "ristretto" "machine"
   "classic" "zen" "protorium" "relaxed" "amber"
 )
 
 THEME_DISPLAY=(
-  "Monokai Pro" "Filter Octagon" "Filter Ristretto" "Filter Spectrum" "Filter Machine"
+  "Chroma Spectrum" "Filter Octagon" "Filter Ristretto" "Filter Machine"
   "Monokai Classic" "Filter Zen" "Filter Protorium" "Filter Relaxed" "Filter Amber"
 )
 
@@ -297,14 +283,14 @@ apply_ghostty() {
   mkdir -p "$config_dir"
 
   # Check if ghostty theme section exists, append or update
-  if [[ -f "$config_file" ]] && grep -q "Monokai Pro Theme" "$config_file"; then
+  if [[ -f "$config_file" ]] && grep -q "Chroma Theme" "$config_file"; then
     # Remove old theme block
-    sed -i.bak '/^# --- Monokai Pro Theme ---$/,/^# --- End Monokai Pro Theme ---$/d' "$config_file"
+    sed -i.bak '/^# --- Chroma Theme ---$/,/^# --- End Chroma Theme ---$/d' "$config_file"
   fi
 
   cat >> "$config_file" << THEME
 
-# --- Monokai Pro Theme: ${THEME_DISPLAY[$i]} ---
+# --- Chroma Theme: ${THEME_DISPLAY[$i]} ---
 background = ${THEME_BG[$theme]}
 foreground = ${THEME_FG[$theme]}
 selection-background = ${THEME_COMMENT[$theme]}
@@ -327,7 +313,7 @@ palette = 12=${THEME_BLUE[$theme]}
 palette = 13=${THEME_MAGENTA[$theme]}
 palette = 14=${THEME_CYAN[$theme]}
 palette = 15=${THEME_WHITE[$theme]}
-# --- End Monokai Pro Theme ---
+# --- End Chroma Theme ---
 THEME
   log_ok "Applied ${THEME_DISPLAY[$THEME_INDEX[$theme]]} to Ghostty"
 }
@@ -340,7 +326,7 @@ apply_alacritty() {
 
   local theme_block
   theme_block=$(cat << TOML
-# --- Monokai Pro Theme: ${THEME_DISPLAY[$THEME_INDEX[$theme]]} ---
+# --- Chroma Theme: ${THEME_DISPLAY[$THEME_INDEX[$theme]]} ---
 [colors.primary]
 background = "${THEME_BG[$theme]}"
 foreground = "${THEME_FG[$theme]}"
@@ -372,17 +358,17 @@ blue = "${THEME_BLUE[$theme]}"
 magenta = "${THEME_MAGENTA[$theme]}"
 cyan = "${THEME_CYAN[$theme]}"
 white = "${THEME_WHITE[$theme]}"
-# --- End Monokai Pro Theme ---
+# --- End Chroma Theme ---
 TOML
 )
 
   if [[ -f "$config_file" ]]; then
-    # Remove existing Monokai Pro block if present
-    if grep -q "Monokai Pro Theme" "$config_file" 2>/dev/null; then
+    # Remove existing Chroma block if present
+    if grep -q "Chroma Theme" "$config_file" 2>/dev/null; then
       # Use awk to remove between markers (more portable than sed ranges on macOS)
       awk '
-        /# --- Monokai Pro Theme/ { skip=1; next }
-        /# --- End Monokai Pro Theme/ { skip=0; next }
+        /# --- Chroma Theme/ { skip=1; next }
+        /# --- End Chroma Theme/ { skip=0; next }
         !skip { print }
       ' "$config_file" > "${config_file}.tmp" && mv "${config_file}.tmp" "$config_file"
     fi
@@ -400,7 +386,7 @@ apply_kitty() {
 
   local theme_block
   theme_block=$(cat << CONF
-# --- Monokai Pro Theme: ${THEME_DISPLAY[$THEME_INDEX[$theme]]} ---
+# --- Chroma Theme: ${THEME_DISPLAY[$THEME_INDEX[$theme]]} ---
 background ${THEME_BG[$theme]}
 foreground ${THEME_FG[$theme]}
 selection_background ${THEME_COMMENT[$theme]}
@@ -423,15 +409,15 @@ color12 ${THEME_BLUE[$theme]}
 color13 ${THEME_MAGENTA[$theme]}
 color14 ${THEME_CYAN[$theme]}
 color15 ${THEME_WHITE[$theme]}
-# --- End Monokai Pro Theme ---
+# --- End Chroma Theme ---
 CONF
 )
 
   if [[ -f "$config_file" ]]; then
-    if grep -q "Monokai Pro Theme" "$config_file" 2>/dev/null; then
+    if grep -q "Chroma Theme" "$config_file" 2>/dev/null; then
       awk '
-        /# --- Monokai Pro Theme/ { skip=1; next }
-        /# --- End Monokai Pro Theme/ { skip=0; next }
+        /# --- Chroma Theme/ { skip=1; next }
+        /# --- End Chroma Theme/ { skip=0; next }
         !skip { print }
       ' "$config_file" > "${config_file}.tmp" && mv "${config_file}.tmp" "$config_file"
     fi
@@ -449,7 +435,7 @@ apply_foot() {
 
   local theme_block
   theme_block=$(cat << INI
-# --- Monokai Pro Theme: ${THEME_DISPLAY[$THEME_INDEX[$theme]]} ---
+# --- Chroma Theme: ${THEME_DISPLAY[$THEME_INDEX[$theme]]} ---
 [colors]
 background=${THEME_BG[$theme]}
 foreground=${THEME_FG[$theme]}
@@ -471,15 +457,15 @@ bright6=${THEME_CYAN[$theme]}
 bright7=${THEME_WHITE[$theme]}
 selection-background=${THEME_COMMENT[$theme]}
 selection-foreground=${THEME_FG[$theme]}
-# --- End Monokai Pro Theme ---
+# --- End Chroma Theme ---
 INI
 )
 
   if [[ -f "$config_file" ]]; then
-    if grep -q "Monokai Pro Theme" "$config_file" 2>/dev/null; then
+    if grep -q "Chroma Theme" "$config_file" 2>/dev/null; then
       awk '
-        /# --- Monokai Pro Theme/ { skip=1; next }
-        /# --- End Monokai Pro Theme/ { skip=0; next }
+        /# --- Chroma Theme/ { skip=1; next }
+        /# --- End Chroma Theme/ { skip=0; next }
         !skip { print }
       ' "$config_file" > "${config_file}.tmp" && mv "${config_file}.tmp" "$config_file"
     fi
@@ -495,11 +481,11 @@ apply_warp() {
   mkdir -p "$warp_dir"
 
   local theme_name="${THEME_DISPLAY[$THEME_INDEX[$theme]]}"
-  local file_name="monokai-pro-${theme}.yaml"
+  local file_name="chroma-${theme}.yaml"
   local file_path="${warp_dir}/${file_name}"
 
   cat > "$file_path" << YAML
-# Monokai Pro Theme: ${theme_name}
+# Chroma Theme: ${theme_name}
 accent: "${THEME_MAGENTA[$theme]}"
 background: "${THEME_BG[$theme]}"
 details: "${THEME_COMMENT[$theme]}"
@@ -522,7 +508,7 @@ apply_iterm2() {
   local iterm_dir="${HOME}/.config/iterm2"
   mkdir -p "$iterm_dir"
 
-  local file_name="MonokaiPro-${theme}.itermcolors"
+  local file_name="Chroma-${theme}.itermcolors"
   local file_path="${iterm_dir}/${file_name}"
 
   cat > "$file_path" << PLIST
@@ -604,7 +590,7 @@ apply_terminal_app() {
   local term_dir="${HOME}/.config/terminal"
   mkdir -p "$term_dir"
 
-  local file_name="MonokaiPro-${theme}.terminal"
+  local file_name="Chroma-${theme}.terminal"
   local file_path="${term_dir}/${file_name}"
 
   cat > "$file_path" << PLIST
@@ -869,7 +855,7 @@ install_starship() {
     esac
     if ! grep -q "starship init" "$shell_config" 2>/dev/null; then
       echo "" >> "$shell_config"
-      echo "# Starship prompt (installed by monokai-pro-terminal)" >> "$shell_config"
+      echo "# Starship prompt (installed by chroma-terminal)" >> "$shell_config"
       echo "$eval_line" >> "$shell_config"
       log_ok "Added Starship init to ${shell_config}"
     fi
@@ -1019,7 +1005,7 @@ main() {
     interactive=true
     echo ""
     log_title "╔══════════════════════════════════════╗"
-    log_title "║  Monokai Pro Terminal Theme Installer ║"
+    log_title "║  Chroma Terminal Theme Installer      ║"
     log_title "╚══════════════════════════════════════╝"
     echo ""
 
@@ -1059,7 +1045,7 @@ main() {
     # Ask about optional installs
     if ! $do_font && ! $do_prompt && ! $do_tools; then
       if confirm "Install JetBrainsMono Nerd Font?"; then do_font=true; fi
-      if confirm "Install Starship prompt with Monokai Pro config?"; then do_prompt=true; fi
+      if confirm "Install Starship prompt with Chroma theme config?"; then do_prompt=true; fi
       if confirm "Install CLI tools (eza, bat, fd, ripgrep, zoxide, fzf)?"; then do_tools=true; fi
     fi
   fi

@@ -1,5 +1,5 @@
 # ──────────────────────────────────────────────────
-# Monokai Pro Starship Prompt Configuration
+# Chroma Starship Prompt Configuration
 # Inspired by Monokai Pro color palette
 # ──────────────────────────────────────────────────
 
@@ -173,7 +173,7 @@ format = "[$symbol $name]($style)"
 [line_break]
 disabled = false
 
-### Palette Override (Monokai Pro colors as fallback)
+### Palette Override (Chroma/Spectrum colors as fallback)
 [palette]
 background = "#2D2A2E"
 foreground = "#FCFCFA"
