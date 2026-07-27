@@ -2,8 +2,13 @@
 #
 # mac-bootstrap — One-shot Mac setup from a clean install
 #
-# Usage: curl -fsSL https://raw.githubusercontent.com/<user>/mac-bootstrap/main/bootstrap.sh | bash
-#    Or: ./bootstrap.sh
+# For beginners:
+#   1. Open Terminal (Command+Space, type "Terminal", Enter)
+#   2. Copy and paste this line, then press Enter:
+#
+#        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/irfancode/mac-bootstrap/main/bootstrap.sh)"
+#
+#   3. Wait 30-60 minutes. That's it.
 #
 set -euo pipefail
 
@@ -18,6 +23,17 @@ header(){ printf "\n${BOLD}══ %s ══${NC}\n" "$1"; }
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:$PATH"
 
+echo ""
+echo "  ╔══════════════════════════════════════════════╗"
+echo "  ║     mac-bootstrap — macOS Setup Wizard       ║"
+echo "  ║     Setting up your Mac... relax and wait    ║"
+echo "  ╚══════════════════════════════════════════════╝"
+echo ""
+echo "  This will take 30–60 minutes (mostly downloads)."
+echo "  You'll see a lot of text scrolling — that's normal."
+echo "  If a popup asks for password, type your Mac login."
+echo ""
+
 # ── Phase 0: Prerequisites ────────────────────────────────────
 header "Phase 0: Prerequisites"
 info "Checking prerequisites..."
@@ -25,8 +41,11 @@ info "Checking prerequisites..."
 # Xcode Command Line Tools
 if ! xcode-select -p &>/dev/null; then
   info "Installing Xcode Command Line Tools..."
+  info "  If a popup appears, click 'Install' and wait for it to finish."
   xcode-select --install
-  echo "    Press Enter after installation completes..."
+  echo ""
+  echo "  ⏳ After the installation popup completes,"
+  echo "     go back to Terminal and press ENTER to continue..."
   read -r
 else
   ok "Xcode CLT present"
@@ -122,19 +141,38 @@ info "Sourcing new shell config..."
 source "$HOME/.zshrc" 2>/dev/null || true
 
 echo ""
-header "Bootstrap Complete!"
+echo "  ╔══════════════════════════════════════════════╗"
+echo "  ║         ✅  ALL DONE!  Your Mac is set up.   ║"
+echo "  ╚══════════════════════════════════════════════╝"
 echo ""
-echo "  ${GREEN}Your Mac is now set up with:${NC}"
-echo "    - Homebrew packages & casks"
-echo "    - macOS preferences (dark mode, dock, keyboard, etc.)"
-echo "    - Developer tools (Node, Go, Neovim, Rust, fzf, rg, bat, lsd, lazygit)"
-echo "    - Shell config (.zshrc, starship, zsh plugins)"
-echo "    - Ghostty terminal config (Catppuccin Mocha theme)"
-echo "    - Neovim config (LazyVim based)"
+echo "  ${GREEN}What was installed:${NC}"
+echo "    177+ command-line tools (via Homebrew)"
+echo "    25+ applications (VS Code, Docker, browsers, etc.)"
+echo "    6 programming fonts (JetBrains Mono, Fira Code, etc.)"
+echo "    macOS settings (dark mode, fast keyboard, Finder tweaks)"
+echo "    Shell config with colored prompt and smart search"
+echo "    Ghostty terminal with Monokai Pro theme"
+echo "    Neovim editor with LazyVim"
 echo ""
-echo "  ${YELLOW}Next steps:${NC}"
-echo "    1. Restart your terminal (or exec zsh)"
-echo "    2. Open Ghostty for the full terminal experience"
-echo "    3. Run 'update-tools --update' to ensure everything is current"
-echo "    4. Review ~/Desktop for your restored files"
+echo "  ${YELLOW}▶  NEXT STEPS (for beginners):${NC}"
+echo ""
+echo "    ${BOLD}1. Close this Terminal window and open a new one${NC}"
+echo "       (Press Command+Space, type 'Terminal', Enter)"
+echo "       You'll now see a colored prompt — that's normal!"
+echo ""
+echo "    ${BOLD}2. Find 'Ghostty' in your Applications folder${NC}"
+echo "       (or press Command+Space, type 'Ghostty', Enter)"
+echo "       This is your new terminal — it looks much better."
+echo ""
+echo "    ${BOLD}3. Connect to GitHub (optional):${NC}"
+echo "       In Terminal, type:  gh auth login"
+echo "       Then follow the on-screen instructions."
+echo ""
+echo "    ${BOLD}4. Want Java? Run:${NC}"
+echo "       source ~/.sdkman/bin/sdkman-init.sh"
+echo "       sdk install java 21.0.11-amzn"
+echo ""
+echo "  ${YELLOW}▶  Need help?${NC}"
+echo "    Open https://github.com/irfancode/mac-bootstrap"
+echo "    Or run: cat ~/.zshrc"
 echo ""
