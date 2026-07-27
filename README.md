@@ -1,3 +1,4 @@
+> Looking for a one-command macOS setup? See [mac-bootstrap](https://github.com/irfancode/mac-bootstrap) — captures all 177 Homebrew formulae, 25 casks, dotfiles, and macOS prefs from a live M4 MacBook Air.
 # 🎨 Terminal Setup: Ghostty + Zellij + Starship
 
 <p align="center">
