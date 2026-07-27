@@ -1,3 +1,4 @@
+> **Superseded** by [mac-bootstrap](https://github.com/irfancode/mac-bootstrap) — a single-command setup script that automates everything in this guide.
 # How to Set Up a Forward Deployment Engineering Mac in 2026
 
 *A complete, step-by-step guide to building a terminal-first infrastructure engineering workstation on macOS.*
