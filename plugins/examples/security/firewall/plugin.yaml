@@ -1,0 +1,8 @@
+name: firewall
+title: Firewall hardening
+description: Example security plugin — enables the application firewall.
+depends_on: [homebrew]
+commands:
+  install: ./install.sh
+  remove: ./remove.sh
+  verify: ./verify.sh

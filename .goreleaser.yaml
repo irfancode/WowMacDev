@@ -1,0 +1,54 @@
+version: 2
+
+project_name: omamac
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: omamac
+    main: ./cmd/omamac
+    binary: omamac
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+    goarch:
+      - arm64
+      - amd64
+    ldflags:
+      - -s -w -X github.com/omamac/omamac/internal/cli.version={{.Version}}
+
+archives:
+  - id: default
+    formats: [tar.gz]
+    files:
+      - LICENSE
+      - README.md
+
+checksum:
+  name_template: checksums.txt
+
+brews:
+  - name: omamac
+    repository:
+      owner: omamac
+      name: homebrew-tap
+      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
+    directory: Formula
+    homepage: https://omamac.dev
+    description: "Opinionated macOS developer workstation bootstrapper inspired by Omakub"
+    license: MIT
+    test: |
+      system "#{bin}/omamac version"
+    install: |
+      bin.install "omamac"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
