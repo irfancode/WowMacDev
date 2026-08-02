@@ -1,0 +1,26 @@
+# Binaries
+/bin/
+/omamac
+/out/
+dist/
+
+# Go
+*.test
+*.out
+coverage.*
+go.work
+go.work.sum
+
+# macOS
+.DS_Store
+*.swp
+*~
+
+# Local state (never commit)
+.local/
+.secrets/
+*.log
+
+# Editor
+.idea/
+.vscode/

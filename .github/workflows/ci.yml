@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - uses: golangci/golangci-lint-action@v6
+        with:
+          version: latest
+
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Shellcheck bootstrap + plugin scripts
+        run: |
+          shellcheck install.sh scripts/*.sh plugins/examples/*/*/*.sh
+
+  test:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        arch: [arm64, x86_64]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Unit + integration tests
+        run: |
+          make vet
+          make test
+          make unit
+      - name: Dry-run smoke test
+        run: |
+          go build -o bin/omamac ./cmd/omamac
+          ./bin/omamac list --json
+          ./bin/omamac doctor --json || true
+          ./bin/omamac install --dry-run --yes --json || true
