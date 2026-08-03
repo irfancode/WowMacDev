@@ -240,12 +240,12 @@ func (b *Brew) installedSet() (*installed, error) {
 	// `brew list --json` changed shape across Homebrew versions and requires
 	// jq; plain `--formula`/`--cask` output (one name per line) is stable and
 	// dependency-free, so we parse that instead.
-	if out, err := b.Runner.Output(b.Path(), "list", "--formula"); err != nil {
+	out, err := b.Runner.Output(b.Path(), "list", "--formula")
+	if err != nil {
 		return nil, fmt.Errorf("brew list --formula: %w", err)
-	} else {
-		for _, name := range strings.Fields(out) {
-			inst.formulae[name] = true
-		}
+	}
+	for _, name := range strings.Fields(out) {
+		inst.formulae[name] = true
 	}
 	if out, err := b.Runner.Output(b.Path(), "list", "--cask"); err == nil {
 		for _, name := range strings.Fields(out) {

@@ -85,9 +85,6 @@ func TestCorruptLineIgnored(t *testing.T) {
 	if err := os.WriteFile(p, []byte("{not json}\n"), 0o644); err != nil {
 		t.Fatal(err)
 	}
-	if err := os.WriteFile(p, []byte("{not json}\n"), 0o644); err == nil {
-		// no-op guard
-	}
 	s, err := Open(p)
 	if err != nil {
 		t.Fatal(err)

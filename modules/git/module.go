@@ -185,7 +185,9 @@ func (m *Module) ensureSSHKey(ctx *module.Context, home string) error {
 		return fmt.Errorf("ssh-keygen: %w", err)
 	}
 	// Ensure the agent picks it up and print the public key for registration.
-	ctx.Runner.Run("ssh-add", key)
+	if err := ctx.Runner.Run("ssh-add", key); err != nil {
+		ctx.Log.Warnf("ssh-add failed (agent may not be running): %v", err)
+	}
 	pub, err := os.ReadFile(key + ".pub")
 	if err != nil {
 		return err
@@ -231,7 +233,9 @@ func (m *Module) Remove(ctx *module.Context) error {
 		}
 	}
 	if ctx.Runner.Exists("git-lfs") {
-		ctx.Runner.Run("git", "lfs", "uninstall")
+		if err := ctx.Runner.Run("git", "lfs", "uninstall"); err != nil {
+			ctx.Log.Warnf("git lfs uninstall failed: %v", err)
+		}
 	}
 	return ctx.State.Append(state.Entry{Module: m.Name(), Action: state.ActionRemove, Status: state.StatusOK})
 }
