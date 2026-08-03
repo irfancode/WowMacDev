@@ -102,7 +102,7 @@ func (m *Module) Verify(ctx *module.Context) error {
 		return nil
 	}
 	if macos.Read(ctx, macos.FinderDomain, "AppleShowAllFiles") == "0" && boolOf(ctx.Config.MacOS.Finder, "show_hidden", true) {
-		return fmt.Errorf("Finder show_hidden preference not applied")
+		return fmt.Errorf("finder show_hidden preference not applied")
 	}
 	return nil
 }

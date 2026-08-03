@@ -105,7 +105,7 @@ func (m *Module) Remove(ctx *module.Context) error {
 }
 
 // Verify implements module.Module.
-func (m *Module) Verify(ctx *module.Context) error {
+func (m *Module) Verify(_ *module.Context) error {
 	return nil
 }
 

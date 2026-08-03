@@ -139,7 +139,7 @@ func (a *adapter) Summary() string {
 }
 func (a *adapter) Priority() int { return 100 }
 
-func (a *adapter) Enabled(cfg *config.Config) bool {
+func (a *adapter) Enabled(_ *config.Config) bool {
 	// Plugins are enabled unless disabled via config or CLI filters.
 	return true
 }

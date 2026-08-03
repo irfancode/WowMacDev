@@ -39,7 +39,7 @@ func newPluginListCmd(r *rootCmd) *cobra.Command {
 	return &cobra.Command{
 		Use:   "list",
 		Short: "List installed plugins",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, args []string) error {
 			app, err := r.getApp()
 			if err != nil {
 				return err
@@ -99,7 +99,7 @@ func newPluginAddCmd(r *rootCmd) *cobra.Command {
 		Use:   "add <dir|git-url> [group]",
 		Short: "Install a plugin from a local directory or git URL",
 		Args:  cobra.RangeArgs(1, 2),
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, args []string) error {
 			app, err := r.getApp()
 			if err != nil {
 				return err
@@ -196,7 +196,7 @@ func newPluginRemoveCmd(r *rootCmd) *cobra.Command {
 		Use:   "remove <name>",
 		Short: "Remove an installed plugin",
 		Args:  cobra.ExactArgs(1),
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, args []string) error {
 			app, err := r.getApp()
 			if err != nil {
 				return err
@@ -247,7 +247,7 @@ func newPluginEnableCmd(r *rootCmd, enable bool) *cobra.Command {
 		Use:   verb + " <name>",
 		Short: short,
 		Args:  cobra.ExactArgs(1),
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, args []string) error {
 			app, err := r.getApp()
 			if err != nil {
 				return err
@@ -294,7 +294,7 @@ func validGroup(s string) bool {
 		return false
 	}
 	for _, r := range s {
-		if !(r >= 'a' && r <= 'z' || r >= '0' && r <= '9' || r == '-' || r == '_') {
+		if (r < 'a' || r > 'z') && (r < '0' || r > '9') && r != '-' && r != '_' {
 			return false
 		}
 	}
@@ -344,7 +344,7 @@ func copyFile(src, dst string) error {
 		return err
 	}
 	if _, err := io.Copy(out, in); err != nil {
-		out.Close()
+		_ = out.Close()
 		return err
 	}
 	return out.Close()

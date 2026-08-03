@@ -42,7 +42,7 @@ func newRootCmd(version string) *rootCmd {
 		Long:          "omamac transforms a fresh macOS install into a fully configured\n" + `developer workstation. Inspired by Omakub, built for Apple Silicon.`,
 		SilenceUsage:  true,
 		SilenceErrors: true,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			return cmd.Help()
 		},
 	}

@@ -219,7 +219,7 @@ func (w *writer) Write(p []byte) (int, error) {
 		w.buf.WriteString(s[idx+1:])
 		line = strings.TrimRight(line, "\r")
 		if strings.TrimSpace(line) != "" {
-			w.log.l.Log(nil, w.level, line)
+			w.log.l.Log(context.TODO(), w.level, line)
 		}
 	}
 	return n, nil
@@ -262,7 +262,7 @@ func (h *consoleHandler) Handle(_ context.Context, rec slog.Record) error {
 	return err
 }
 
-func (h *consoleHandler) WithAttrs(attrs []slog.Attr) slog.Handler {
+func (h *consoleHandler) WithAttrs(_ []slog.Attr) slog.Handler {
 	return h
 }
 

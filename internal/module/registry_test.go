@@ -147,7 +147,6 @@ func TestRegistryFilter(t *testing.T) {
 
 type fakeModule struct {
 	name     string
-	summary  string
 	priority int
 	enabled  bool
 }
