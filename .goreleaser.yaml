@@ -37,13 +37,11 @@ brews:
       name: homebrew-tap
       token: "{{ .Env.TAP_GITHUB_TOKEN }}"
     directory: Formula
-    homepage: https://github.com/irfancode/omamac
+    homepage: https://omamac.dev
     description: "Opinionated macOS developer workstation bootstrapper inspired by Omakub"
     license: MIT
     test: |
       system "#{bin}/omamac version"
-    install: |
-      bin.install "omamac"
 
 changelog:
   sort: asc
