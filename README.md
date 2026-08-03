@@ -146,6 +146,7 @@ Global flags: `--dry-run`, `--yes`, `--json`, `--verbose`, `--debug`,
 
 ## Documentation
 
+- [The last time you'll set up a Mac by hand](docs/blog-post.md) — read this first
 - [Getting started](docs/getting-started.md)
 - [Architecture](docs/architecture.md)
 - [Writing plugins](docs/plugins.md)
