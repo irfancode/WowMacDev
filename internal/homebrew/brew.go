@@ -8,9 +8,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/omamac/omamac/internal/logging"
-	"github.com/omamac/omamac/internal/module"
-	"github.com/omamac/omamac/internal/util"
+	"github.com/irfancode/omamac/internal/logging"
+	"github.com/irfancode/omamac/internal/module"
+	"github.com/irfancode/omamac/internal/util"
 )
 
 // Brew talks to Homebrew via the util.Runner (respecting dry-run).

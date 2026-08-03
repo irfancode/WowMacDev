@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/omamac/omamac/internal/util"
+	"github.com/irfancode/omamac/internal/util"
 	"github.com/spf13/cobra"
 )
 

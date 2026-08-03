@@ -4,8 +4,8 @@ import (
 	"errors"
 	"sort"
 
-	"github.com/omamac/omamac/internal/module"
-	"github.com/omamac/omamac/internal/state"
+	"github.com/irfancode/omamac/internal/module"
+	"github.com/irfancode/omamac/internal/state"
 	"github.com/spf13/cobra"
 )
 

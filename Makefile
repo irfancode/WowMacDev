@@ -3,7 +3,7 @@
 
 BINARY      := omamac
 VERSION     ?= dev
-LDFLAGS     := -s -w -X github.com/omamac/omamac/internal/cli.version=$(VERSION)
+LDFLAGS     := -s -w -X github.com/irfancode/omamac/internal/cli.version=$(VERSION)
 GOFLAGS     ?=
 
 all: fmt vet build

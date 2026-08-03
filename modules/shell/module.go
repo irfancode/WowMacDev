@@ -9,10 +9,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/omamac/omamac/internal/config"
-	"github.com/omamac/omamac/internal/fsutil"
-	"github.com/omamac/omamac/internal/module"
-	"github.com/omamac/omamac/internal/state"
+	"github.com/irfancode/omamac/internal/config"
+	"github.com/irfancode/omamac/internal/fsutil"
+	"github.com/irfancode/omamac/internal/module"
+	"github.com/irfancode/omamac/internal/state"
 )
 
 // Module configures the shell.

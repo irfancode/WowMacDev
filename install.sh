@@ -2,7 +2,7 @@
 # omamac bootstrap — transforms a fresh macOS into a configured dev workstation.
 #
 # Usage:
-#   curl -fsSL https://omamac.dev/install.sh | bash
+#   curl -fsSL https://github.com/irfancode/omamac/raw/main/install.sh | bash
 #   # or, for a local checkout / development:
 #   bash install.sh
 #
@@ -15,8 +15,8 @@
 set -euo pipefail
 
 OMAMAC_VERSION="${OMAMAC_VERSION:-latest}"
-OMAMAC_REPO="${OMAMAC_REPO:-omamac/omamac}"
-OMAMAC_TAP="${OMAMAC_TAP:-omamac/homebrew-tap}"
+OMAMAC_REPO="${OMAMAC_REPO:-irfancode/omamac}"
+OMAMAC_TAP="${OMAMAC_TAP:-irfancode/homebrew-tap}"
 BIN_DIR="${OMAMAC_BIN_DIR:-$HOME/.local/bin}"
 
 log()  { printf '\033[1;34m▸\033[0m %s\n' "$*"; }
@@ -78,20 +78,19 @@ fi
 # 4. Install the omamac binary
 # --------------------------------------------------------------------------
 install_binary_release() {
-  log "Downloading omamac $OMAMAC_VERSION ($GOARCH)..."
-  local url
+  log "Downloading omamac ${OMAMAC_VERSION} (${GOARCH})..."
+  local ver
   if [ "$OMAMAC_VERSION" = "latest" ]; then
-    url="https://github.com/${OMAMAC_REPO}/releases/latest/download/omamac_${GOARCH}_darwin_${GOARCH}.tar.gz"
+    ver="$(curl -fsSL "https://api.github.com/repos/${OMAMAC_REPO}/releases/latest" | grep -o '"tag_name": *"[^"]*"' | head -1 | cut -d'"' -f4 | sed 's/^v//')"
   else
-    url="https://github.com/${OMAMAC_REPO}/releases/download/v${OMAMAC_VERSION}/omamac_${OMAMAC_VERSION}_darwin_${GOARCH}.tar.gz"
+    ver="$OMAMAC_VERSION"
   fi
-  # Try the actual release asset naming scheme, falling back to the common one.
+  [ -n "$ver" ] || die "Could not resolve omamac ${OMAMAC_VERSION}; check OMAMAC_REPO"
+  local url="https://github.com/${OMAMAC_REPO}/releases/download/v${ver}/omamac_${ver}_darwin_${GOARCH}.tar.gz"
   local tmp
   tmp="$(mktemp -d)"
-  if ! curl -fsSL "$url" -o "$tmp/omamac.tar.gz"; then
-    url="https://github.com/${OMAMAC_REPO}/releases/download/v${OMAMAC_VERSION}/omamac_${GOARCH}_darwin_${GOARCH}.tar.gz"
-    curl -fsSL "$url" -o "$tmp/omamac.tar.gz"
-  fi
+  log "Fetching ${url}"
+  curl -fsSL "$url" -o "$tmp/omamac.tar.gz" || die "Download failed: $url"
   mkdir -p "$BIN_DIR"
   tar -xzf "$tmp/omamac.tar.gz" -C "$tmp"
   install -m 0755 "$tmp/omamac" "$BIN_DIR/omamac"
@@ -117,12 +116,24 @@ else
   install_binary_release
 fi
 
-# Ensure ~/.local/bin is on PATH for this and future shells.
+# Ensure ~/.local/bin is on PATH for this and future shells. macOS does not
+# include it by default, so persist it in .zshrc/.zprofile (idempotent).
 case ":$PATH:" in
   *":$BIN_DIR:"*) ;;
   *) log "Adding $BIN_DIR to PATH for this session." ;;
 esac
 export PATH="$BIN_DIR:$PATH"
+
+persist_path() {
+  local rc="$1"
+  if [ -f "$rc" ] && ! grep -qF "$BIN_DIR" "$rc"; then
+    # shellcheck disable=SC2016 # $PATH is intentionally literal in the written line
+    printf '\nexport PATH="%s:$PATH"\n' "$BIN_DIR" >> "$rc"
+    log "Added $BIN_DIR to PATH in $rc"
+  fi
+}
+persist_path "$HOME/.zshrc"
+persist_path "$HOME/.zprofile"
 
 ok "omamac ready"
 

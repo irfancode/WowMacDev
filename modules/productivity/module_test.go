@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/omamac/omamac/internal/config"
+	"github.com/irfancode/omamac/internal/config"
 )
 
 func TestSelected(t *testing.T) {

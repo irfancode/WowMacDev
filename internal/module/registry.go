@@ -5,7 +5,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/omamac/omamac/internal/config"
+	"github.com/irfancode/omamac/internal/config"
 )
 
 // Registry collects built-in modules and discovered plugins.

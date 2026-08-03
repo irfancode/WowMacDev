@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/omamac/omamac/internal/module"
+	"github.com/irfancode/omamac/internal/module"
 )
 
 // Rule describes one `defaults` write.

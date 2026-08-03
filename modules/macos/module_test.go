@@ -3,7 +3,7 @@ package macosmodule
 import (
 	"testing"
 
-	"github.com/omamac/omamac/internal/config"
+	"github.com/irfancode/omamac/internal/config"
 )
 
 func TestBuildRules(t *testing.T) {

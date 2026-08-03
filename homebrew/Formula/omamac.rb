@@ -4,14 +4,14 @@
 
 class Omamac < Formula
   desc "Opinionated macOS developer workstation bootstrapper inspired by Omakub"
-  homepage "https://omamac.dev"
+  homepage "https://github.com/irfancode/omamac"
   version "0.1.0"
 
   if Hardware::CPU.arm?
-    url "https://github.com/omamac/omamac/releases/download/v0.1.0/omamac_0.1.0_darwin_arm64.tar.gz"
+    url "https://github.com/irfancode/omamac/releases/download/v0.1.0/omamac_0.1.0_darwin_arm64.tar.gz"
     sha256 "0000000000000000000000000000000000000000000000000000000000000000"
   else
-    url "https://github.com/omamac/omamac/releases/download/v0.1.0/omamac_0.1.0_darwin_amd64.tar.gz"
+    url "https://github.com/irfancode/omamac/releases/download/v0.1.0/omamac_0.1.0_darwin_amd64.tar.gz"
     sha256 "0000000000000000000000000000000000000000000000000000000000000000"
   end
 
