@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/omamac/omamac/internal/config"
+	"github.com/irfancode/omamac/internal/config"
 	"github.com/spf13/cobra"
 )
 

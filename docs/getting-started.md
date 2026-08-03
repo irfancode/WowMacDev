@@ -19,7 +19,7 @@ itself.
 ### Bootstrap script (recommended)
 
 ```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/omamac/omamac/main/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/irfancode/omamac/main/install.sh)"
 ```
 
 The script checks for Xcode Command Line Tools, installs Homebrew if missing,
@@ -28,7 +28,7 @@ then installs the latest omamac release and prints next steps.
 ### From source
 
 ```sh
-git clone https://github.com/omamac/omamac.git
+git clone https://github.com/irfancode/omamac.git
 cd omamac
 make build
 ./bin/omamac install --yes

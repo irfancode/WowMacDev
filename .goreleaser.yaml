@@ -18,7 +18,7 @@ builds:
       - arm64
       - amd64
     ldflags:
-      - -s -w -X github.com/omamac/omamac/internal/cli.version={{.Version}}
+      - -s -w -X github.com/irfancode/omamac/internal/cli.version={{.Version}}
 
 archives:
   - id: default
@@ -33,11 +33,11 @@ checksum:
 brews:
   - name: omamac
     repository:
-      owner: omamac
+      owner: irfancode
       name: homebrew-tap
       token: "{{ .Env.TAP_GITHUB_TOKEN }}"
     directory: Formula
-    homepage: https://omamac.dev
+    homepage: https://github.com/irfancode/omamac
     description: "Opinionated macOS developer workstation bootstrapper inspired by Omakub"
     license: MIT
     test: |

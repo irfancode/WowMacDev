@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/omamac/omamac/internal/module"
-	"github.com/omamac/omamac/internal/util"
+	"github.com/irfancode/omamac/internal/module"
+	"github.com/irfancode/omamac/internal/util"
 	"github.com/spf13/cobra"
 )
 

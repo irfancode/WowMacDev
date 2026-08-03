@@ -6,7 +6,7 @@ heavily testable — please keep it that way.
 ## Setup
 
 ```sh
-git clone https://github.com/omamac/omamac.git
+git clone https://github.com/irfancode/omamac.git
 cd omamac
 make check     # fmt, vet, lint, shellcheck, test
 ```

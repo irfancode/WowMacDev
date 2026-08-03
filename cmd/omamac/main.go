@@ -1,11 +1,11 @@
 // Command omamac bootstraps and configures a complete macOS development
-// environment. See https://omamac.dev for documentation.
+// environment. See https://github.com/irfancode/omamac for documentation.
 package main
 
 import (
 	"os"
 
-	"github.com/omamac/omamac/internal/cli"
+	"github.com/irfancode/omamac/internal/cli"
 )
 
 func main() {

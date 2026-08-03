@@ -10,7 +10,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/omamac/omamac/internal/logging"
+	"github.com/irfancode/omamac/internal/logging"
 )
 
 // Runner executes external commands. It is dry-run aware: in dry-run mode no

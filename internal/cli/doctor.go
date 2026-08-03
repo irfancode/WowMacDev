@@ -3,7 +3,7 @@ package cli
 import (
 	"errors"
 
-	"github.com/omamac/omamac/internal/module"
+	"github.com/irfancode/omamac/internal/module"
 	"github.com/spf13/cobra"
 )
 

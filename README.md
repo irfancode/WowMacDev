@@ -28,7 +28,7 @@ $ omamac backup              # snapshot the environment
 ## Quick start
 
 ```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/omamac/omamac/main/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/irfancode/omamac/main/install.sh)"
 omamac install --yes
 ```
 

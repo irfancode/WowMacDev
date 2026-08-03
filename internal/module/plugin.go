@@ -12,7 +12,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/omamac/omamac/internal/config"
+	"github.com/irfancode/omamac/internal/config"
 	"gopkg.in/yaml.v3"
 )
 

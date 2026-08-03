@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/omamac/omamac/internal/logging"
-	"github.com/omamac/omamac/internal/util"
+	"github.com/irfancode/omamac/internal/logging"
+	"github.com/irfancode/omamac/internal/util"
 )
 
 // fakeBrew returns a Brew whose "brew" binary is a shell stub answering

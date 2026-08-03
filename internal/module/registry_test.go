@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/omamac/omamac/internal/config"
+	"github.com/irfancode/omamac/internal/config"
 )
 
 func writePlugin(t *testing.T, base, group, name string, manifest string, scripts map[string]string) string {

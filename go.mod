@@ -1,4 +1,4 @@
-module github.com/omamac/omamac
+module github.com/irfancode/omamac
 
 go 1.26.5
 

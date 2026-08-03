@@ -166,7 +166,7 @@ Monday morning:
 
 ```sh
 # the whole journey
-curl -fsSL https://raw.githubusercontent.com/omamac/omamac/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/irfancode/omamac/main/install.sh | bash
 omamac install --yes     # or: omamac install --dry-run first
 omamac doctor            # prove it all works
 omamac backup            # so you never have to do this again
@@ -179,7 +179,7 @@ omamac backup            # so you never have to do this again
 Thirty seconds after the box is opened:
 
 ```sh
-$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/omamac/omamac/main/install.sh)"
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/irfancode/omamac/main/install.sh)"
 $ omamac install --yes
 ```
 
@@ -206,4 +206,4 @@ That's the last time you set up a Mac by hand.
 file an issue, or write a plugin for your team's stack — the docs for writing
 plugins take about ten minutes to read.*
 
-**[github.com/omamac/omamac](https://github.com/omamac/omamac)**
+**[github.com/irfancode/omamac](https://github.com/irfancode/omamac)**

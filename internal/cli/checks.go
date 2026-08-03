@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/omamac/omamac/internal/config"
-	"github.com/omamac/omamac/internal/util"
+	"github.com/irfancode/omamac/internal/config"
+	"github.com/irfancode/omamac/internal/util"
 )
 
 func platformCheck() checkResult {

@@ -8,12 +8,12 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/omamac/omamac/internal/config"
-	"github.com/omamac/omamac/internal/logging"
-	"github.com/omamac/omamac/internal/module"
-	"github.com/omamac/omamac/internal/state"
-	"github.com/omamac/omamac/internal/tui"
-	"github.com/omamac/omamac/internal/util"
+	"github.com/irfancode/omamac/internal/config"
+	"github.com/irfancode/omamac/internal/logging"
+	"github.com/irfancode/omamac/internal/module"
+	"github.com/irfancode/omamac/internal/state"
+	"github.com/irfancode/omamac/internal/tui"
+	"github.com/irfancode/omamac/internal/util"
 )
 
 // version is stamped at build time via -ldflags.
