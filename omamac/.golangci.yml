@@ -1,0 +1,56 @@
+version: "2"
+
+run:
+  timeout: 10m
+  go: "1.26"
+
+linters:
+  enable:
+    - govet
+    - staticcheck
+    - ineffassign
+    - unused
+    - errcheck
+    - gosec
+    - misspell
+    - revive
+  settings:
+    errcheck:
+      exclude-functions:
+        - fmt.Fprint
+        - fmt.Fprintf
+        - fmt.Fprintln
+        - os.RemoveAll
+        - "(*os.File).Close"
+        - "(*text/tabwriter.Writer).Flush"
+    gosec:
+      excludes:
+        - G104
+        - G204
+        - G301
+        - G302
+        - G304
+        - G306
+        - G703
+  exclusions:
+    rules:
+      - path: _test\.go
+        linters:
+          - errcheck
+          - gosec
+      - linters:
+          - revive
+        text: unused-parameter
+      - linters:
+          - revive
+        text: stutters
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
+
+output:
+  formats:
+    text:
+      path: stdout
