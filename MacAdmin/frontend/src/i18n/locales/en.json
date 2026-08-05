@@ -1,0 +1,73 @@
+{
+  "app": {
+    "name": "MacAdmin",
+    "tagline": "System Management",
+    "description": "Native macOS system administration"
+  },
+  "auth": {
+    "login": "Sign In",
+    "logout": "Sign Out",
+    "username": "Username",
+    "password": "Password",
+    "loginButton": "Sign In",
+    "loginError": "Invalid credentials",
+    "welcome": "Welcome to MacAdmin",
+    "welcomeSubtitle": "Sign in to manage your Mac"
+  },
+  "navigation": {
+    "overview": "Overview",
+    "dashboard": "Dashboard",
+    "system": "System",
+    "processes": "Processes",
+    "storage": "Storage",
+    "network": "Network",
+    "users": "Users & Groups",
+    "updates": "Software Update",
+    "logs": "Logs",
+    "tools": "Tools",
+    "files": "File Browser",
+    "terminal": "Terminal",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overview": "System Overview",
+    "cpu": "CPU",
+    "memory": "Memory",
+    "disk": "Disk",
+    "network": "Network",
+    "uptime": "Uptime",
+    "processes": "Processes",
+    "systemHealth": "System Health",
+    "healthy": "Healthy",
+    "updatesAvailable": "Updates Available",
+    "noUpdates": "Your Mac is up to date"
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "refresh": "Refresh",
+    "actions": "Actions",
+    "status": "Status",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "running": "Running",
+    "stopped": "Stopped"
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "appearance": "Appearance",
+    "theme": {
+      "title": "Appearance",
+      "light": "Light",
+      "dark": "Dark",
+      "auto": "Auto"
+    }
+  }
+}

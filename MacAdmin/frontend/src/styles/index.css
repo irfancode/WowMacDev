@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+  
+  html {
+    @apply antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-macos-window text-macos-primary;
+  }
+  
+  /* macOS Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-macos-tertiary/40 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-macos-tertiary/60;
+  }
+}
+
+@layer components {
+  /* macOS Native Button */
+  .macos-button {
+    @apply inline-flex items-center justify-center px-4 py-2 
+           bg-macos-accent text-white font-medium text-sm
+           rounded-md shadow-macos-button
+           hover:bg-macos-accent/90 active:scale-[0.98]
+           transition-all duration-100
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .macos-button-secondary {
+    @apply inline-flex items-center justify-center px-4 py-2
+           bg-macos-content text-macos-primary font-medium text-sm
+           rounded-md shadow-macos-button border border-macos-quaternary/30
+           hover:bg-macos-window active:scale-[0.98]
+           transition-all duration-100;
+  }
+  
+  .macos-button-ghost {
+    @apply inline-flex items-center justify-center px-3 py-1.5
+           bg-transparent text-macos-secondary font-medium text-sm
+           rounded-md hover:bg-macos-sidebar/50
+           transition-all duration-100;
+  }
+  
+  /* macOS Input */
+  .macos-input {
+    @apply w-full px-3 py-2 bg-macos-content 
+           border border-macos-quaternary/50 rounded-md
+           text-macos-primary text-sm
+           focus:outline-none focus:ring-2 focus:ring-macos-accent/30 focus:border-macos-accent
+           placeholder:text-macos-tertiary
+           transition-all duration-150;
+  }
+  
+  /* macOS Card/Window */
+  .macos-card {
+    @apply bg-macos-content/80 backdrop-blur-macos rounded-macos
+           shadow-macos-window border border-white/20
+           dark:bg-macos-dark-content/80 dark:border-white/10;
+  }
+  
+  .macos-sidebar {
+    @apply bg-macos-sidebar/95 backdrop-blur-macos 
+           border-r border-macos-quaternary/20
+           dark:bg-macos-dark-sidebar/95;
+  }
+  
+  /* macOS Toolbar */
+  .macos-toolbar {
+    @apply bg-macos-window/90 backdrop-blur-macos 
+           border-b border-macos-quaternary/20 px-4 py-2
+           flex items-center justify-between
+           dark:bg-macos-dark-window/90;
+  }
+  
+  /* macOS List Item */
+  .macos-list-item {
+    @apply flex items-center gap-3 px-3 py-2 
+           text-macos-secondary text-sm
+           hover:bg-macos-accent/10 hover:text-macos-primary
+           rounded-md cursor-pointer
+           transition-all duration-100;
+  }
+  
+  .macos-list-item.active {
+    @apply bg-macos-accent text-white hover:bg-macos-accent hover:text-white;
+  }
+  
+  /* macOS Segmented Control */
+  .macos-segmented {
+    @apply inline-flex bg-macos-sidebar/50 p-0.5 rounded-lg
+           dark:bg-macos-dark-sidebar/50;
+  }
+  
+  .macos-segmented-item {
+    @apply px-3 py-1 text-sm font-medium text-macos-secondary
+           rounded-md transition-all duration-100
+           hover:text-macos-primary;
+  }
+  
+  .macos-segmented-item.active {
+    @apply bg-macos-content text-macos-primary shadow-sm
+           dark:bg-macos-dark-content;
+  }
+  
+  /* macOS Alert/Toast */
+  .macos-alert {
+    @apply flex items-start gap-3 p-4 rounded-macos
+           bg-macos-content shadow-macos-window
+           border border-macos-quaternary/20;
+  }
+  
+  .macos-alert-success {
+    @apply bg-macos-success/10 border-macos-success/20;
+  }
+  
+  .macos-alert-warning {
+    @apply bg-macos-warning/10 border-macos-warning/20;
+  }
+  
+  .macos-alert-error {
+    @apply bg-macos-error/10 border-macos-error/20;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+}

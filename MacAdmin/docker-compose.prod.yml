@@ -1,0 +1,69 @@
+version: '3.8'
+
+# Production Docker Compose Configuration for MacAdmin
+
+services:
+  traefik:
+    image: traefik:v3.0
+    container_name: macadmin-traefik
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.email=admin@your-domain.com"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./letsencrypt:/letsencrypt
+    networks:
+      - macadmin-network
+    restart: unless-stopped
+
+  frontend:
+    image: ghcr.io/irfancode/macadmin-frontend:latest
+    container_name: macadmin-frontend
+    environment:
+      - NODE_ENV=production
+      - VITE_API_URL=/api
+      - VITE_WS_URL=wss://your-domain.com/ws
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`your-domain.com`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
+    networks:
+      - macadmin-network
+    restart: unless-stopped
+
+  backend:
+    image: ghcr.io/irfancode/macadmin-backend:latest
+    container_name: macadmin-backend
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - DEBUG=false
+    volumes:
+      - /var/log:/host/logs:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`your-domain.com`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.backend.loadbalancer.server.port=8000"
+      - "traefik.http.routers.websocket.rule=Host(`your-domain.com`) && PathPrefix(`/ws`)"
+      - "traefik.http.routers.websocket.entrypoints=websecure"
+      - "traefik.http.routers.websocket.tls.certresolver=letsencrypt"
+    networks:
+      - macadmin-network
+    restart: unless-stopped
+
+networks:
+  macadmin-network:
+    driver: bridge
