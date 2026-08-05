@@ -1,0 +1,343 @@
+#!/usr/bin/env bash
+#
+# chroma-cli — Single command setup for Chroma Terminal
+#
+# Usage: bash -c "$(curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli)"
+#   or:  curl -fsSL https://raw.githubusercontent.com/irfancode/chroma-terminal/main/utility/chroma-cli | bash
+#
+# Flags:
+#   --theme <name>     Select theme (spectrum, octagon, ristretto, spectrum,
+#                      machine, classic, zen, protorium, relaxed, amber)
+#   --font             Install JetBrainsMono Nerd Font
+#   --prompt           Install Starship prompt with Chroma theme config
+#   --tools            Install CLI tools (eza, bat, fd, ripgrep, zoxide, fzf)
+#   --all              Install everything (font + prompt + tools + theme)
+#   --list-themes      List all available themes with preview
+#   --preview [theme]  Show color preview of a theme (or all if no theme given)
+#   --help             Show this message
+#
+# Interactive mode is used when no flags are provided.
+#
+
+set -euo pipefail
+
+# ──────────────────────────────────────────────
+# Configuration
+# ──────────────────────────────────────────────
+REPO_OWNER="irfancode"
+REPO_NAME="chroma-terminal"
+REPO_BRANCH="main"
+RAW_BASE="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}"
+
+# ──────────────────────────────────────────────
+# Color helpers
+# ──────────────────────────────────────────────
+RESET='\033[0m'
+BOLD='\033[1m'
+DIM='\033[2m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+WHITE='\033[0;37m'
+
+log_info()  { printf "${BLUE}  ⓘ${RESET} %s\n" "$*"; }
+log_ok()    { printf "${GREEN}  ✔${RESET} %s\n" "$*"; }
+log_warn()  { printf "${YELLOW}  ⚠${RESET} %s\n" "$*"; }
+log_error() { printf "${RED}  ✘${RESET} %s\n" "$*" >&2; }
+log_step()  { printf "\n${BOLD}${CYAN}▸ %s${RESET}\n" "$*"; }
+log_title() { printf "\n${BOLD}${WHITE}  %s${RESET}\n" "$*"; }
+
+has_cmd() { command -v "$1" &>/dev/null; }
+
+confirm() {
+  local prompt="$1" default="${2:-y}"
+  local yn
+  [[ "$default" == "y" ]] && prompt="$prompt [Y/n] " || prompt="$prompt [y/N] "
+  read -r -p "$(printf "${BOLD}${prompt}${RESET}")" yn
+  yn="${yn:-$default}"
+  [[ "$yn" =~ ^[Yy]$ ]]
+}
+
+# ──────────────────────────────────────────────
+# Theme definitions (embedded for offline use)
+# ──────────────────────────────────────────────
+declare -A T_BG T_FG T_BLK T_RED T_GRN T_YLW T_BLU T_MAG T_CYN T_WHI T_BRB T_COM
+
+init_themes() {
+  local t
+  t="spectrum"; T_BG[$t]="#2D2A2E"; T_FG[$t]="#FCFCFA"; T_BLK[$t]="#2D2A2E"; T_RED[$t]="#FF6188"; T_GRN[$t]="#A9DC76"; T_YLW[$t]="#FFD866"; T_BLU[$t]="#78DCE8"; T_MAG[$t]="#AB9DF2"; T_CYN[$t]="#78DCE8"; T_WHI[$t]="#FCFCFA"; T_BRB[$t]="#1A1A1C"; T_COM[$t]="#69676C"
+  t="octagon"; T_BG[$t]="#2D2A2E"; T_FG[$t]="#FCFCFA"; T_BLK[$t]="#2D2A2E"; T_RED[$t]="#FF6188"; T_GRN[$t]="#A9DC76"; T_YLW[$t]="#FFD866"; T_BLU[$t]="#78DCE8"; T_MAG[$t]="#FC9867"; T_CYN[$t]="#78DCE8"; T_WHI[$t]="#FCFCFA"; T_BRB[$t]="#1A1A1C"; T_COM[$t]="#69676C"
+  t="ristretto"; T_BG[$t]="#2B2A2B"; T_FG[$t]="#FCFCFA"; T_BLK[$t]="#2B2A2B"; T_RED[$t]="#E36A6A"; T_GRN[$t]="#98C379"; T_YLW[$t]="#E5C07B"; T_BLU[$t]="#7CB7D9"; T_MAG[$t]="#C678DD"; T_CYN[$t]="#56B6C2"; T_WHI[$t]="#FCFCFA"; T_BRB[$t]="#1A1A1C"; T_COM[$t]="#5C5C5C"
+  t="machine"; T_BG[$t]="#2D2A2E"; T_FG[$t]="#FCFCFA"; T_BLK[$t]="#2D2A2E"; T_RED[$t]="#FF6188"; T_GRN[$t]="#A9DC76"; T_YLW[$t]="#FFD866"; T_BLU[$t]="#78DCE8"; T_MAG[$t]="#AB9DF2"; T_CYN[$t]="#FC9867"; T_WHI[$t]="#FCFCFA"; T_BRB[$t]="#1A1A1C"; T_COM[$t]="#69676C"
+  t="classic"; T_BG[$t]="#272822"; T_FG[$t]="#F8F8F2"; T_BLK[$t]="#272822"; T_RED[$t]="#F92672"; T_GRN[$t]="#A6E22E"; T_YLW[$t]="#E6DB74"; T_BLU[$t]="#66D9EF"; T_MAG[$t]="#AE81FF"; T_CYN[$t]="#A1EFE4"; T_WHI[$t]="#F8F8F2"; T_BRB[$t]="#1B1C18"; T_COM[$t]="#75715E"
+  t="zen"; T_BG[$t]="#2D2A2E"; T_FG[$t]="#FCFCFA"; T_BLK[$t]="#2D2A2E"; T_RED[$t]="#FF6188"; T_GRN[$t]="#A9DC76"; T_YLW[$t]="#FFD866"; T_BLU[$t]="#78DCE8"; T_MAG[$t]="#AB9DF2"; T_CYN[$t]="#FC9867"; T_WHI[$t]="#FCFCFA"; T_BRB[$t]="#1A1A1C"; T_COM[$t]="#69676C"
+  t="protorium"; T_BG[$t]="#2D2A2E"; T_FG[$t]="#FCFCFA"; T_BLK[$t]="#2D2A2E"; T_RED[$t]="#FF6188"; T_GRN[$t]="#A9DC76"; T_YLW[$t]="#FFD866"; T_BLU[$t]="#78DCE8"; T_MAG[$t]="#AB9DF2"; T_CYN[$t]="#FC9867"; T_WHI[$t]="#FCFCFA"; T_BRB[$t]="#1A1A1C"; T_COM[$t]="#69676C"
+  t="relaxed"; T_BG[$t]="#3A3A3A"; T_FG[$t]="#F8F8F2"; T_BLK[$t]="#3A3A3A"; T_RED[$t]="#E06C75"; T_GRN[$t]="#98C379"; T_YLW[$t]="#E5C07B"; T_BLU[$t]="#61AFEF"; T_MAG[$t]="#C678DD"; T_CYN[$t]="#56B6C2"; T_WHI[$t]="#F8F8F2"; T_BRB[$t]="#282828"; T_COM[$t]="#5C6370"
+  t="amber"; T_BG[$t]="#2D2A2E"; T_FG[$t]="#FCFCFA"; T_BLK[$t]="#2D2A2E"; T_RED[$t]="#E36A6A"; T_GRN[$t]="#A9DC76"; T_YLW[$t]="#E5C07B"; T_BLU[$t]="#78DCE8"; T_MAG[$t]="#FC9867"; T_CYN[$t]="#56B6C2"; T_WHI[$t]="#FCFCFA"; T_BRB[$t]="#1A1A1C"; T_COM[$t]="#5C6370"
+}
+
+THEME_NAMES=(spectrum octagon ristretto machine classic zen protorium relaxed amber)
+THEME_DISPLAY=("Chroma Spectrum" "Filter Octagon" "Filter Ristretto" "Filter Machine" "Monokai Classic" "Filter Zen" "Filter Protorium" "Filter Relaxed" "Filter Amber")
+
+declare -A T_IDX
+for i in "${!THEME_NAMES[@]}"; do T_IDX["${THEME_NAMES[$i]}"]="$i"; done
+
+# ──────────────────────────────────────────────
+# Preview
+# ──────────────────────────────────────────────
+show_preview() {
+  local theme="$1"
+  echo ""
+  log_title "${THEME_DISPLAY[${T_IDX[$theme]}]}"
+  echo ""
+  printf "  ${BOLD}Background:${RESET}  "
+  printf "\033[48;2;%d;%d;%dm              ${RESET}\n" \
+    "$(printf '%d' 0x$(echo ${T_BG[$theme]:1} | cut -c1-2))" \
+    "$(printf '%d' 0x$(echo ${T_BG[$theme]:1} | cut -c3-4))" \
+    "$(printf '%d' 0x$(echo ${T_BG[$theme]:1} | cut -c5-6))"
+  printf "  ${BOLD}Foreground:${RESET}  "
+  printf "\033[48;2;%d;%d;%dm              ${RESET}\n" \
+    "$(printf '%d' 0x$(echo ${T_FG[$theme]:1} | cut -c1-2))" \
+    "$(printf '%d' 0x$(echo ${T_FG[$theme]:1} | cut -c3-4))" \
+    "$(printf '%d' 0x$(echo ${T_FG[$theme]:1} | cut -c5-6))"
+  echo ""
+  printf "  ${BOLD}Palette:${RESET}\n"
+  local colors=("${T_BLK[$theme]}" "${T_RED[$theme]}" "${T_GRN[$theme]}" "${T_YLW[$theme]}" "${T_BLU[$theme]}" "${T_MAG[$theme]}" "${T_CYN[$theme]}" "${T_WHI[$theme]}")
+  printf "  "
+  for c in "${colors[@]}"; do
+    printf "\033[48;2;%d;%d;%dm  ${RESET} " \
+      "$(printf '%d' 0x$(echo $c | cut -c2-3))" \
+      "$(printf '%d' 0x$(echo $c | cut -c4-5))" \
+      "$(printf '%d' 0x$(echo $c | cut -c6-7))"
+  done
+  printf "\n  ${DIM}%-6s${RESET} ${DIM}%-6s${RESET} ${DIM}%-6s${RESET} ${DIM}%-6s${RESET} ${DIM}%-6s${RESET} ${DIM}%-6s${RESET} ${DIM}%-6s${RESET} ${DIM}%-6s${RESET}\n" \
+    "Black" "Red" "Green" "Yellow" "Blue" "Magenta" "Cyan" "White"
+  echo ""
+}
+
+# ──────────────────────────────────────────────
+# Download helpers
+# ──────────────────────────────────────────────
+download_and_run() {
+  local script="$1" dest="$2"
+  mkdir -p "$(dirname "$dest")"
+  if has_cmd curl; then
+    curl -fsSL "${RAW_BASE}/scripts/${script}" -o "$dest" || return 1
+  elif has_cmd wget; then
+    wget -q "${RAW_BASE}/scripts/${script}" -O "$dest" || return 1
+  else
+    return 1
+  fi
+  chmod +x "$dest"
+  return 0
+}
+
+download_file() {
+  local path="$1" dest="$2"
+  mkdir -p "$(dirname "$dest")"
+  if has_cmd curl; then
+    curl -fsSL "${RAW_BASE}/${path}" -o "$dest" || return 1
+  elif has_cmd wget; then
+    wget -q "${RAW_BASE}/${path}" -O "$dest" || return 1
+  else
+    return 1
+  fi
+  return 0
+}
+
+# ──────────────────────────────────────────────
+# Backup existing configs
+# ──────────────────────────────────────────────
+backup_configs() {
+  local backup_dir="${HOME}/.chroma-terminal-backup-$(date +%Y%m%d%H%M%S)"
+  local has_backup=false
+
+  for f in "${HOME}/.config/starship.toml" "${HOME}/.config/ghostty/config" "${HOME}/.config/alacritty/alacritty.toml" "${HOME}/.config/kitty/kitty.conf" "${HOME}/.config/foot/foot.ini"; do
+    if [[ -f "$f" ]]; then
+      mkdir -p "$backup_dir"
+      cp "$f" "$backup_dir/" 2>/dev/null && has_backup=true
+    fi
+  done
+
+  if $has_backup; then
+    log_info "Backed up existing configs to ${backup_dir}"
+  fi
+}
+
+# ──────────────────────────────────────────────
+# OS detection
+# ──────────────────────────────────────────────
+detect_os() {
+  case "$(uname -s)" in
+    Linux*)  echo "linux" ;;
+    Darwin*) echo "macos" ;;
+    *)       echo "unknown" ;;
+  esac
+}
+
+# ──────────────────────────────────────────────
+# Main
+# ──────────────────────────────────────────────
+main() {
+  init_themes
+
+  local theme=""
+  local do_font=false
+  local do_prompt=false
+  local do_tools=false
+  local do_all=false
+
+  # Parse flags
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --theme)
+        shift
+        theme="$1"
+        ;;
+      --font)     do_font=true ;;
+      --prompt)   do_prompt=true ;;
+      --tools)    do_tools=true ;;
+      --all)      do_all=true ;;
+      --list-themes)
+        echo ""
+        log_title "Available Themes"
+        echo ""
+        for i in "${!THEME_NAMES[@]}"; do
+          printf "  ${BOLD}%-16s${RESET} %s\n" "${THEME_NAMES[$i]}" "${THEME_DISPLAY[$i]}"
+        done
+        echo ""
+        exit 0
+        ;;
+      --preview)
+        if [[ -n "${2:-}" && ! "$2" =~ ^-- ]]; then
+          local ptheme="$2"
+          shift
+          if [[ -n "${T_IDX[$ptheme]:-}" ]]; then
+            show_preview "$ptheme"
+          else
+            log_error "Unknown theme: $ptheme"
+            exit 1
+          fi
+        else
+          for n in "${THEME_NAMES[@]}"; do show_preview "$n"; done
+        fi
+        exit 0
+        ;;
+      --help|-h)
+        sed -n '3,16p' "$0" | sed 's/^# //; s/^#$//'
+        exit 0
+        ;;
+      *)
+        log_error "Unknown option: $1"
+        echo "Usage: chroma-cli [--theme <name>] [--font] [--prompt] [--tools] [--all] [--list-themes] [--preview] [--help]"
+        exit 1
+        ;;
+    esac
+    shift
+  done
+
+  # Validate theme
+  if [[ -n "$theme" ]]; then
+    if [[ -z "${T_IDX[$theme]:-}" ]]; then
+      log_error "Unknown theme: ${theme}"
+      echo "Available themes: ${THEME_NAMES[*]}"
+      exit 1
+    fi
+  fi
+
+  local os
+  os="$(detect_os)"
+  if [[ "$os" == "unknown" ]]; then
+    log_error "Unsupported OS: $(uname -s)"
+    exit 1
+  fi
+
+  # Interactive mode
+  if [[ -z "$theme" ]] && ! $do_all; then
+    echo ""
+    log_title "╔══════════════════════════════════════╗"
+    log_title "║  Chroma Terminal Quick Setup         ║"
+    log_title "╚══════════════════════════════════════╝"
+    echo ""
+
+    log_title "Select a theme:"
+    echo ""
+    for i in "${!THEME_NAMES[@]}"; do
+      printf "  ${BOLD}%2d)${RESET} %-16s ${DIM}%s${RESET}\n" $((i + 1)) "${THEME_NAMES[$i]}" "${THEME_DISPLAY[$i]}"
+    done
+    echo ""
+    read -r -p "$(printf "${BOLD}Enter theme number or name [1]:${RESET} ")" choice
+    choice="${choice:-1}"
+
+    if [[ "$choice" =~ ^[0-9]+$ ]] && [[ "$choice" -ge 1 ]] && [[ "$choice" -le ${#THEME_NAMES[@]} ]]; then
+      theme="${THEME_NAMES[$((choice - 1))]}"
+    elif [[ -n "${T_IDX[$choice]:-}" ]]; then
+      theme="$choice"
+    else
+      theme="${THEME_NAMES[0]}"
+      log_warn "Using default: ${theme}"
+    fi
+
+    show_preview "$theme"
+    echo ""
+
+    if confirm "Install JetBrainsMono Nerd Font?"; then do_font=true; fi
+    if confirm "Install Starship prompt?"; then do_prompt=true; fi
+    if confirm "Install CLI tools (eza, bat, fd, ripgrep, zoxide, fzf)?"; then do_tools=true; fi
+  fi
+
+  if $do_all; then
+    do_font=true
+    do_prompt=true
+    do_tools=true
+    [[ -z "$theme" ]] && theme="${THEME_NAMES[0]}"
+    show_preview "$theme"
+  fi
+
+  # Generate config dir
+  local cache_dir="${HOME}/.cache/chroma-terminal"
+  mkdir -p "$cache_dir"
+
+  # Backup existing configs
+  backup_configs
+
+  # Download and run bootstrap
+  echo ""
+  log_step "Downloading bootstrap script"
+  if download_and_run "bootstrap.sh" "${cache_dir}/bootstrap.sh"; then
+    log_ok "Bootstrap script downloaded"
+  else
+    log_error "Failed to download bootstrap script. Check your internet connection."
+    exit 1
+  fi
+
+  # Download starship config
+  if $do_prompt; then
+    log_step "Downloading Starship config"
+    download_file "scripts/starship.toml" "${cache_dir}/starship.toml" || log_warn "Could not pre-download starship.toml"
+  fi
+
+  # Run bootstrap with accumulated options
+  local bootstrap_args=("$theme")
+  $do_font   && bootstrap_args+=("--font")
+  $do_prompt && bootstrap_args+=("--prompt")
+  $do_tools  && bootstrap_args+=("--tools")
+
+  echo ""
+  log_step "Running bootstrap..."
+  bash "${cache_dir}/bootstrap.sh" "${bootstrap_args[@]}"
+
+  echo ""
+  log_title "╔════════════════════════════════════════════╗"
+  log_title "║  All done! 🎉                              ║"
+  log_title "╚════════════════════════════════════════════╝"
+  echo ""
+  log_info "Theme: ${BOLD}${THEME_DISPLAY[${T_IDX[$theme]}]}${RESET}"
+  log_info "To source Starship: exec \$SHELL"
+  echo ""
+}
+
+main "$@"
