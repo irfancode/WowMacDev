@@ -1,0 +1,80 @@
+// ═══════════════════════════════════════════════════════════
+// Zellij Configuration
+// Modern Rust-based terminal workspace (tmux alternative)
+// ═══════════════════════════════════════════════════════════
+
+// Theme: Catppuccin Mocha
+theme "catppuccin-mocha"
+
+// ── Performance: Disable unused plugins ──────────────────
+disabled_plugins "filepicker"
+
+// ── Mouse Mode ────────────────────────────────────────────
+mouse_mode false
+
+// ── Scrollback Buffer ─────────────────────────────────────
+scrollback_size 10000
+
+// ── Keybindings ────────────────────────────────────────────
+// Using clear-defaults to override defaults completely
+keybinds clear-defaults=true {
+    normal {
+        // ── Pane Management ──────────────────────────────
+        // New pane (split)
+        bind "Alt n" { NewPane; }
+        bind "Alt d" { NewPane direction="down"; }
+        bind "Alt h" { NewPane direction="left"; }
+        bind "Alt l" { NewPane direction="right"; }
+        
+        // Close pane
+        bind "Alt x" { CloseFocus; }
+        
+        // Toggle pane zoom
+        bind "Alt m" { ToggleFocusFullscreen; }
+
+        // ── Tab Management ───────────────────────────────
+        bind "Alt t" { NewTab; }
+        bind "Alt w" { CloseTab; }
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+
+        // ── Navigation ─────────────────────────────────
+        bind "Alt h" { MoveFocus "left"; }
+        bind "Alt l" { MoveFocus "right"; }
+        bind "Alt j" { MoveFocus "down"; }
+        bind "Alt k" { MoveFocus "up"; }
+        
+        // Arrow key navigation
+        bind "Alt left" { MoveFocus "left"; }
+        bind "Alt right" { MoveFocus "right"; }
+        bind "Alt up" { MoveFocus "up"; }
+        bind "Alt down" { MoveFocus "down"; }
+
+        // ── Session Management ──────────────────────────
+        // Detach from session
+        bind "Alt q" { Detach; }
+
+        // ── UI Toggles ─────────────────────────────────
+        // Toggle pane frames
+        bind "Alt f" { TogglePaneFrames; }
+
+        // ── Quit ────────────────────────────────────────
+        bind "Alt Q" { Quit; }
+    }
+    
+    pane {
+        bind "h" { MoveFocus "left"; }
+        bind "l" { MoveFocus "right"; }
+        bind "j" { MoveFocus "down"; }
+        bind "k" { MoveFocus "up"; }
+        bind "x" { CloseFocus; }
+        bind "Enter" "Space" "Esc" { SwitchToMode "normal"; }
+    }
+    
+    locked {
+        bind "Ctrl g" { SwitchToMode "normal"; }
+    }
+}

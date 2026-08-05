@@ -1,0 +1,36 @@
+# ═══════════════════════════════════════════════════════════
+# Ghostty Terminal Configuration
+# Ghostty + Zellij + Catppuccin Mocha Setup
+# ═══════════════════════════════════════════════════════════
+
+# ── Typography ─────────────────────────────────────────────
+font-family = JetBrainsMono Nerd Font
+font-size = 14
+font-thicken = true
+
+# ── Theme (Catppuccin Mocha) ───────────────────────────────
+theme = Catppuccin Mocha
+
+# ── Window & Appearance ────────────────────────────────────
+background-opacity = 0.92
+background-blur-radius = 15
+window-padding-x = 12
+window-padding-y = 10
+macos-titlebar-style = transparent
+
+# ── Cursor & Mouse ─────────────────────────────────────────
+cursor-style = bar
+cursor-style-blink = true
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+
+# ── Shell Integration ──────────────────────────────────────
+shell-integration = detect
+shell-integration-features = cursor,sudo,title,path
+
+# ── Scrollback (25M chars ~25MB) ──────────────────────────
+scrollback-limit = 25000000
+
+# ── Quick Terminal (Quake-style dropdown) ──────────────────
+quick-terminal-position = top
+quick-terminal-screen = mouse
