@@ -1,0 +1,44 @@
+# ── Format ─────────────────────────────────────────────────
+format = """$directory$git_branch$git_status$cmd_duration$line_break$character"""
+
+# ── Palette: Catppuccin Mocha ─────────────────────────────
+palette = "catppuccin_mocha"
+
+[palettes.catppuccin_mocha]
+text = "#cdd6f4"
+surface = "#313244"
+subtext = "#a6adc8"
+overlay = "#585b70"
+green = "#a6e3a1"
+mauve = "#cba6f7"
+blue = "#89b4fa"
+teal = "#94e2d5"
+peach = "#fab387"
+maroon = "#f38ba8"
+
+# ── Directory ─────────────────────────────────────────────
+[directory]
+style = "blue"
+truncation_length = 2
+truncate_to_repo = true
+
+# ── Git Branch ─────────────────────────────────────────────
+[git_branch]
+symbol = " "
+style = "mauve"
+
+# ── Git Status ─────────────────────────────────────────────
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "peach"
+
+# ── Command Duration ───────────────────────────────────────
+[cmd_duration]
+min_time = 2000
+style = "subtext"
+
+# ── Character ──────────────────────────────────────────────
+[character]
+success_symbol = "[❯](green)"
+error_symbol = "[❯](maroon)"
+vimcmd_symbol = "[❮](teal)"
