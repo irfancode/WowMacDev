@@ -1,0 +1,158 @@
+app: omamac
+version: 1
+
+# modules: []   # optional whitelist; empty means all enabled modules run
+# disable: []   # force-disable these modules
+
+homebrew:
+  taps: []
+  formulae:
+    - git
+    - git-lfs
+    - gh
+    - jq
+    - ripgrep
+    - fd
+    - fzf
+    - bat
+    - eza
+    - zoxide
+    - tmux
+    - neovim
+    - starship
+    - zsh-autosuggestions
+    - zsh-syntax-highlighting
+  casks:
+    - font-jetbrains-mono-nerd-font
+    - font-fira-code-nerd-font
+    - font-hack-nerd-font
+    - font-cascadia-code-nf
+    - gcloud-cli
+  update: true
+  upgrade: true
+  cleanup: true
+
+apps:
+  browser: []
+  development: []
+  communication: []
+  utilities: []
+  creative: []
+  extra: []
+
+languages: []
+
+tools:
+  - awscli
+  - azure-cli
+  - kubernetes-cli
+  - helm
+  - opentofu
+  - ansible
+
+shell:
+  shell: zsh
+  prompt: starship
+  aliases: []
+  env: []
+
+git:
+  default_branch: main
+  user_name: ""
+  user_email: ""
+  editor: nvim
+  lfs: true
+  ssh: false
+  gpg: false
+  github_auth: false
+  aliases: []
+
+vscode:
+  enable: false
+  extensions: []
+  theme: Default Dark+
+  font: JetBrainsMono Nerd Font
+
+ai:
+  claude: false
+  opencode: false
+  gemini: false
+  openai: false
+  copilot: false
+  ollama: false
+  models: []
+
+terminal:
+  ghostty: true
+  warp: false
+  iterm2: false
+  terminal_app: false
+  theme: nord
+
+fonts:
+  - JetBrains Mono
+  - Fira Code
+  - Hack
+  - Cascadia Code
+
+macos:
+  enable: true
+  finder:
+    show_hidden: true
+    show_path_bar: true
+    show_status_bar: true
+  dock:
+    autohide: true
+    magnification: false
+    icon_size: 36
+    remove_animation_delay: true
+  trackpad:
+    tap_to_click: true
+  keyboard:
+    key_repeat: 2
+    initial_repeat: 15
+  mission_control:
+    workspaces_per_display: true
+  screenshots:
+    location: "~/Pictures/Screenshots"
+    disable_shadow: true
+  desktop:
+    show_hard_disks: false
+  login:
+    show_boot_message: false
+  energy:
+    battery_display_sleep: 10
+    mains_display_sleep: 30
+  update:
+    auto_update: false
+  privacy:
+    analytics: false
+
+security:
+  enable: true
+  firewall: false
+  filevault: false
+  gatekeeper: false
+  ssh: false
+
+productivity:
+  raycast:
+    enable: false
+  rectangle:
+    enable: true
+  hidden_bar:
+    enable: true
+  stats:
+    enable: true
+
+dotfiles:
+  repo: ""
+  branch: main
+  local: ""
+  links: []
+
+cleanup:
+  enable: true
+  cache: true
+  trash: false
+  homebrew: true

@@ -1,0 +1,12 @@
+name: acme
+title: ACME Tooling
+description: Example company plugin showing the full plugin contract.
+depends_on:
+  - homebrew
+commands:
+  install: ./install.sh
+  update: ./update.sh
+  remove: ./remove.sh
+  verify: ./verify.sh
+config:
+  formula: jq
