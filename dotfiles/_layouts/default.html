@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="{{ site.description }}">
+    {% seo %}
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="{{ site.baseurl }}/" class="site-title">{{ site.title }}</a>
+            <nav class="site-nav">
+                <a href="{{ site.baseurl }}/">Home</a>
+                <a href="{{ site.baseurl }}/blog">Blog</a>
+                <a href="{{ site.github.repo }}" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="hero">
+                <h1>🎨 Terminal Setup</h1>
+                <p class="lead">A powerful, beautiful terminal configuration featuring <strong>Ghostty</strong>, <strong>Zellij</strong>, and <strong>Starship</strong>.</p>
+                <div class="hero-badges">
+                    <span class="badge badge-terminal">Terminal</span>
+                    <span class="badge badge-productivity">Productivity</span>
+                    <span class="badge badge-devtools">Developer Tools</span>
+                </div>
+                <div class="hero-actions">
+                    <a href="{{ site.github.repo }}" class="btn btn-primary" target="_blank">View on GitHub</a>
+                    <a href="{{ site.baseurl }}/blog" class="btn btn-secondary">Read Blog</a>
+                </div>
+            </section>
+
+            <section class="features">
+                <h2>✨ Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>⚡ Ghostty</h3>
+                        <p>GPU-accelerated terminal built with Zig. Native macOS feel with Metal rendering.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🟣 Zellij</h3>
+                        <p>Modern terminal multiplexer with Alt-based keybindings, floating panes, and WASM plugins.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⭐ Starship</h3>
+                        <p>Cross-shell prompt showing git status, language versions, and command timing.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎨 Catppuccin</h3>
+                        <p>Beautiful purple-tinted theme that's easy on the eyes during long coding sessions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="quick-start">
+                <h2>🚀 Quick Start</h2>
+                <div class="code-block">
+                    <pre><code>git clone https://github.com/irfancode/dotfiles.git ~/dotfiles
+cd ~/dotfiles && bash scripts/install.sh
+exec zsh</code></pre>
+                </div>
+            </section>
+
+            <section class="latest-posts">
+                <h2>📝 Latest Posts</h2>
+                {% for post in site.posts limit:3 %}
+                <article class="post-preview">
+                    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                    <time>{{ post.date | date: "%B %d, %Y" }}</time>
+                </article>
+                {% endfor %}
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
+        </div>
+    </footer>
+</body>
+</html>

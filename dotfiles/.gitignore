@@ -1,0 +1,21 @@
+# OS files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Temporary files
+.tmp/
+.cache/
+
+# Nix build outputs
+nix/result
+nix/result-*
+
+# Jekyll site
+_site/
+
+# Sensitive data (if any)
+*.key
+*.pem
+.env

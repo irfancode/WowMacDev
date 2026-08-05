@@ -1,0 +1,39 @@
+name: Test Install Script
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Run install script
+        run: |
+          bash scripts/install.sh
+      
+      - name: Verify installations
+        run: |
+          which ghostty
+          which zellij
+          which starship
+          which zoxide
+          which eza
+          which bat
+          which fd
+          which fzf
+          which rg
+          which lazygit
+      
+      - name: Verify configs exist
+        run: |
+          test -f ~/.config/ghostty/config
+          test -f ~/.config/zellij/config.kdl
+          test -f ~/.config/starship.toml
+          test -f ~/.zshrc

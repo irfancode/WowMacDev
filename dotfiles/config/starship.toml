@@ -1,0 +1,113 @@
+# ═══════════════════════════════════════════════════════════
+# Starship Prompt Configuration
+# Cross-shell prompt with Catppuccin Mocha theme
+# ═══════════════════════════════════════════════════════════
+
+# ── Format ─────────────────────────────────────────────────
+format = """
+$username$hostname$directory$git_branch$git_status$nodejs$rust$golang$python$cmd_duration$line_break$character"""
+
+# ── Palette: Catppuccin Mocha ─────────────────────────────
+palette = "catppuccin_mocha"
+
+# Catppuccin Mocha Colors
+[palettes.catppuccin_mocha]
+text = "#cdd6f4"
+surface = "#313244"
+subtext = "#a6adc8"
+overlay = "#585b70"
+maroon = "#f38ba8"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+mauve = "#cba6f7"
+pink = "#f5c2e7"
+blue = "#89b4fa"
+sapphire = "#74c7ec"
+teal = "#94e2d5"
+flamingo = "#f2cdcd"
+lavender = "#b4befe"
+red = "#f38ba8"
+
+# ── Username ───────────────────────────────────────────────
+[username]
+show_always = false
+style_user = "text"
+format = "[$user]($style)"
+
+# ── Hostname ──────────────────────────────────────────────
+[hostname]
+ssh_only = true
+style = "subtext"
+format = "[$SSH_CONNECTION]($style) "
+trim_at = ".local"
+
+# ── Directory ─────────────────────────────────────────────
+[directory]
+style = "blue"
+truncation_length = 3
+truncate_to_repo = true
+home_symbol = "~"
+read_only = " 🔒"
+read_only_style = "overlay"
+
+# ── Git Branch ─────────────────────────────────────────────
+[git_branch]
+symbol = " "
+style = "mauve"
+format = "on [$symbol$branch]($style) "
+
+# ── Git Status ─────────────────────────────────────────────
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "peach"
+conflicted = "⚔ "
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?${count}"
+stashed = "📦"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+# ── Node.js ────────────────────────────────────────────────
+[nodejs]
+symbol = " "
+style = "green"
+format = "via [$symbol($version )]($style) "
+
+# ── Rust ───────────────────────────────────────────────────
+[rust]
+symbol = " "
+style = "red"
+format = "via [$symbol($version )]($style) "
+
+# ── Golang ─────────────────────────────────────────────────
+[golang]
+symbol = " "
+style = "teal"
+format = "via [$symbol($version )]($style) "
+
+# ── Python ─────────────────────────────────────────────────
+[python]
+symbol = " "
+style = "yellow"
+format = "via [$symbol($version )]($style) "
+
+# ── Command Duration ───────────────────────────────────────
+[cmd_duration]
+min_time = 2000
+style = "subtext"
+format = "took [$duration]($style) "
+
+# ── Character ──────────────────────────────────────────────
+[character]
+success_symbol = "[❯](green)"
+error_symbol = "[❯](maroon)"
+vimcmd_symbol = "[❮](teal)"
+
+# ── Line Break ─────────────────────────────────────────────
+[line_break]
+disabled = false
