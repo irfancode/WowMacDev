@@ -1,0 +1,10 @@
+# Hyprland window border colors — Chroma "nebula"
+general {
+    col.active_border   = rgba(c8bcd8cc) rgba(1e1a28ff) 45deg
+    col.inactive_border = rgba(1e1a28aa)
+}
+
+group {
+    col.border_active   = rgba(c8bcd8cc)
+    col.border_inactive = rgba(1e1a2866)
+}

@@ -1,0 +1,10 @@
+# Hyprland window border colors — Chroma "forge"
+general {
+    col.active_border   = rgba(d0c6bccc) rgba(221a17ff) 45deg
+    col.inactive_border = rgba(221a17aa)
+}
+
+group {
+    col.border_active   = rgba(d0c6bccc)
+    col.border_inactive = rgba(221a1766)
+}

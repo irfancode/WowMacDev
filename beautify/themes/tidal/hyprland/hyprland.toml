@@ -1,0 +1,10 @@
+# Hyprland window border colors — Chroma "tidal"
+general {
+    col.active_border   = rgba(bccbd8cc) rgba(1e2630ff) 45deg
+    col.inactive_border = rgba(1e2630aa)
+}
+
+group {
+    col.border_active   = rgba(bccbd8cc)
+    col.border_inactive = rgba(1e263066)
+}

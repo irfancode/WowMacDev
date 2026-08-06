@@ -3,8 +3,8 @@
 Unified terminal theming & setup toolkit, merged from:
 
 | Upstream repo | What it contributed |
-|---|---|
-| `chroma-terminal` | 10 Chroma themes (Monokai Pro inspired) × 7 terminals + theme applier |
+|---|---|---|
+| `chroma-terminal` | 10 Chroma themes (Monokai Pro inspired) × 10 targets + theme applier |
 | `dotfiles` | Ghostty + Zellij + Starship stack, shell config, Nix home/darwin config |
 
 ## Layout
@@ -12,11 +12,13 @@ Unified terminal theming & setup toolkit, merged from:
 ```
 beautify/
 ├── install.sh                  # ← unified installer (theme + stack)
-├── themes/                     # 10 themes × 7 terminal formats
+├── themes/                     # 10 themes × 10 targets
 │   ├── aurora/ canopy/ clay/ forge/ frost/
 │   ├── nebula/ solar/ spectrum/ tidal/ void/
 │   │   ├── ghostty/   alacritty/  kitty/  foot/
-│   │   └── warp/      hyper/      terminal/
+│   │   ├── warp/      hyper/      terminal/
+│   │   ├── hyprland/  # Hyprland window border colors
+│   │   └── nvim/      # Neovim colorscheme (chroma.lua)
 ├── config/
 │   ├── ghostty/config          # Ghostty terminal config
 │   ├── zellij/                 # Zellij multiplexer + Catppuccin theme
@@ -62,7 +64,9 @@ beautify/
 | `clay` | Forest earth | Green/brown |
 | `canopy` | Forest canopy | Green/red |
 
-Each theme ships ready-made configs for **Ghostty, Alacritty, Kitty, Foot, Warp, Hyper, and macOS Terminal**.
+Each theme ships ready-made configs for **Ghostty, Alacritty, Kitty, Foot, Warp, Hyper, macOS Terminal, Hyprland** (window borders) and a self-contained **Neovim** colorscheme (`nvim/chroma.lua`, loaded with `vim.cmd("colorscheme chroma-<theme>")`).
+
+To use the Neovim theme with LazyVim, drop `nvim/chroma.lua` into `~/.config/nvim/colors/chroma.lua` and set `vim.cmd.colorscheme("chroma-spectrum")` (or whatever theme) in your config; `install.sh --theme <name>` copies it automatically.
 
 ## Fixes applied during consolidation
 
