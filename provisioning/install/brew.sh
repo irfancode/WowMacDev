@@ -31,8 +31,9 @@ if command -v cargo &>/dev/null; then
   cargo install du-dust 2>/dev/null || true
 fi
 
-# npm global packages: intentionally none. corepack is skipped (its pnpm/pnpx
-# shims collide with the Homebrew pnpm formula and break `brew link`); pnpm/yarn
-# come from Homebrew formulae. See Brewfile notes for the full rationale.
+# npm global packages: none installed here — corepack (Node's official manager)
+# provides pnpm/yarn via npm, so there are no brew pnpm/yarn formulae to link.
+# This avoids the previous collision where brew and corepack both claimed
+# /opt/homebrew/bin/pnpm and /opt/homebrew/bin/yarn. See Brewfile notes.
 
 echo "==> Brew install complete"

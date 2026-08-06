@@ -59,7 +59,7 @@ cd monitoring/macadmin/frontend && npm install && npm run dev   # → http://loc
 WowMacDev/
 ├── provisioning/     # provision.sh unified CLI + Brewfile + sync/ + omamac engine
 │   ├── provision.sh          # bootstrap / install / export / analyze / diff / apps / omamac delegate
-│   ├── Brewfile              # 76 formulae, 32 casks, 84 VS Code extensions
+│   ├── Brewfile              # 74 formulae, 32 casks, 84 VS Code extensions
 │   ├── bootstrap.sh          # one-shot fresh-Mac bootstrap
 │   ├── catalyst-install.sh    # reinstall your dev environment on any machine
 │   ├── install/             # dev-tools.sh, macos.sh, brew.sh

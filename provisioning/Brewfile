@@ -76,8 +76,6 @@ brew "openjdk"
 brew "icu4c@76"
 brew "icu4c@77"
 brew "pipx"
-brew "pnpm"
-brew "yarn"
 
 # ── System / Monitoring ───────────────────────────────────────────────────────
 brew "btop"
@@ -159,8 +157,10 @@ mas "uBlock Origin Lite", id: 6745342698
 
 # ── Language package managers ─────────────────────────────────────────────────
 cargo "du-dust"
-# corepack (npm) is intentionally omitted: its pnpm/pnpx shims collide with the
-# Homebrew `brew "pnpm"` formula's bin/pnpm symlink and break `brew link`.
+# pnpm / yarn are deliberately NOT Homebrew formulae here: corepack (installed
+# via npm) already owns the bin/pnpm and bin/yarn shims, and installing the brew
+# pnpm/yarn formulae would collide and repeatedly fail `brew link`. corepack is
+# the single source of truth for pnpm/yarn across projects.
 
 # ── VS Code Extensions (84 from mac-catalyst) ─────────────────────────────────
 vscode "akamud.vscode-theme-onedark"
