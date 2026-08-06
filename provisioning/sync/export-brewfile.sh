@@ -5,7 +5,8 @@ set -e
 REPO_NAME="mac-catalyst"
 VERSION="1.0.0"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BREWFILE="$SCRIPT_DIR/Brewfile"
+# The canonical Brewfile lives in provisioning/ (one level up from sync/).
+BREWFILE="$SCRIPT_DIR/../Brewfile"
 
 DRY_RUN=false
 VERBOSE=false

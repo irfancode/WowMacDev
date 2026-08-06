@@ -258,7 +258,6 @@ async def get_brew_casks(current_user: dict = Depends(get_current_user)):
             "casks": [
                 {"name": "zoom", "description": "Video conferencing", "installed": False},
                 {"name": "whatsapp", "description": "WhatsApp desktop", "installed": False},
-                {"name": "messenger", "description": "Facebook Messenger", "installed": False},
             ]
         },
         "fonts": {
