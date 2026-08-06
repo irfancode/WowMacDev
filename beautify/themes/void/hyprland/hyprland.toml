@@ -1,0 +1,10 @@
+# Hyprland window border colors — Chroma "void"
+general {
+    col.active_border   = rgba(cccccccc) rgba(161618ff) 45deg
+    col.inactive_border = rgba(161618aa)
+}
+
+group {
+    col.border_active   = rgba(cccccccc)
+    col.border_inactive = rgba(16161866)
+}

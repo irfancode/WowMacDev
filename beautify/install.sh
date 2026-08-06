@@ -3,7 +3,8 @@
 # beautify/install.sh — WowMacDev unified terminal theming & setup.
 #
 # Merges:
-#   chroma-terminal  → 10 Chroma themes across 7 terminals + theme applier
+#   chroma-terminal  → 10 Chroma themes across 10 targets (7 original +
+#                      Hyprland borders + Neovim) + theme applier
 #   dotfiles         → Ghostty + Zellij + Starship stack + shell config
 #
 # Usage:
@@ -152,6 +153,14 @@ apply_theme() {
     [ -n "$f_hyper" ] && apply "$f_hyper" "$HOME/.hyper.js"
     f_foot="$(ls "$tdir"/foot/*.ini 2>/dev/null | head -1)"
     [ -n "$f_foot" ] && apply "$f_foot" "$HOME/.config/foot/foot.ini"
+    # Hyprland window borders
+    if [ -f "$tdir/hyprland/hyprland.toml" ]; then
+        apply "$tdir/hyprland/hyprland.toml" "$HOME/.config/hypr/hyprland.theme.toml"
+    fi
+    # Neovim: copy the chroma colorscheme into the nvim colors dir
+    if [ -f "$tdir/nvim/chroma.lua" ]; then
+        apply "$tdir/nvim/chroma.lua" "$HOME/.config/nvim/colors/chroma.lua"
+    fi
     ok "Theme '${THEME}' applied"
 }
 

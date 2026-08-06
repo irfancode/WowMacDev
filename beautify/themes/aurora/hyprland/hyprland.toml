@@ -1,0 +1,10 @@
+# Hyprland window border colors — Chroma "aurora"
+general {
+    col.active_border   = rgba(b8c5d4cc) rgba(1a2029ff) 45deg
+    col.inactive_border = rgba(1a2029aa)
+}
+
+group {
+    col.border_active   = rgba(b8c5d4cc)
+    col.border_inactive = rgba(1a202966)
+}

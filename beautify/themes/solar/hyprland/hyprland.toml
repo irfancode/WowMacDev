@@ -1,0 +1,10 @@
+# Hyprland window border colors — Chroma "solar"
+general {
+    col.active_border   = rgba(c4bfb0cc) rgba(2b2820ff) 45deg
+    col.inactive_border = rgba(2b2820aa)
+}
+
+group {
+    col.border_active   = rgba(c4bfb0cc)
+    col.border_inactive = rgba(2b282066)
+}

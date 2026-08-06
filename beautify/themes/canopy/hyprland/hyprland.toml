@@ -1,0 +1,10 @@
+# Hyprland window border colors — Chroma "canopy"
+general {
+    col.active_border   = rgba(bccfc4cc) rgba(1e2822ff) 45deg
+    col.inactive_border = rgba(1e2822aa)
+}
+
+group {
+    col.border_active   = rgba(bccfc4cc)
+    col.border_inactive = rgba(1e282266)
+}
