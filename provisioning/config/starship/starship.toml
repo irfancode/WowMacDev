@@ -169,7 +169,7 @@ style = "blue"
 
 [gcloud]
 symbol = " 󱪔 "
-format = "on [$symbol($project)]($style) "
+format = "on [$symbol$account(@$domain)(\($region\))]($style) "
 style = "green"
 
 [docker_context]

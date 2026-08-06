@@ -2,7 +2,15 @@
 # Version: 1.3.1 — Last updated: June 2026
 
 # ── Font & Typography ─────────────────────────────────────
-font-family = JetBrainsMono NF
+# Use the MONOSPACED Nerd Font variant (NFM). Ghostty performs its own
+# cell-alignment + scaling for Nerd Font glyphs, and per the Ghostty docs it
+# behaves best with the mono (NFM) build rather than the proportional "NF".
+# The proportional variant is what makes prompt icons / ASCII art columns sit
+# off-grid; NFM keeps every glyph exactly one cell wide.
+font-family = JetBrainsMono Nerd Font Mono
+# Fallback so any glyph the primary font lacks falls through to the symbols
+# font Ghostty ships with, instead of rendering as tofu.
+font-family = Symbols Nerd Font
 font-size = 16
 font-thicken = true
 font-feature = calt
