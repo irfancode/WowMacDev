@@ -91,7 +91,7 @@ update_node() {
   log "Downloading Node.js v${latest_ver}..."
   curl -fsSL "https://nodejs.org/dist/v${latest_ver}/${tarball}" -o "$tarball"
   tar xzf "$tarball" -C "$OPT_DIR"
-  for bin in node npm npx corepack; do
+  for bin in node npm npx; do
     ln -sf "$OPT_DIR/$dirname/bin/$bin" "$TOOLS_DIR/$bin" 2>/dev/null || true
   done
   local dirs; dirs=$(ls -d "$OPT_DIR"/node-v* 2>/dev/null | sort -V)

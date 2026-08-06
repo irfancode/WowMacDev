@@ -39,7 +39,7 @@
     "homebrew_casks": 12,
     "mas_apps": ["uBlock Origin Lite"],
     "cargo_packages": ["du-dust"],
-    "npm_globals": ["corepack"],
+    "npm_globals": [],
     "pip_packages": ["certifi", "cffi", "cryptography", "pydantic"]
   },
   "homebrew_core": [

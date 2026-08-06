@@ -52,16 +52,16 @@ The classic answer to Mac setup is a shell script — and that answer has exactl
 
 WowMacDev fixes that with a layered approach:
 
-- **[omamac](omamac/)** — a single Go binary that treats setup the way you treat production: as *declarative, reversible, and verifiable* state. Organized around modules, each with four hooks: `install`, `update`, `verify`, and uninstall. Inspired by Omakub, built for Apple Silicon.
-- **[mac-bootstrap](mac-bootstrap/)** — the one-liner for the rest of us. Installs 55+ Homebrew packages, 12 desktop apps, language runtimes (Node, Go, Rust, Python, Java), Cloud CLIs (AWS, Azure, GCP, K8s, Terraform), and macOS preferences in a single command:
+- **[omamac](provisioning/omamac/)** — a single Go binary that treats setup the way you treat production: as *declarative, reversible, and verifiable* state. Organized around modules, each with four hooks: `install`, `update`, `verify`, and uninstall. Inspired by Omakub, built for Apple Silicon.
+- **[provisioning](provisioning/)** — the one-liner for the rest of us. Installs 71+ Homebrew packages, 32 desktop apps, language runtimes (Node, Go, Rust, Python, Java), Cloud CLIs (AWS, Azure, GCP, K8s, Terraform), and macOS preferences in a single command:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/irfancode/WowMacDev/main/mac-bootstrap/bootstrap.sh | bash
+bash provisioning/provision.sh bootstrap
 ```
 
-- **[mac-app-sync](mac-app-sync/)** — backup and restore *everything*: Homebrew formulae, casks, App Store apps, npm/pnpm/yarn/pip gems, and VS Code extensions. Your entire app inventory, portable.
-- **[mac-catalyst](mac-catalyst/)** — recreate your development environment on any machine in minutes with export/install/diff workflows.
-- **[mac-dev-setup](mac-dev-setup/)** — the original Forward Deployment Engineer's guide (now superseded by mac-bootstrap) that documents *why* each tool earns its place.
+- **[mac-app-sync](provisioning/sync/)** — backup and restore *everything*: Homebrew formulae, casks, App Store apps, npm/pnpm/yarn/pip gems, and VS Code extensions. Your entire app inventory, portable.
+- **[mac-catalyst](provisioning/)** — recreate your development environment on any machine in minutes with export/install/diff workflows.
+- **[mac-dev-setup](provisioning/)** — the original Forward Deployment Engineer's guide (now superseded by bootstrap) that documents *why* each tool earns its place.
 
 > **A note on history:** three upstream repos (`MacDevEnv`, `Mac-Sysmon`, `MacAdmin-master`) were empty shells, so they've been merged in as placeholders ready for content.
 
@@ -69,19 +69,18 @@ curl -fsSL https://raw.githubusercontent.com/irfancode/WowMacDev/main/mac-bootst
 
 Two tools, both born from the same frustration: manual hardware checks that take 30+ seconds and require remembering arcane commands.
 
-- **[macOS-System-Diagnostics](macOS-System-Diagnostics/)** — checks **16+ system components in parallel** and gives you a complete health overview in ~2 seconds. Parallelized checks, hardware-level insight, one clean report.
-- **[macos-setup-tools](macos-setup-tools/)** — a four-script toolkit: setup, diagnostics, performance checks, and disk usage, automating everything from enabling battery percentage to monitoring performance.
+- **[diagnostics](diagnostics/)** — checks **16+ system components in parallel** and gives you a complete health overview in ~2 seconds. Parallelized checks, hardware-level insight, one clean report.
+- **[macos-setup-tools](diagnostics/)** — a four-script toolkit: setup, diagnostics, performance checks, and disk usage, automating everything from enabling battery percentage to monitoring performance.
 
 ### 3. Monitor & manage — keep your system healthy
 
-- **[MacAdmin](MacAdmin/)** — a beautiful native macOS system administration tool with a SwiftUI-inspired design, React frontend + FastAPI backend. Built specifically for macOS Tahoe/Sequoia.
+- **[monitoring](monitoring/)** — a beautiful native macOS system administration dashboard with a SwiftUI-inspired design, React frontend + FastAPI backend. Built specifically for macOS Tahoe/Sequoia.
 
 ### 4. Beautify — a terminal you actually want to work in
 
 Your terminal is where you run code, manage files, interact with Git, and SSH into servers. Making it look good isn't vanity — it's ergonomics.
 
-- **[chroma-terminal](chroma-terminal/)** — 10 beautiful Monokai Pro–inspired themes for Ghostty, Alacritty, Warp, Hyper.js, Foot, Kitty, and macOS Terminal, with a single-command cross-platform setup utility.
-- **[dotfiles](dotfiles/)** — the full terminal stack: Ghostty + Zellij + Starship, plus a Nix package manager guide, all config-as-code and portable to new machines.
+- **[beautify](beautify/)** — 10 beautiful Monokai Pro–inspired themes for Ghostty, Alacritty, Warp, Hyper.js, Foot, Kitty, and macOS Terminal, with a single-command cross-platform setup utility, plus the full terminal stack (Ghostty + Zellij + Starship) config-as-code and portable to new machines.
 
 ---
 
@@ -102,11 +101,11 @@ Everything is in this repo. Start with the pillar that matches your pain:
 
 | Your pain | Start here |
 |-----------|------------|
-| "New Mac, three-hour setup ritual" | [omamac](omamac/) · [mac-bootstrap](mac-bootstrap/) |
-| "My Mac feels slow / something's wrong" | [macOS-System-Diagnostics](macOS-System-Diagnostics/) |
-| "My terminal looks like 1999" | [chroma-terminal](chroma-terminal/) · [dotfiles](dotfiles/) |
-| "How do I migrate to a new machine?" | [mac-app-sync](mac-app-sync/) · [mac-catalyst](mac-catalyst/) |
-| "I want to manage my whole system" | [MacAdmin](MacAdmin/) |
+| "New Mac, three-hour setup ritual" | [provisioning](provisioning/) — `bash provisioning/provision.sh bootstrap` |
+| "My Mac feels slow / something's wrong" | [diagnostics](diagnostics/) |
+| "My terminal looks like 1999" | [beautify](beautify/) |
+| "How do I migrate to a new machine?" | [provisioning/sync](provisioning/sync/) — export/install |
+| "I want to manage my whole system" | [monitoring](monitoring/) |
 
 ---
 

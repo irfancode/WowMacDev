@@ -507,7 +507,7 @@ install_vscode_extensions() {
     
     local file="$EXPORT_DIR/vscode_extensions.txt"
     check_file "$file"
-    
+
     local extensions=$(filter_packages "$file" | tr '\n' ' ')
     local count=$(filter_packages "$file" | wc -l | tr -d ' ')
     
@@ -516,7 +516,25 @@ install_vscode_extensions() {
         log "No VS Code extensions to install"
         return 0
     fi
-    
+
+    # Clean up stale install state before starting. Aborted/failed prior runs leave
+    # staging dirs like ".6bd55c1b-f637-4b15-90b0-b0e883a6ac85" and corrupt
+    # unpacked extension folders behind. Re-running then fails with
+    # "ENOTEMPTY: directory not empty" or "Cannot read the extension from ...".
+    # Only remove transient staging dirs / invalid-folder markers here, not the
+    # installed extension folders (the "publisher.name-<version>" dirs).
+    local EXT_DIR="${CODE_EXTENSIONS_DIR:-$HOME/.vscode/extensions}"
+    if [ -d "$EXT_DIR" ]; then
+        local cleaned=0
+        # shellcheck disable=SC2010
+        for stale in "$EXT_DIR"/.[0-9a-f]* "$EXT_DIR"/.obsolete; do
+            if [ -e "$stale" ]; then
+                rm -rf "$stale" && { ((cleaned++)); echo "  [CLEAN] removed stale: $stale"; }
+            fi
+        done
+        [ "$cleaned" -gt 0 ] && log "Cleaned $cleaned stale extension staging dir(s)"
+    fi
+
     echo "  Installing $count VS Code extensions..."
     log "Installing $count VS Code extensions"
     

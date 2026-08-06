@@ -9,10 +9,10 @@
 # Regenerate:    brew bundle dump --force --file=Brewfile
 
 # ── Taps ──────────────────────────────────────────────────────────────────────
-tap "homebrew/bundle"
-tap "homebrew/core"
-tap "homebrew/cask"
-tap "homebrew/cask-fonts"
+# homebrew/core, homebrew/cask and homebrew/bundle are pre-installed defaults in
+# modern Homebrew (6.x) and must NOT be tapped explicitly — tapping them errors.
+# homebrew/cask-fonts was deprecated and merged into homebrew/cask; fonts are
+# now installed directly from homebrew/cask. Only third-party taps are listed.
 tap "hashicorp/tap"
 
 # ── Shell & Prompt ────────────────────────────────────────────────────────────
@@ -100,10 +100,11 @@ cask "gcloud-cli"
 
 # ── Databases ─────────────────────────────────────────────────────────────────
 # (CLI-only; servers run via Docker/OrbStack)
+# mongodb-community was removed from homebrew/core (now under the mongodb/brew
+# tap) and conflicts with the "servers run via Docker" intent, so it is dropped.
 brew "sqlite"
 brew "mysql-client"
 brew "postgresql@16"
-brew "mongodb-community"
 
 # ── Browsers ──────────────────────────────────────────────────────────────────
 cask "google-chrome"
@@ -141,7 +142,6 @@ cask "onedrive"
 
 # ── Communication ─────────────────────────────────────────────────────────────
 cask "whatsapp"
-cask "messenger"
 cask "zoom"
 
 # ── Fonts ─────────────────────────────────────────────────────────────────────
@@ -154,7 +154,8 @@ mas "uBlock Origin Lite", id: 6745342698
 
 # ── Language package managers ─────────────────────────────────────────────────
 cargo "du-dust"
-npm "corepack"
+# corepack (npm) is intentionally omitted: its pnpm/pnpx shims collide with the
+# Homebrew `brew "pnpm"` formula's bin/pnpm symlink and break `brew link`.
 
 # ── VS Code Extensions (84 from mac-catalyst) ─────────────────────────────────
 vscode "akamud.vscode-theme-onedark"
