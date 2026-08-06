@@ -30,6 +30,11 @@ brew "tree"
 brew "powerlevel10k"
 brew "fish"
 brew "tmux"
+brew "zellij"
+brew "fastfetch"
+brew "jq"
+brew "delta"
+brew "xh"
 
 # ── Editors ───────────────────────────────────────────────────────────────────
 brew "neovim"

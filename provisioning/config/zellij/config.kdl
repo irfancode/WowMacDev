@@ -1,0 +1,56 @@
+// ═══════════════════════════════════════════════════════════
+// Zellij Configuration — terminal workspace (WowMacDev)
+// Modern Rust-based terminal multiplexer (tmux alternative).
+// ═══════════════════════════════════════════════════════════
+
+// Theme: Catppuccin Mocha
+theme "catppuccin-mocha"
+
+// ── Performance: Disable unused plugins ──────────────────
+disabled_plugins "filepicker"
+
+// ── Mouse Mode ────────────────────────────────────────────
+mouse_mode true
+
+// ── Scrollback Buffer ─────────────────────────────────────
+scrollback_size 10000
+
+// ── UI ────────────────────────────────────────────────────
+pane_frames false
+default_shell "/opt/homebrew/bin/zsh"
+copy_on_select false
+
+// ── Shortcuts / keybindings ───────────────────────────────
+keybinds clear-defaults=true {
+    normal {
+        // ── Pane Management ──────────────────────────────
+        bind "Alt n" { NewPane; }
+        bind "Alt d" { NewPane direction="down"; }
+        bind "Alt v" { NewPane direction="left"; }
+        bind "Alt h" { NewPane direction="right"; }
+        bind "Alt x" { CloseFocus; }
+        bind "Alt m" { ToggleFocusFullscreen; }
+
+        // ── Tab Management ───────────────────────────────
+        bind "Alt t" { NewTab; }
+        bind "Alt w" { CloseTab; }
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+
+        // ── Navigation ─────────────────────────────────
+        bind "Alt h" { MoveFocus "left"; }
+        bind "Alt l" { MoveFocus "right"; }
+        bind "Alt j" { MoveFocus "down"; }
+        bind "Alt k" { MoveFocus "up"; }
+
+        // ── Session Management ──────────────────────────
+        bind "Alt q" { Detach; }
+        bind "Alt Q" { Quit; }
+
+        // ── UI Toggles ─────────────────────────────────
+        bind "Alt f" { TogglePaneFrames; }
+    }
+}
