@@ -1,8 +1,0 @@
-----------
-altgraph
-future
-macholib
-pip
-setuptools
-six
-wheel
