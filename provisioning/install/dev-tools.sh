@@ -9,33 +9,47 @@ echo "==> Installing standalone CLI tools..."
 
 install_gh_release() {
   local repo="$1" pattern="$2" binary="$3"
-  local tag ver archive
+  local tag ver f
   tag=$(gh release view -R "$repo" --json tagName --jq .tagName 2>/dev/null) || return
   ver=$(echo "$tag" | sed 's/^v//')
   echo "    Installing $binary v$ver ..."
-  archive=$(gh release download "$tag" -R "$repo" -p "$pattern" --clobber -O /tmp/"$binary-$tag" 2>&1 | tail -1)
-  case "$archive" in
+  local work
+  work=$(mktemp -d)
+  # Download into a work dir keeping the ORIGINAL asset filename so we can
+  # detect tar.gz vs zip from the actual file, not from gh's output text.
+  gh release download "$tag" -R "$repo" -p "$pattern" --clobber --dir "$work" 2>/dev/null || {
+    rm -rf "$work"
+    echo "    WARNING: could not download $binary ($pattern); skipping"
+    return 0
+  }
+  # Capture the actual downloaded asset name; gh keeps the original filename.
+  f=$(find "$work" -maxdepth 1 -type f -print -quit)
+  if [ -z "$f" ]; then
+    rm -rf "$work"
+    echo "    WARNING: no archive found for $binary; skipping"
+    return 0
+  fi
+  case "$f" in
     *.tar.gz|*.tgz)
-      local dir
-      dir=$(mktemp -d)
-      tar xzf "/tmp/$binary-$tag" -C "$dir"
-      if [ -f "$dir/$binary" ]; then
-        cp "$dir/$binary" "$TOOLS_DIR/$binary"
-      else
-        find "$dir" -name "$binary" -type f -exec cp {} "$TOOLS_DIR/$binary" \;
-      fi
-      rm -rf "$dir"
+      tar xzf "$f" -C "$work"
       ;;
     *.zip)
-      local dir
-      dir=$(mktemp -d)
-      unzip -qo "/tmp/$binary-$tag" -d "$dir"
-      find "$dir" -name "$binary" -type f -exec cp {} "$TOOLS_DIR/$binary" \;
-      rm -rf "$dir"
+      unzip -qo "$f" -d "$work"
+      ;;
+    *)
+      rm -rf "$work"
+      echo "    WARNING: unknown archive type for $binary ($f); skipping"
+      return 0
       ;;
   esac
+  # Locate the binary anywhere in the extracted tree.
+  if [ -f "$work/$binary" ]; then
+    cp "$work/$binary" "$TOOLS_DIR/$binary"
+  else
+    find "$work" -name "$binary" -type f -exec cp {} "$TOOLS_DIR/$binary" \; 2>/dev/null || true
+  fi
   chmod +x "$TOOLS_DIR/$binary"
-  rm -f "/tmp/$binary-$tag"
+  rm -rf "$work"
 }
 
 # Neovim
