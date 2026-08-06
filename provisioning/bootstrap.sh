@@ -75,27 +75,48 @@ bash "$REPO_DIR/install/dev-tools.sh"
 # ── Phase 4: Shell & Configs ──────────────────────────────────
 header "Phase 4: Shell Configuration"
 
-# Zsh config
-info "Installing .zshrc and .zprofile..."
-cp "$REPO_DIR/config/zsh/.zshrc" "$HOME/.zshrc"
-cp "$REPO_DIR/config/zsh/.zprofile" "$HOME/.zprofile"
+# Backup-then-install helper (idempotent, preserves existing dotfiles).
+install_dotfile() {
+  local src="$1" dest="$2"
+  if [ -e "$dest" ] && [ ! -L "$dest" ]; then
+    mv "$dest" "$dest.backup.$(date +%s)" 2>/dev/null
+    info "Backed up existing $dest"
+  fi
+  cp "$src" "$dest"
+}
 
-# Starship prompt
+# ── Zsh shell profiles ─────────────────────────────────────
+info "Installing .zshrc / .zprofile / .profile..."
+mkdir -p "$HOME/.local/bin" "$HOME/.local/share/zsh/plugins"
+install_dotfile "$REPO_DIR/config/zsh/.zshrc" "$HOME/.zshrc"
+install_dotfile "$REPO_DIR/config/zsh/.zprofile" "$HOME/.zprofile"
+install_dotfile "$REPO_DIR/config/zsh/.profile" "$HOME/.profile"
+
+# ── Git global config ─────────────────────────────────────
+info "Installing .gitconfig..."
+install_dotfile "$REPO_DIR/config/git/.gitconfig" "$HOME/.gitconfig"
+
+# ── Starship prompt ───────────────────────────────────────
 info "Installing Starship config..."
 mkdir -p "$HOME/.config"
 cp "$REPO_DIR/config/starship/starship.toml" "$HOME/.config/starship.toml"
 
-# Ghostty terminal
+# ── Ghostty terminal ──────────────────────────────────────
 info "Installing Ghostty config..."
 mkdir -p "$HOME/.config/ghostty"
 cp "$REPO_DIR/config/ghostty/config" "$HOME/.config/ghostty/config"
 
-# btop
+# ── Zellij multiplexer ────────────────────────────────────
+info "Installing Zellij config..."
+mkdir -p "$HOME/.config/zellij"
+cp "$REPO_DIR/config/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
+
+# ── btop ──────────────────────────────────────────────────
 info "Installing btop config..."
 mkdir -p "$HOME/.config/btop"
 cp "$REPO_DIR/config/btop/btop.conf" "$HOME/.config/btop/btop.conf"
 
-# Neovim
+# ── Neovim ────────────────────────────────────────────────
 info "Installing Neovim config..."
 if [ -d "$HOME/.config/nvim" ]; then
   mv "$HOME/.config/nvim" "$HOME/.config/nvim.backup.$(date +%s)"
@@ -114,10 +135,12 @@ if [ ! -d "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting" ]; then
   git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting"
 fi
 
-# FZF key bindings & completion
-if command -v fzf &>/dev/null && [ ! -f "$HOME/.fzf/shell/key-bindings.zsh" ]; then
-  info "Installing fzf integration..."
-  "$(which fzf)"/install --key-bindings --completion --no-update-rc 2>/dev/null || true
+# FZF key bindings & completion (handled by `fzf --zsh` in .zshrc;
+# just ensure the binary is present). No ~/.fzf legacy install needed.
+if command -v fzf &>/dev/null && fzf --zsh >/dev/null 2>&1; then
+  info "fzf shell integration available"
+else
+  warn "fzf not present or legacy; ensure it's installed via Brewfile"
 fi
 
 # ── Phase 5: Post-setup ───────────────────────────────────────
@@ -146,7 +169,7 @@ echo "  ║         ✅  ALL DONE!  Your Mac is set up.   ║"
 echo "  ╚══════════════════════════════════════════════╝"
 echo ""
 echo "  ${GREEN}What was installed:${NC}"
-echo "    71 command-line tools (via Homebrew)"
+echo "    76 command-line tools (via Homebrew)"
 echo "    32 applications (VS Code, Docker, browsers, etc.)"
 echo "    3 programming fonts (JetBrains Mono, Fira Code, etc.)"
 echo "    macOS settings (dark mode, fast keyboard, Finder tweaks)"

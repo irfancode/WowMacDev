@@ -1,0 +1,74 @@
+# ═══════════════════════════════════════════════════════════
+# .gitconfig — Global Git configuration (WowMacDev)
+# ═══════════════════════════════════════════════════════════
+
+[user]
+	name = Irfan
+	email = irfan@irfancode.com
+
+[init]
+	defaultBranch = main
+
+[color]
+	ui = auto
+
+[core]
+	editor = nvim
+	pager = delta
+	autocrlf = input
+
+[interactive]
+	diffFilter = delta --color-only --features=interactive
+
+[delta]
+	features = decorations
+	line-numbers = true
+	syntax-theme = Catppuccin Mocha
+	side-by-side = false
+
+[pull]
+	rebase = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[fetch]
+	prune = true
+
+[push]
+	autoSetupRemote = true
+	default = current
+
+[alias]
+	st = status -sb
+	co = checkout
+	br = branch
+	ci = commit
+	cm = commit -m
+	am = commit --amend
+	lg = log --oneline --graph --decorate -20
+	la = log --all --oneline --graph --decorate
+	df = diff
+	dfs = diff --staged
+	sh = show
+	sw = switch
+	ss = stash
+	sl = stash list
+	sa = stash apply
+	sp = stash pop
+	po = push origin
+	pof = push origin --force-with-lease
+	up = pull --rebase
+	lo = log --stat
+	last = log -1 --stat
+	who = shortlog -sn --
+	cleanup = branch --merged | grep -v '\\*\\|main\\|master' | xargs -r git branch -d
+	ignore = update-index --assume-unchanged
+	unignore = update-index --no-assume-unchanged
+	find = rev-list --all --grep
+
+[credential]
+	helper = osxkeychain
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
