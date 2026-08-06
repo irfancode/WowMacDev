@@ -318,11 +318,13 @@ check_all() {
 
 update_all() {
   header "Updating Tools"
-  for tool in "${ALL_TOOLS[@]}"; set +e; do
+  set +e
+  for tool in "${ALL_TOOLS[@]}"; do
     if ! "check_${tool}" &>/dev/null; then
       "update_${tool}"
     fi
-  done; set -e
+  done
+  set -e
   header "Update Complete"
 }
 

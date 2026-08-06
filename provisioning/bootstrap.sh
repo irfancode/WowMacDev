@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #
-# mac-bootstrap — One-shot Mac setup from a clean install
+# mac-bootstrap — One-shot Mac setup from a clean install (WowMacDev provisioning)
 #
 # For beginners:
 #   1. Open Terminal (Command+Space, type "Terminal", Enter)
 #   2. Copy and paste this line, then press Enter:
 #
-#        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/irfancode/mac-bootstrap/main/bootstrap.sh)"
+#        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/irfancode/WowMacDev/main/provisioning/bootstrap.sh)"
 #
 #   3. Wait 30-60 minutes. That's it.
 #
