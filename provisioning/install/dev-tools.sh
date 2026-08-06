@@ -51,26 +51,39 @@ fi
 # Node.js
 if ! command -v node &>/dev/null; then
   echo "    Installing Node.js..."
-  latest=$(gh release list -R nodejs/node -L 50 2>/dev/null | grep -v 'rc\|beta\|nightly' | grep '^v22' | head -1 | awk '{print $1}' | sed 's/^v//')
-  [ -z "$latest" ] && latest=$(gh release list -R nodejs/node -L 50 2>/dev/null | grep -v 'rc\|beta\|nightly' | head -1 | awk '{print $1}' | sed 's/^v//')
-  curl -fsSL "https://nodejs.org/dist/v${latest}/node-v${latest}-darwin-arm64.tar.gz" -o /tmp/node.tar.gz
-  tar xzf /tmp/node.tar.gz -C "$OPT_DIR"
-  ln -sf "$OPT_DIR/node-v${latest}-darwin-arm64/bin/node" "$TOOLS_DIR/node"
-  ln -sf "$OPT_DIR/node-v${latest}-darwin-arm64/bin/npm" "$TOOLS_DIR/npm"
-  ln -sf "$OPT_DIR/node-v${latest}-darwin-arm64/bin/npx" "$TOOLS_DIR/npx"
-  rm /tmp/node.tar.gz
+  latest=$(gh release list -R nodejs/node -L 50 2>/dev/null | grep -v 'rc\|beta\|nightly' | grep '^v22' | head -1 | awk '{print $1}' | sed 's/^v//' || true)
+  [ -z "$latest" ] && latest=$(gh release list -R nodejs/node -L 50 2>/dev/null | grep -v 'rc\|beta\|nightly' | head -1 | awk '{print $1}' | sed 's/^v//' || true)
+  if [ -z "$latest" ]; then
+    echo "    WARNING: could not determine latest Node version; skipping"
+  else
+    curl -fsSL "https://nodejs.org/dist/v${latest}/node-v${latest}-darwin-arm64.tar.gz" -o /tmp/node.tar.gz
+    tar xzf /tmp/node.tar.gz -C "$OPT_DIR"
+    ln -sf "$OPT_DIR/node-v${latest}-darwin-arm64/bin/node" "$TOOLS_DIR/node"
+    ln -sf "$OPT_DIR/node-v${latest}-darwin-arm64/bin/npm" "$TOOLS_DIR/npm"
+    ln -sf "$OPT_DIR/node-v${latest}-darwin-arm64/bin/npx" "$TOOLS_DIR/npx"
+    rm /tmp/node.tar.gz
+  fi
 fi
 
 # Go
 if ! command -v go &>/dev/null; then
   echo "    Installing Go..."
-  latest=$(gh release view golang/go --json tagName --jq .tagName | sed 's/^go//')
-  curl -fsSL "https://go.dev/dl/go${latest}.darwin-arm64.tar.gz" -o /tmp/go.tar.gz
-  tar xzf /tmp/go.tar.gz -C "$OPT_DIR"
-  mv "$OPT_DIR/go" "$OPT_DIR/go${latest}" 2>/dev/null || true
-  ln -sf "$OPT_DIR/go${latest}/bin/go" "$TOOLS_DIR/go"
-  ln -sf "$OPT_DIR/go${latest}/bin/gofmt" "$TOOLS_DIR/gofmt"
-  rm /tmp/go.tar.gz
+  # golang/go has no "latest" GitHub release (404), so resolve the newest
+  # STABLE tag (excludes rc/beta/nightly) from the remote tag list.
+  latest=$(git ls-remote --tags --refs https://github.com/golang/go 'go1.*' \
+    2>/dev/null | awk -F/ '{print $3}' | grep -E '^go[0-9]+\.[0-9]+\.[0-9]+$' \
+    | sort -V | tail -1 | sed 's/^go//')
+  if [ -z "$latest" ]; then
+    echo "    WARNING: could not determine latest Go version; skipping"
+  else
+    echo "    Installing Go v${latest} (darwin-arm64)..."
+    curl -fsSL "https://go.dev/dl/go${latest}.darwin-arm64.tar.gz" -o /tmp/go.tar.gz
+    tar xzf /tmp/go.tar.gz -C "$OPT_DIR"
+    mv "$OPT_DIR/go" "$OPT_DIR/go${latest}" 2>/dev/null || true
+    ln -sf "$OPT_DIR/go${latest}/bin/go" "$TOOLS_DIR/go"
+    ln -sf "$OPT_DIR/go${latest}/bin/gofmt" "$TOOLS_DIR/gofmt"
+    rm /tmp/go.tar.gz
+  fi
 fi
 
 # fzf
