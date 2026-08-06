@@ -1,0 +1,243 @@
+# WowMacDev — consolidated Brewfile
+#
+# Merged from:
+#   mac-bootstrap/Brewfile      (177+ tools/25+ apps, macOS 27 / M4)
+#   mac-catalyst/Brewfile       (38 CLI tools, 30 apps, 84 VS Code extensions)
+#   mac-dev-setup/bootstrap.sh  (Forward Deployment Engineer toolchain)
+#
+# Install with:  brew bundle install --file=Brewfile
+# Regenerate:    brew bundle dump --force --file=Brewfile
+
+# ── Taps ──────────────────────────────────────────────────────────────────────
+tap "homebrew/bundle"
+tap "homebrew/core"
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+tap "hashicorp/tap"
+
+# ── Shell & Prompt ────────────────────────────────────────────────────────────
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+brew "starship"
+brew "zoxide"
+brew "fzf"
+brew "eza"
+brew "bat"
+brew "fd"
+brew "ripgrep"
+brew "lsd"
+brew "tree"
+brew "powerlevel10k"
+brew "fish"
+brew "tmux"
+
+# ── Editors ───────────────────────────────────────────────────────────────────
+brew "neovim"
+brew "tree-sitter"
+brew "luarocks"
+brew "nvm"
+
+# ── Git & DevOps ──────────────────────────────────────────────────────────────
+brew "git"
+brew "gh"
+brew "lazygit"
+brew "tldr", link: false
+brew "tlrc"
+brew "kubernetes-cli"
+brew "kubectx"
+brew "helm"
+brew "helmfile"
+brew "k9s"
+brew "kind"
+brew "kustomize"
+brew "kubectl"
+brew "ansible"
+brew "sops"
+brew "age"
+brew "awscli"
+brew "azure-cli"
+brew "yq"
+brew "hashicorp/tap/packer", trusted: true
+brew "hashicorp/tap/terraform", trusted: true
+
+# ── Languages & Runtimes ──────────────────────────────────────────────────────
+brew "node"
+brew "python@3.11"
+brew "python@3.12"
+brew "python@3.13"
+brew "python@3.14"
+brew "rustup"
+brew "openjdk"
+brew "icu4c@76"
+brew "icu4c@77"
+brew "pipx"
+brew "pnpm"
+brew "yarn"
+
+# ── System / Monitoring ───────────────────────────────────────────────────────
+brew "btop"
+brew "htop"
+brew "bottom"
+brew "glances"
+brew "procs"
+brew "macos-trash"
+brew "topgrade"
+brew "wget"
+brew "httpie"
+brew "doggo"
+brew "mtr"
+brew "ncdu"
+brew "duf"
+brew "speedtest-cli"
+brew "mas"
+brew "aichat"
+
+# ── Containers / Cloud ────────────────────────────────────────────────────────
+brew "podman"
+cask "docker-desktop"
+cask "orbstack"
+cask "gcloud-cli"
+
+# ── Databases ─────────────────────────────────────────────────────────────────
+# (CLI-only; servers run via Docker/OrbStack)
+brew "sqlite"
+brew "mysql-client"
+brew "postgresql@16"
+brew "mongodb-community"
+
+# ── Browsers ──────────────────────────────────────────────────────────────────
+cask "google-chrome"
+cask "microsoft-edge"
+cask "firefox@developer-edition"
+cask "floorp"
+cask "zen"
+cask "thebrowsercompany-dia"
+
+# ── Terminals ─────────────────────────────────────────────────────────────────
+cask "ghostty"
+cask "hyper"
+cask "warp"
+
+# ── Editors (GUI) ─────────────────────────────────────────────────────────────
+cask "visual-studio-code"
+cask "zed"
+
+# ── Productivity ──────────────────────────────────────────────────────────────
+cask "notion"
+cask "craft"
+cask "rectangle"
+cask "raycast"
+cask "readdle-spark"
+cask "microsoft-auto-update"
+cask "lm-studio"
+cask "kiro-cli"
+
+# ── Microsoft Office ──────────────────────────────────────────────────────────
+cask "microsoft-word"
+cask "microsoft-excel"
+cask "microsoft-powerpoint"
+cask "microsoft-onenote"
+cask "onedrive"
+
+# ── Communication ─────────────────────────────────────────────────────────────
+cask "whatsapp"
+cask "messenger"
+cask "zoom"
+
+# ── Fonts ─────────────────────────────────────────────────────────────────────
+cask "font-jetbrains-mono-nerd-font"
+cask "font-fira-code"
+cask "font-fira-code-nerd-font"
+
+# ── App Store (requires `mas` + signed-in Apple ID) ──────────────────────────
+mas "uBlock Origin Lite", id: 6745342698
+
+# ── Language package managers ─────────────────────────────────────────────────
+cargo "du-dust"
+npm "corepack"
+
+# ── VS Code Extensions (84 from mac-catalyst) ─────────────────────────────────
+vscode "akamud.vscode-theme-onedark"
+vscode "alefragnani.project-manager"
+vscode "almenon.arepl"
+vscode "amazonwebservices.amazon-q-vscode"
+vscode "amazonwebservices.aws-toolkit-vscode"
+vscode "astro-build.astro-vscode"
+vscode "avetis.tokyo-night"
+vscode "batisteo.vscode-django"
+vscode "bencoleman.armview"
+vscode "codezombiech.gitignore"
+vscode "cstrap.python-snippets"
+vscode "davidanson.vscode-markdownlint"
+vscode "dbaeumer.vscode-eslint"
+vscode "deerawan.vscode-dash"
+vscode "demystifying-javascript.python-extensions-pack"
+vscode "donjayamanne.git-extension-pack"
+vscode "donjayamanne.githistory"
+vscode "dracula-theme.theme-dracula"
+vscode "eamodio.gitlens"
+vscode "esbenp.prettier-vscode"
+vscode "github.copilot-chat"
+vscode "golang.go"
+vscode "google.geminicodeassist"
+vscode "googlecloudtools.cloudcode"
+vscode "hbenl.vscode-test-explorer"
+vscode "jprestidge.theme-material-theme"
+vscode "kaih2o.python-resource-monitor"
+vscode "kevinrose.vsc-python-indent"
+vscode "littlefoxteam.vscode-python-test-adapter"
+vscode "mintlify.document"
+vscode "ms-azure-devops.azure-pipelines"
+vscode "ms-azuretools.vscode-azureappservice"
+vscode "ms-azuretools.vscode-azurefunctions"
+vscode "ms-azuretools.vscode-azureresourcegroups"
+vscode "ms-azuretools.vscode-azurestaticwebapps"
+vscode "ms-azuretools.vscode-azurestorage"
+vscode "ms-azuretools.vscode-azurevirtualmachines"
+vscode "ms-azuretools.vscode-bicep"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-azuretools.vscode-cosmosdb"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-dotnettools.vscode-dotnet-runtime"
+vscode "ms-edgedevtools.vscode-edge-devtools"
+vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
+vscode "ms-python.black-formatter"
+vscode "ms-python.debugpy"
+vscode "ms-python.isort"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-toolsai.jupyter"
+vscode "ms-toolsai.jupyter-hub"
+vscode "ms-toolsai.jupyter-keymap"
+vscode "ms-toolsai.jupyter-renderers"
+vscode "ms-toolsai.vscode-ai"
+vscode "ms-toolsai.vscode-ai-remote"
+vscode "ms-toolsai.vscode-jupyter-cell-tags"
+vscode "ms-toolsai.vscode-jupyter-powertoys"
+vscode "ms-toolsai.vscode-jupyter-slideshow"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vscode-remote.remote-ssh-edit"
+vscode "ms-vscode-remote.remote-wsl"
+vscode "ms-vscode.azurecli"
+vscode "ms-vscode.makefile-tools"
+vscode "ms-vscode.powershell"
+vscode "ms-vscode.test-adapter-converter"
+vscode "ms-vscode.vscode-node-azure-pack"
+vscode "njpwerner.autodocstring"
+vscode "njqdev.vscode-python-typehint"
+vscode "oderwat.indent-rainbow"
+vscode "randomfractalsinc.vscode-data-table"
+vscode "redhat.vscode-yaml"
+vscode "sensetime.kestrel"
+vscode "sourcery.sourcery"
+vscode "streetsidesoftware.code-spell-checker"
+vscode "thebarkman.vscode-djaneiro"
+vscode "tomoki1207.pdf"
+vscode "trabpukcip.wolf"
+vscode "uloco.theme-bluloco-light"
+vscode "unifiedjs.vscode-mdx"
+vscode "vscodevim.vim"
+vscode "xirider.livecode"
+vscode "zhuangtongfa.material-theme"
+vscode "ziyasal.vscode-open-in-github"

@@ -1,0 +1,27 @@
+Dia
+Discord
+Docker
+Firefox Developer Edition
+Floorp
+Ghostty
+Google Chrome
+Hyper
+Kiro CLI
+LM Studio
+Microsoft Edge
+Microsoft Excel
+Microsoft OneNote
+Microsoft PowerPoint
+Microsoft Word
+Notion
+OBS
+OneDrive
+Rectangle
+Safari
+Spark Desktop
+Visual Studio Code
+Warp
+WhatsApp
+Zed
+Zen
+zoom.us
