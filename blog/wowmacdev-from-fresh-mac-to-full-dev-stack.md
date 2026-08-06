@@ -53,7 +53,7 @@ The classic answer to Mac setup is a shell script — and that answer has exactl
 WowMacDev fixes that with a layered approach:
 
 - **[omamac](provisioning/omamac/)** — a single Go binary that treats setup the way you treat production: as *declarative, reversible, and verifiable* state. Organized around modules, each with four hooks: `install`, `update`, `verify`, and uninstall. Inspired by Omakub, built for Apple Silicon.
-- **[provisioning](provisioning/)** — the one-liner for the rest of us. Installs 71+ Homebrew packages, 32 desktop apps, language runtimes (Node, Go, Rust, Python, Java), Cloud CLIs (AWS, Azure, GCP, K8s, Terraform), and macOS preferences in a single command:
+- **[provisioning](provisioning/)** — the one-liner for the rest of us. Installs 76+ Homebrew packages, 32 desktop apps, language runtimes (Node, Go, Rust, Python, Java), Cloud CLIs (AWS, Azure, GCP, K8s, Terraform), and macOS preferences in a single command. It also wires up a complete, working terminal powerhouse — your `.zshrc` / `.zprofile` / `.profile`, a full Starship prompt, Zellij multiplexer, Ghostty, and git config — all installed idempotently so they're ready the moment your shell opens:
 
 ```bash
 bash provisioning/provision.sh bootstrap
