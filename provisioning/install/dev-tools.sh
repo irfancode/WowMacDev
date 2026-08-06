@@ -113,13 +113,13 @@ install_gh_release "sharkdp/bat" "bat-*-aarch64-apple-darwin.tar.gz" "bat"
 install_gh_release "lsd-rs/lsd" "lsd-*-aarch64-apple-darwin.tar.gz" "lsd"
 
 # lazygit
-install_gh_release "jesseduffield/lazygit" "lazygit_*_Darwin_arm64.tar.gz" "lazygit"
+install_gh_release "jesseduffield/lazygit" "lazygit_*_darwin_arm64.tar.gz" "lazygit"
 
 # zoxide
 install_gh_release "ajeetdsouza/zoxide" "zoxide-*-aarch64-apple-darwin.tar.gz" "zoxide"
 
 # starship
-install_gh_release "starship/starship" "starship-*-aarch64-apple-darwin.tar.gz" "starship"
+install_gh_release "starship/starship" "starship-aarch64-apple-darwin.tar.gz" "starship"
 
 # GitHub CLI (gh) - usually via brew, but fallback
 if ! command -v gh &>/dev/null; then
