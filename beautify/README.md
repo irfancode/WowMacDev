@@ -22,10 +22,16 @@ beautify/
 ├── config/
 │   ├── ghostty/config          # Ghostty terminal config
 │   ├── zellij/                 # Zellij multiplexer + Catppuccin theme
-│   ├── starship.toml           # Starship prompt
+│   ├── starship.toml           # Starship prompt — Chroma 'spectrum' palette
+│   ├── fastfetch/config.jsonc  # fastfetch system-info layout + logo
 │   └── zshrc                   # shell aliases, fzf/zoxide integration
 └── nix/                        # home-manager + nix-darwin flake
 ```
+
+`install.sh --theme <name>` writes a theme's files across every target it can
+reach. `--only-stack` (or the same files under `provisioning/config/`) installs
+the always-on stack configs — Ghostty, Zellij, **starship** and **fastfetch** —
+so the prompt and system-info banner are Chroma-colored and tightly laid out.
 
 ## Quick start
 
@@ -78,3 +84,19 @@ To use the Neovim theme with LazyVim, drop `nvim/chroma.lua` into `~/.config/nvi
   syntax with the standard `casks = [ … ]` list.
 - The installer no longer mutates an existing `.hyper.js`/`alacritty.toml`
   destructively — user configs are backed up before appending.
+
+## Recent changes
+
+- **Hyprland + Neovim variants** for all 10 themes: `themes/<name>/hyprland/`
+  (window border colors from the palette) and `themes/<name>/nvim/chroma.lua`
+  (self-contained 16-color colorscheme). `install.sh` copies both into
+  `~/.config/hypr/hyprland.theme.toml` and `~/.config/nvim/colors/chroma.lua`.
+- **Chroma-colored single-line Starship prompt** (`config/starship.toml`):
+  replaced the one-module-per-line format (which produced orphaned
+  `on <branch>` rows and large vertical gaps) with a single compact line, and
+  retargeted the palette from `catppuccin_mocha` to the Chroma `spectrum`
+  palette so the prompt matches the Ghostty theme exactly.
+- **New fastfetch config** (`config/fastfetch/config.jsonc`): auto logo with a
+  palette-index tint, ordered vertically-padded stats, and custom keys. Shipped
+  through both `beautify/install.sh` and `provisioning/bootstrap.sh`, so a
+  fresh install gets a clean, tight system-info banner.

@@ -63,8 +63,7 @@ WowMacDev/
 │   ├── bootstrap.sh          # one-shot fresh-Mac bootstrap
 │   ├── catalyst-install.sh    # reinstall your dev environment on any machine
 │   ├── install/             # dev-tools.sh, macos.sh, brew.sh
-│   ├── config/             # btop, ghostty, nvim, starship, zsh
-│   ├── sync/               # export/install apps + configs (backup & restore)
+│   ├── config/             # btop, fastfetch, ghostty, nvim, starship, zsh
 │   ├── sync/               # export/install apps + configs (backup & restore)
 │   └── omamac/             # declarative, reversible, verifiable Go setup engine
 ├── diagnostics/            # diagnose.sh, performance.sh, disk-usage.sh, optimize.sh, lib/ common.sh

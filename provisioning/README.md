@@ -23,7 +23,7 @@ provisioning/
 │   ├── macos.sh              # macOS preferences
 │   ├── dev-tools.sh          # Node, Go, Neovim, fzf, etc.
 │   └── mas-list.txt          # App Store app IDs
-├── config/                   # dotfile configs (zsh, starship, ghostty, btop, nvim)
+├── config/                   # dotfile configs (zsh, starship, ghostty, fastfetch, btop, nvim)
 ├── scripts/update-tools.sh   # daily updater + launch agent
 ├── sync/                     # app-sync engine
 │   ├── export_apps.sh        # export all app/config manifests
@@ -71,3 +71,7 @@ provisioning/
   pip/pipx, Ruby gems, App Store apps, VS Code extensions, Docker images, and
   shell/git configs — so a new Mac can be rebuilt from `sync/exports/`.
 - All entry points are `set -euo pipefail` safe and idempotent.
+- The terminal stack is fully themed: the **starship** prompt uses the Chroma
+  `spectrum` palette (single compact line, matching Ghostty/beautify colors)
+  and **fastfetch** ships a themed `config.jsonc` banner — both kept in sync
+  with `beautify/config/` and copied by `bootstrap.sh`.
