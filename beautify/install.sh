@@ -196,11 +196,12 @@ install_stack() {
 
     # Configs
     if [ "$DRYDR" = false ]; then
-        mkdir -p "$HOME/.config/ghostty" "$HOME/.config/zellij/themes" "$HOME/.config/starship"
+        mkdir -p "$HOME/.config/ghostty" "$HOME/.config/zellij/themes" "$HOME/.config/starship" "$HOME/.config/fastfetch"
         ln -sf "$CONFIG_DIR/ghostty/config" "$HOME/.config/ghostty/config"
         ln -sf "$CONFIG_DIR/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
         ln -sf "$CONFIG_DIR/zellij/themes/catppuccin-mocha.kdl" "$HOME/.config/zellij/themes/catppuccin-mocha.kdl"
         ln -sf "$CONFIG_DIR/starship.toml" "$HOME/.config/starship.toml"
+        ln -sf "$CONFIG_DIR/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
         if [[ -f "$HOME/.zshrc" ]] && ! diff -q "$HOME/.zshrc" "$CONFIG_DIR/zshrc" &>/dev/null; then
             cp "$HOME/.zshrc" "$HOME/.zshrc.bak.$(date +%s)"
         fi

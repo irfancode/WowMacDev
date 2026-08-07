@@ -106,6 +106,11 @@ info "Installing Ghostty config..."
 mkdir -p "$HOME/.config/ghostty"
 cp "$REPO_DIR/config/ghostty/config" "$HOME/.config/ghostty/config"
 
+# ── fastfetch system info ─────────────────────────────────
+info "Installing fastfetch config..."
+mkdir -p "$HOME/.config/fastfetch"
+cp "$REPO_DIR/config/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
+
 # ── Zellij multiplexer ────────────────────────────────────
 info "Installing Zellij config..."
 mkdir -p "$HOME/.config/zellij"
