@@ -1,3 +1,6 @@
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
+
 # ═══════════════════════════════════════════════════════════
 # .zshrc — Zsh interactive shell configuration (WowMacDev)
 # A comprehensive developer terminal powerhouse.
@@ -327,3 +330,9 @@ if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" != "vscode" ] && [ -z "$KITTY_WINDOW_ID" 
     echo "  ╰──────────────────────────────────────────────╯"
     echo ""
 fi
+
+# ── opencode ─────────────────────────────────────────────────
+export PATH=/Users/irfan/.opencode/bin:$PATH
+
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
