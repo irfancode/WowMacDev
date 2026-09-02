@@ -96,6 +96,17 @@ To use the Neovim theme with LazyVim, drop `nvim/chroma.lua` into `~/.config/nvi
   `on <branch>` rows and large vertical gaps) with a single compact line, and
   retargeted the palette from `catppuccin_mocha` to the Chroma `spectrum`
   palette so the prompt matches the Ghostty theme exactly.
+- **Starship scan/performance tuning** (`config/starship.toml`): the `package`
+  module scans the directory on every prompt; its default 30 ms budget aborts
+  under transient I/O load (iCloud, Spotlight, builds) and prints warnings.
+  Bumped `scan_timeout` to 500 ms and set `follow_symlinks = false` so the
+  prompt never blocks or warns. Mirrored in
+  `provisioning/config/starship/starship.toml`.
+- **Shell integration hooks** (`config/zshrc`): kiro-cli now sources its
+  `zshrc.pre.zsh` / `zshrc.post.zsh` blocks at the top/bottom of the file and
+  `opencode`'s `bin/` is on `PATH` — both kept at the very edges so the rest of
+  the config stays portable. Mirrored in
+  `provisioning/config/zsh/.zshrc`.
 - **New fastfetch config** (`config/fastfetch/config.jsonc`): auto logo with a
   palette-index tint, ordered vertically-padded stats, and custom keys. Shipped
   through both `beautify/install.sh` and `provisioning/bootstrap.sh`, so a

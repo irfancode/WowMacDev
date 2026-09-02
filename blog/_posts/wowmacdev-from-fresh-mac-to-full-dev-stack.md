@@ -109,6 +109,30 @@ Everything is in this repo. Start with the pillar that matches your pain:
 
 ---
 
+## Still iterating
+
+WowMacDev is maintained, not finished. Recent passes tightened the details you
+notice every day:
+
+- **A terminal powerhouse by default.** `provision.sh bootstrap` wires up a
+  working `.zshrc` / `.zprofile` / `.profile`, a single-line Chroma Starship
+  prompt, Zellij, Ghostty, and git config — so the first shell you open after
+  provisioning already feels lived-in.
+- **Prompt performance tuning.** Starship's `package` module rescans the
+  directory on every prompt; at its default 30 ms budget it aborts and barks
+  under transient filesystem load. We raised `scan_timeout` to 500 ms and
+  stopped following symlinks, so the prompt stays instantaneous and quiet even
+  while iCloud, Spotlight, or a build churns.
+- **Shell integration hooks.** The `.zshrc` reserves the very top and bottom
+  of the file for kiro-cli's `pre`/`post` blocks and keeps `opencode` on
+  `PATH` — tool-managed snippets live at the edges, and everything between
+  them stays portable.
+
+The point of all of it: the tooling should get out of your way the moment the
+terminal opens.
+
+---
+
 ## The Moral
 
 After setting up Macs six times across a career, I stopped re-learning the same lessons and started encoding them. WowMacDev is the sum of that work — declarative, reversible, verifiable, and beautiful. The next time a MacBook arrives, the ritual is over.
