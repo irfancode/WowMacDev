@@ -74,4 +74,9 @@ provisioning/
 - The terminal stack is fully themed: the **starship** prompt uses the Chroma
   `spectrum` palette (single compact line, matching Ghostty/beautify colors)
   and **fastfetch** ships a themed `config.jsonc` banner — both kept in sync
-  with `beautify/config/` and copied by `bootstrap.sh`.
+  with `beautify/config/` and copied by `bootstrap.sh`. Starship also sets a
+  generous `scan_timeout` (500 ms) with `follow_symlinks = false` so the
+  `package` module never stalls or warns under filesystem load.
+- `.zshrc` carries kiro-cli integration hooks at the very top/bottom
+  (`zshrc.pre.zsh` / `zshrc.post.zsh`) and puts `opencode`'s `bin/` on
+  `PATH`, matching the live setup in `beautify/config/`.
