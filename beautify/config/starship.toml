@@ -8,6 +8,14 @@
 format = """
 $username$hostname$directory$git_branch$git_status$status$package$cmd_duration$line_break$character"""
 
+# ── Scan / performance ─────────────────────────────────────
+# The `package` module triggers a directory scan on every prompt;
+# default scan_timeout is only 30 ms, so transient filesystem load
+# (iCloud, Spotlight, builds) makes it abort and warn. Raise the
+# budget and stop following symlinks so stats can't block.
+scan_timeout = 500        # ms (default: 30)
+follow_symlinks = false
+
 # ── Palette: Chroma spectrum ───────────────────────────────
 palette = "chroma_spectrum"
 
