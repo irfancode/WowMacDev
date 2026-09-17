@@ -1,4 +1,3 @@
-craft
 discord
 docker-desktop
 firefox@developer-edition
@@ -20,12 +19,10 @@ microsoft-word
 notion
 obs
 onedrive
-raycast
 readdle-spark
 rectangle
 thebrowsercompany-dia
 visual-studio-code
-warp
 whatsapp
 zed
 zen

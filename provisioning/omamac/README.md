@@ -48,8 +48,8 @@ See [Getting started](docs/getting-started.md) for full instructions.
 | `homebrew` | Install Homebrew; manage taps/formulae/casks | yes |
 | `fonts` | Install Nerd Fonts from `config.fonts` | yes |
 | `apps` | Install applications from `config.apps` | no |
-| `productivity` | Raycast, Rectangle, Hidden Bar, Stats | yes |
-| `terminal` | Ghostty / Warp / iTerm2 + theme | yes |
+| `productivity` | Rectangle, Hidden Bar, Stats | yes |
+| `terminal` | Ghostty / iTerm2 + theme | yes |
 | `git` | Identity, defaults, LFS, SSH keys, GitHub auth | yes |
 | `shell` | zsh, Starship, zoxide, fzf, aliases, env, functions | yes |
 | `tools` | Cloud/ops CLIs from `config.tools` | yes |

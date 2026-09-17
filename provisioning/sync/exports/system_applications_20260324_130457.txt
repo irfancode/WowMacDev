@@ -20,7 +20,6 @@ Rectangle
 Safari
 Spark Desktop
 Visual Studio Code
-Warp
 WhatsApp
 Zed
 Zen

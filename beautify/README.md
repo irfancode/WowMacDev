@@ -16,7 +16,7 @@ beautify/
 │   ├── aurora/ canopy/ clay/ forge/ frost/
 │   ├── nebula/ solar/ spectrum/ tidal/ void/
 │   │   ├── ghostty/   alacritty/  kitty/  foot/
-│   │   ├── warp/      hyper/      terminal/
+│   │   ├── hyper/      terminal/
 │   │   ├── hyprland/  # Hyprland window border colors
 │   │   └── nvim/      # Neovim colorscheme (chroma.lua)
 ├── config/
@@ -70,7 +70,7 @@ so the prompt and system-info banner are Chroma-colored and tightly laid out.
 | `clay` | Forest earth | Green/brown |
 | `canopy` | Forest canopy | Green/red |
 
-Each theme ships ready-made configs for **Ghostty, Alacritty, Kitty, Foot, Warp, Hyper, macOS Terminal, Hyprland** (window borders) and a self-contained **Neovim** colorscheme (`nvim/chroma.lua`, loaded with `vim.cmd("colorscheme chroma-<theme>")`).
+Each theme ships ready-made configs for **Ghostty, Alacritty, Kitty, Foot, Hyper, macOS Terminal, Hyprland** (window borders) and a self-contained **Neovim** colorscheme (`nvim/chroma.lua`, loaded with `vim.cmd("colorscheme chroma-<theme>")`).
 
 To use the Neovim theme with LazyVim, drop `nvim/chroma.lua` into `~/.config/nvim/colors/chroma.lua` and set `vim.cmd.colorscheme("chroma-spectrum")` (or whatever theme) in your config; `install.sh --theme <name>` copies it automatically.
 

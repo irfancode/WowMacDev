@@ -27,7 +27,7 @@ func (m *Module) Priority() int { return 25 }
 // Enabled implements module.Module.
 func (m *Module) Enabled(cfg *config.Config) bool {
 	t := cfg.Terminal
-	return t.Ghostty || t.Warp || t.ITerm2 || t.TerminalApp
+	return t.Ghostty || t.ITerm2 || t.TerminalApp
 }
 
 // Install implements module.Module.
@@ -38,9 +38,6 @@ func (m *Module) Install(ctx *module.Context) error {
 	var casks []string
 	if term.Ghostty {
 		casks = append(casks, "ghostty")
-	}
-	if term.Warp {
-		casks = append(casks, "warp")
 	}
 	if term.ITerm2 {
 		casks = append(casks, "iterm2")
@@ -71,9 +68,6 @@ func (m *Module) Remove(ctx *module.Context) error {
 	var casks []string
 	if term.Ghostty {
 		casks = append(casks, "ghostty")
-	}
-	if term.Warp {
-		casks = append(casks, "warp")
 	}
 	if term.ITerm2 {
 		casks = append(casks, "iterm2")

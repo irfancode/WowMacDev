@@ -97,9 +97,9 @@ func TestMissingLayerIgnored(t *testing.T) {
 }
 
 func TestAppsAll(t *testing.T) {
-	a := AppsConfig{Browser: []string{"Arc"}, Development: []string{"Zed"}, Utilities: []string{"Raycast"}}
+	a := AppsConfig{Browser: []string{"Arc"}, Development: []string{"Zed"}, Utilities: []string{"Notion"}}
 	all := a.All()
-	if len(all) != 3 || !contains(all, "Arc") || !contains(all, "Zed") || !contains(all, "Raycast") {
+	if len(all) != 3 || !contains(all, "Arc") || !contains(all, "Zed") || !contains(all, "Notion") {
 		t.Errorf("All() = %v", all)
 	}
 }

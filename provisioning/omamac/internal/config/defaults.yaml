@@ -84,7 +84,6 @@ ai:
 
 terminal:
   ghostty: true
-  warp: false
   iterm2: false
   terminal_app: false
   theme: nord
@@ -136,8 +135,6 @@ security:
   ssh: false
 
 productivity:
-  raycast:
-    enable: false
   rectangle:
     enable: true
   hidden_bar:
