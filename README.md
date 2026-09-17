@@ -53,13 +53,24 @@ Run the monitoring web dashboard (backend FastAPI + React frontend):
 cd monitoring/macadmin/backend && pip install -r requirements.txt && uvicorn app.main:app --reload
 cd monitoring/macadmin/frontend && npm install && npm run dev   # → http://localhost:5173
 ```
+
+Apple Intelligence from the command line (`apfel`) is included in the Brewfile —
+an OpenAI-compatible API server and CLI (see `brew info apfel`).
+
+## Recent Changes
+
+- **Removed** Craft, OrbStack, Raycast, and Warp — uninstalled from the system
+  and stripped from the Brewfile, omamac modules/config, monitoring endpoints,
+  sync exports, and docs.
+- **Added** `apfel` (Apple Intelligence CLI, v1.10.0) to the Brewfile and the
+  system.
 ## Repo Map
 
 ```
 WowMacDev/
 ├── provisioning/     # provision.sh unified CLI + Brewfile + sync/ + omamac engine
 │   ├── provision.sh          # bootstrap / install / export / analyze / diff / apps / omamac delegate
-│   ├── Brewfile              # 74 formulae, 32 casks, 84 VS Code extensions
+│   ├── Brewfile              # 75 formulae, 28 casks, 84 VS Code extensions
 │   ├── bootstrap.sh          # one-shot fresh-Mac bootstrap
 │   ├── catalyst-install.sh    # reinstall your dev environment on any machine
 │   ├── install/             # dev-tools.sh, macos.sh, brew.sh
