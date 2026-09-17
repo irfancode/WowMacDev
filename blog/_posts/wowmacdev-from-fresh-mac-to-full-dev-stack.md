@@ -80,7 +80,7 @@ Two tools, both born from the same frustration: manual hardware checks that take
 
 Your terminal is where you run code, manage files, interact with Git, and SSH into servers. Making it look good isn't vanity — it's ergonomics.
 
-- **[beautify](beautify/)** — 10 beautiful Monokai Pro–inspired themes for Ghostty, Alacritty, Warp, Hyper.js, Foot, Kitty, and macOS Terminal, with a single-command cross-platform setup utility, plus the full terminal stack (Ghostty + Zellij + Starship) config-as-code and portable to new machines.
+- **[beautify](beautify/)** — 10 beautiful Monokai Pro–inspired themes for Ghostty, Alacritty, Hyper.js, Foot, Kitty, and macOS Terminal, with a single-command cross-platform setup utility, plus the full terminal stack (Ghostty + Zellij + Starship) config-as-code and portable to new machines.
 
 ---
 

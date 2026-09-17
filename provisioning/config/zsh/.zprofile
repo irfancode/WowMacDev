@@ -11,9 +11,6 @@ elif [ -x /usr/local/bin/brew ]; then
     eval "$(/usr/local/bin/brew shellenv)"
 fi
 
-# ── OrbStack (containers / VMs) ───────────────────────────
-[ -f "$HOME/.orbstack/shell/init.zsh" ] && source "$HOME/.orbstack/shell/init.zsh"
-
 # ── Local bin dirs ────────────────────────────────────────
 [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 [ -d "$HOME/bin" ]        && export PATH="$HOME/bin:$PATH"

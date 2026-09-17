@@ -98,11 +98,11 @@ brew "aichat"
 # ── Containers / Cloud ────────────────────────────────────────────────────────
 brew "podman"
 cask "docker-desktop"
-cask "orbstack"
+
 cask "gcloud-cli"
 
 # ── Databases ─────────────────────────────────────────────────────────────────
-# (CLI-only; servers run via Docker/OrbStack)
+# (CLI-only; servers run via Docker)
 # mongodb-community was removed from homebrew/core (now under the mongodb/brew
 # tap) and conflicts with the "servers run via Docker" intent, so it is dropped.
 brew "sqlite"
@@ -120,7 +120,7 @@ cask "thebrowsercompany-dia"
 # ── Terminals ─────────────────────────────────────────────────────────────────
 cask "ghostty"
 cask "hyper"
-cask "warp"
+
 
 # ── Editors (GUI) ─────────────────────────────────────────────────────────────
 cask "visual-studio-code"
@@ -128,9 +128,7 @@ cask "zed"
 
 # ── Productivity ──────────────────────────────────────────────────────────────
 cask "notion"
-cask "craft"
 cask "rectangle"
-cask "raycast"
 cask "readdle-spark"
 cask "microsoft-auto-update"
 cask "lm-studio"

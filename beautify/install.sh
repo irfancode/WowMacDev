@@ -145,9 +145,6 @@ apply_theme() {
     # macOS Terminal.app
     f_term="$(ls "$tdir"/terminal/*.terminal 2>/dev/null | head -1)"
     [ -n "$f_term" ] && apply "$f_term" "$HOME/.config/terminal/Chroma-${THEME}.terminal"
-    # Warp
-    f_warp="$(ls "$tdir"/warp/*.yaml 2>/dev/null | head -1)"
-    [ -n "$f_warp" ] && apply "$f_warp" "$HOME/.warp/themes/chroma-${THEME}.yaml"
     # Hyper / Foot handled if .hyper.js / foot.ini exist
     f_hyper="$(ls "$tdir"/hyper/*.js 2>/dev/null | head -1)"
     [ -n "$f_hyper" ] && apply "$f_hyper" "$HOME/.hyper.js"

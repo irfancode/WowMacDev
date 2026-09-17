@@ -224,7 +224,6 @@ async def get_brew_casks(current_user: dict = Depends(get_current_user)):
                 {"name": "zed", "description": "High-performance, multiplayer code editor", "installed": False},
                 {"name": "docker-desktop", "description": "Containerization platform", "installed": False},
                 {"name": "ghostty", "description": "Fast, native terminal emulator", "installed": False},
-                {"name": "warp", "description": "Modern, Rust-based terminal", "installed": False},
                 {"name": "hyper", "description": "Terminal built on web technologies", "installed": False},
             ]
         },
@@ -244,12 +243,10 @@ async def get_brew_casks(current_user: dict = Depends(get_current_user)):
             "name": "Productivity",
             "description": "Apps to boost your productivity",
             "casks": [
-                {"name": "raycast", "description": "Blazingly fast launcher", "installed": False},
                 {"name": "rectangle", "description": "Window management app", "installed": False},
                 {"name": "notion", "description": "All-in-one workspace", "installed": False},
                 {"name": "readdle-spark", "description": "Email client by Readdle", "installed": False},
                 {"name": "amazon-q", "description": "AI-powered productivity tool", "installed": False},
-                {"name": "craft", "description": "Document editor", "installed": False},
             ]
         },
         "communication": {

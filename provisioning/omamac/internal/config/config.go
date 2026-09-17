@@ -169,7 +169,6 @@ type AIConfig struct {
 // TerminalConfig toggles terminal emulators and a theme.
 type TerminalConfig struct {
 	Ghostty     bool   `yaml:"ghostty"`
-	Warp        bool   `yaml:"warp"`
 	ITerm2      bool   `yaml:"iterm2"`
 	TerminalApp bool   `yaml:"terminal_app"`
 	Theme       string `yaml:"theme"`
@@ -203,7 +202,6 @@ type SecurityConfig struct {
 
 // ProductivityConfig toggles utility apps and their settings.
 type ProductivityConfig struct {
-	Raycast   map[string]any `yaml:"raycast"`
 	Rectangle map[string]any `yaml:"rectangle"`
 	HiddenBar map[string]any `yaml:"hidden_bar"`
 	Stats     map[string]any `yaml:"stats"`

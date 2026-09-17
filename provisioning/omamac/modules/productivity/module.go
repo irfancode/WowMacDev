@@ -1,5 +1,5 @@
 // Package productivitymodule installs utility apps from config.productivity:
-// Raycast, Rectangle, Hidden Bar and Stats.
+// Rectangle, Hidden Bar and Stats.
 package productivitymodule
 
 import (
@@ -18,7 +18,7 @@ type Module struct{}
 func (m *Module) Name() string { return "productivity" }
 
 // Summary implements module.Module.
-func (m *Module) Summary() string { return "Utility apps: Raycast, Rectangle, Hidden Bar, Stats" }
+func (m *Module) Summary() string { return "Utility apps: Rectangle, Hidden Bar, Stats" }
 
 // Priority implements module.Module.
 func (m *Module) Priority() int { return 22 }
@@ -39,9 +39,6 @@ func enabled(m map[string]any) bool {
 func selected(cfg *config.Config) []string {
 	p := cfg.Productivity
 	var out []string
-	if enabled(p.Raycast) {
-		out = append(out, "raycast")
-	}
 	if enabled(p.Rectangle) {
 		out = append(out, "rectangle")
 	}
