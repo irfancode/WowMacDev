@@ -94,6 +94,7 @@ brew "duf"
 brew "speedtest-cli"
 brew "mas"
 brew "aichat"
+brew "apfel"
 
 # ── Containers / Cloud ────────────────────────────────────────────────────────
 brew "podman"
@@ -120,7 +121,6 @@ cask "thebrowsercompany-dia"
 # ── Terminals ─────────────────────────────────────────────────────────────────
 cask "ghostty"
 cask "hyper"
-
 
 # ── Editors (GUI) ─────────────────────────────────────────────────────────────
 cask "visual-studio-code"
