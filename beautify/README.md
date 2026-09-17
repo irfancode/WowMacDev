@@ -90,7 +90,8 @@ To use the Neovim theme with LazyVim, drop `nvim/chroma.lua` into `~/.config/nvi
 - **Hyprland + Neovim variants** for all 10 themes: `themes/<name>/hyprland/`
   (window border colors from the palette) and `themes/<name>/nvim/chroma.lua`
   (self-contained 16-color colorscheme). `install.sh` copies both into
-  `~/.config/hypr/hyprland.theme.toml` and `~/.config/nvim/colors/chroma.lua`.
+  `~/.config/hypr/hyprland.theme.conf` and `~/.config/nvim/colors/chroma.lua`
+  and adds a `source` line to `hyprland.conf` so the border theme is loaded.
 - **Chroma-colored single-line Starship prompt** (`config/starship.toml`):
   replaced the one-module-per-line format (which produced orphaned
   `on <branch>` rows and large vertical gaps) with a single compact line, and

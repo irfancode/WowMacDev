@@ -151,8 +151,21 @@ apply_theme() {
     f_foot="$(ls "$tdir"/foot/*.ini 2>/dev/null | head -1)"
     [ -n "$f_foot" ] && apply "$f_foot" "$HOME/.config/foot/foot.ini"
     # Hyprland window borders
-    if [ -f "$tdir/hyprland/hyprland.toml" ]; then
-        apply "$tdir/hyprland/hyprland.toml" "$HOME/.config/hypr/hyprland.theme.toml"
+    local f_hypr
+    f_hypr="$(ls "$tdir"/hyprland/*.conf 2>/dev/null | head -1)"
+    if [ -n "$f_hypr" ]; then
+        local hdest="$HOME/.config/hypr/hyprland.theme.conf"
+        apply "$f_hypr" "$hdest"
+        # Wire the theme into hyprland.conf so Hyprland actually loads it
+        # (Hyprland only auto-sources hyprland.conf; other files need a `source`).
+        local hmain="$HOME/.config/hypr/hyprland.conf"
+        if [ "$DRYDR" = true ]; then
+            info "[dry] ensure $hmain sources $hdest"
+        elif [ -f "$hmain" ] && ! grep -q "hyprland.theme.conf" "$hmain"; then
+            cp "$hmain" "$hmain.bak.$(date +%s)"
+            printf '\n# Chroma theme (managed by beautify/install.sh)\nsource = %s\n' "$hdest" >> "$hmain"
+            ok "Sourced theme from $hmain"
+        fi
     fi
     # Neovim: copy the chroma colorscheme into the nvim colors dir
     if [ -f "$tdir/nvim/chroma.lua" ]; then
