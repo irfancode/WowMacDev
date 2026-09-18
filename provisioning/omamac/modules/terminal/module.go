@@ -94,11 +94,19 @@ func (m *Module) writeGhostty(ctx *module.Context) error {
 		return nil
 	}
 	path := dir + "/ghostty/config"
-	cfg := "font-family = JetBrainsMono Nerd Font\nfont-size = 13\n"
+	cfg := `font-family = JetBrainsMono Nerd Font Mono
+font-family = Symbols Nerd Font
+font-size = 14
+font-thicken = true
+font-feature = calt
+font-feature = liga
+font-feature = zero
+`
 	if ctx.Config.Terminal.Theme != "" {
 		cfg += fmt.Sprintf("theme = %s\n", ctx.Config.Terminal.Theme)
 	}
 	cfg += "confirm-close-surface = false\n"
+	cfg += "config-file = ?theme.ghostty\n"
 	changed, err := fsutil.WriteFileIfChanged(path, cfg, 0o644)
 	if err != nil {
 		return err
