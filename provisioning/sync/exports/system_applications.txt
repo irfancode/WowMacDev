@@ -1,11 +1,11 @@
 Dia
-Discord
 Docker
 Firefox Developer Edition
 Floorp
 Ghostty
 Google Chrome
 Hyper
+IntelliJ IDEA
 Kiro CLI
 LM Studio
 Microsoft Edge
@@ -14,11 +14,11 @@ Microsoft OneNote
 Microsoft PowerPoint
 Microsoft Word
 Notion
-OBS
 OneDrive
 Rectangle
 Safari
 Spark Desktop
+uBlock Origin Lite
 Visual Studio Code
 WhatsApp
 Zed

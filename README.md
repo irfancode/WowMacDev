@@ -59,18 +59,22 @@ an OpenAI-compatible API server and CLI (see `brew info apfel`).
 
 ## Recent Changes
 
+- **Installed** git, gh, jq, yq, ripgrep, fd, wget, tree, openjdk@21, scala, sbt,
+  maven, gradle, postgresql@17, redis, kafka and the Docker Desktop,
+  IntelliJ IDEA, and Microsoft Edge casks — synced into the Brewfile, sync
+  exports, and system snapshot.
+- **Added** `apfel` (Apple Intelligence CLI, v1.10.0) to the Brewfile and the
+  system.
 - **Removed** Craft, OrbStack, Raycast, and Warp — uninstalled from the system
   and stripped from the Brewfile, omamac modules/config, monitoring endpoints,
   sync exports, and docs.
-- **Added** `apfel` (Apple Intelligence CLI, v1.10.0) to the Brewfile and the
-  system.
 ## Repo Map
 
 ```
 WowMacDev/
 ├── provisioning/     # provision.sh unified CLI + Brewfile + sync/ + omamac engine
 │   ├── provision.sh          # bootstrap / install / export / analyze / diff / apps / omamac delegate
-│   ├── Brewfile              # 75 formulae, 28 casks, 84 VS Code extensions
+│   ├── Brewfile              # 83 formulae, 29 casks, 84 VS Code extensions
 │   ├── bootstrap.sh          # one-shot fresh-Mac bootstrap
 │   ├── catalyst-install.sh    # reinstall your dev environment on any machine
 │   ├── install/             # dev-tools.sh, macos.sh, brew.sh
