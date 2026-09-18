@@ -1,13 +1,14 @@
-discord
 docker-desktop
 firefox@developer-edition
 floorp
 font-fira-code
 font-fira-code-nerd-font
 font-jetbrains-mono-nerd-font
+gcloud-cli
 ghostty
 google-chrome
 hyper
+intellij-idea
 kiro-cli
 lm-studio
 microsoft-auto-update
@@ -17,7 +18,6 @@ microsoft-onenote
 microsoft-powerpoint
 microsoft-word
 notion
-obs
 onedrive
 readdle-spark
 rectangle

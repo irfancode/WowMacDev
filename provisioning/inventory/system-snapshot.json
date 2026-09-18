@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-06-27T23:30:00Z",
+  "captured_at": "2026-09-18T12:00:00Z",
   "hostname": "Singularity",
   "os": {
     "name": "macOS",
@@ -32,36 +32,50 @@
   },
   "editors": {
     "primary": "Neovim (LazyVim)",
-    "secondary": "vim"
+    "secondary": "IntelliJ IDEA 2026.2.3",
+    "others": ["Visual Studio Code", "Zed"]
   },
   "package_managers": {
-    "homebrew_formulae": 55,
-    "homebrew_casks": 12,
+    "homebrew_formulae": 177,
+    "homebrew_casks": 29,
     "mas_apps": ["uBlock Origin Lite"],
     "cargo_packages": ["du-dust"],
     "npm_globals": [],
     "pip_packages": ["certifi", "cffi", "cryptography", "pydantic"]
   },
   "homebrew_core": [
-    "age", "ansible", "awscli", "azure-cli", "btop", "doggo", "duf",
-    "glances", "helm", "helmfile", "htop", "httpie", "k9s", "kind",
-    "kubernetes-cli", "kustomize", "mas", "mtr", "ncdu", "openjdk",
-    "packer", "podman", "procs", "python@3.12", "python@3.13",
-    "python@3.14", "rustup", "sops", "speedtest-cli", "tldr", "tlrc",
-    "terraform", "tree", "yq"
+    "age", "aichat", "ansible", "apfel", "awscli", "azure-cli", "btop",
+    "doggo", "duf", "glances", "gradle", "helm", "helmfile", "htop",
+    "httpie", "jq", "k9s", "kafka", "kind", "kubernetes-cli", "kustomize",
+    "maven", "mas", "mtr", "ncdu", "openjdk", "openjdk@21", "packer",
+    "podman", "postgresql@16", "postgresql@17", "procs", "python@3.11",
+    "python@3.12", "python@3.13", "python@3.14", "redis", "ripgrep", "rustup",
+    "sbt", "scala", "sops", "speedtest-cli", "tldr", "tlrc", "terraform",
+    "tree", "wget", "yq"
   ],
-    "homebrew_casks": [
-    "1password-cli", "gcloud-cli", "ghostty", "microsoft-powerpoint",
-    "microsoft-word", "notion", "onedrive", "rectangle",
-    "whatsapp", "zoom"
+  "homebrew_casks": [
+    "docker-desktop", "firefox@developer-edition", "floorp", "font-fira-code",
+    "font-fira-code-nerd-font", "font-jetbrains-mono-nerd-font", "gcloud-cli",
+    "ghostty", "google-chrome", "hyper", "intellij-idea", "kiro-cli",
+    "lm-studio", "microsoft-auto-update", "microsoft-edge", "microsoft-excel",
+    "microsoft-onenote", "microsoft-powerpoint", "microsoft-word", "notion",
+    "onedrive", "readdle-spark", "rectangle", "thebrowsercompany-dia",
+    "visual-studio-code", "whatsapp", "zed", "zen", "zoom"
   ],
   "dev_toolchains": {
     "node": "v22.23.1",
     "python": "3.14.6 (default), 3.13.14, 3.12.13",
     "go": "1.26.4",
     "rust": "1.96.0",
-    "java": "OpenJDK 26.0.1",
-    "docker": "29.4.0 (via Docker Desktop)",
+    "java": "OpenJDK 21.0.12.1 (keg-only) + Temurin toolchain via brew",
+    "scala": "3.9.0 (scala-cli 1.16.0)",
+    "sbt": "2.0.9",
+    "maven": "3.9.16",
+    "gradle": "9.7.1",
+    "docker": "29.8.0 (via Docker Desktop)",
+    "postgres": "17.11 (postgresql@17) + 16.15 (postgresql@16)",
+    "redis": "8.10.2",
+    "kafka": "4.3.1",
     "k8s": "kubectl v1.36.2, kind, helm v4.2.2, helmfile, kustomize, k9s",
     "terraform": "1.15.7",
     "ansible": "core 2.21.1",
@@ -70,15 +84,17 @@
     "gcloud": "latest (via cask)"
   },
   "standalone_cli_tools": [
-    "bat", "fzf", "gh", "lazygit", "lsd", "nvim", "rg",
-    "starship", "zoxide", "update-tools"
+    "bat", "fd", "fzf", "gh", "git", "jq", "lazygit", "lsd", "nvim", "rg",
+    "starship", "tree", "wget", "yq", "zoxide", "update-tools"
   ],
   "applications": {
-    "browsers": ["Firefox Nightly", "Zen.app", "Dia.app"],
-    "office": ["Microsoft Word", "Microsoft PowerPoint", "ONLYOFFICE", "Notion"],
+    "browsers": ["Firefox Developer Edition", "Google Chrome", "Microsoft Edge", "Floorp", "Zen", "Dia"],
+    "office": ["Microsoft Word", "Microsoft PowerPoint", "Microsoft Excel", "Microsoft OneNote", "Notion"],
     "communication": ["WhatsApp", "Spark Desktop", "zoom.us"],
     "cloud_storage": ["OneDrive"],
-    "utilities": ["Rectangle", "Ghostty"]
+    "containers": ["Docker Desktop"],
+    "dev": ["IntelliJ IDEA", "Visual Studio Code", "Zed", "LM Studio"],
+    "utilities": ["Rectangle", "Ghostty", "Hyper", "Kiro CLI"]
   },
   "finder_favorites": [
     "Developer", "GitHub", "Documents", "Downloads", "Desktop",
@@ -88,7 +104,7 @@
     "nlb-intelligence", "FastFox", "phi4-web", "mlx-env",
     "rsumly", "keeper", "CURATED_BOOKMARKS.md"
   ],
-  "fonts": ["Iosevka Nerd Font (full family)"],
+  "fonts": ["Iosevka Nerd Font (full family)", "JetBrains Mono Nerd Font", "Fira Code"],
   "key_macos_preferences": {
     "dark_mode": true,
     "dock_autohide": true,

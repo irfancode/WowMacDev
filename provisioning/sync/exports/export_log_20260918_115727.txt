@@ -1,0 +1,36 @@
+[2026-09-18 11:57:27] === Starting Export ===
+[2026-09-18 11:57:27] Exporting Homebrew Formulae (CLI Tools)
+[2026-09-18 11:57:27] Exported      177 formulas
+[2026-09-18 11:57:27] Exporting Homebrew Casks (GUI Apps)
+[2026-09-18 11:57:27] Exported       29 casks
+[2026-09-18 11:57:27] Exporting Mac App Store Apps
+[2026-09-18 11:57:27] Exported        1 App Store apps
+[2026-09-18 11:57:27] Exporting System Applications (/Applications)
+[2026-09-18 11:57:27] Exported       26 system applications
+[2026-09-18 11:57:27] Exporting User Applications (~/Applications)
+[2026-09-18 11:57:27] No ~/Applications directory - skipped
+[2026-09-18 11:57:27] Exporting npm Global Packages
+[2026-09-18 11:57:27] Exported        0 npm packages
+[2026-09-18 11:57:27] Exporting pnpm Global Packages
+[2026-09-18 11:57:27] pnpm not found - skipped
+[2026-09-18 11:57:27] Exporting yarn Global Packages
+[2026-09-18 11:57:27] yarn not found - skipped
+[2026-09-18 11:57:27] Exporting pip Global Packages
+[2026-09-18 11:57:29] Exported        8 pip packages
+[2026-09-18 11:57:29] Exporting pipx Packages
+[2026-09-18 11:57:29] Exported        0 pipx packages
+[2026-09-18 11:57:29] Exporting Ruby Gems
+[2026-09-18 11:57:30] Exported       48 gems
+[2026-09-18 11:57:30] Exporting VS Code Extensions
+[2026-09-18 11:57:30] Exported       92 VS Code extensions
+[2026-09-18 11:57:30] Exporting Docker Images
+[2026-09-18 11:57:30] Exported        0 Docker images
+[2026-09-18 11:57:30] Exporting Git Configuration
+[2026-09-18 11:57:30] Exporting Shell Configuration
+[2026-09-18 11:57:30] Exported .zshrc
+[2026-09-18 11:57:30] Exported .bashrc
+[2026-09-18 11:57:30] Exported .zprofile
+[2026-09-18 11:57:30] Exported .profile
+[2026-09-18 11:57:30] Mac App Store Sign-in Status
+[2026-09-18 11:57:30] Export Summary
+[2026-09-18 11:57:30] Export completed successfully
