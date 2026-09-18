@@ -106,6 +106,10 @@ info "Installing Ghostty config..."
 mkdir -p "$HOME/.config/ghostty"
 cp "$REPO_DIR/config/ghostty/config" "$HOME/.config/ghostty/config"
 
+# ── Hyper terminal ─────────────────────────────────────────
+info "Installing Hyper config..."
+cp "$REPO_DIR/config/hyper/hyper.js" "$HOME/.hyper.js"
+
 # ── fastfetch system info ─────────────────────────────────
 info "Installing fastfetch config..."
 mkdir -p "$HOME/.config/fastfetch"
