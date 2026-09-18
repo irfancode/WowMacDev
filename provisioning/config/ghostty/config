@@ -1,41 +1,46 @@
-# ── Ghostty Configuration ──────────────────────────────────
-# Version: 1.3.1 — Last updated: June 2026
+# ═══════════════════════════════════════════════════════════
+# Ghostty Terminal Configuration — 2026 best-in-class
+# Ghostty 1.3.x · macOS · Chroma themes
+# Mirrors beautify/config/ghostty/config (single source of truth).
+# ═══════════════════════════════════════════════════════════
 
-# ── Font & Typography ─────────────────────────────────────
-# Use the MONOSPACED Nerd Font variant (NFM). Ghostty performs its own
-# cell-alignment + scaling for Nerd Font glyphs, and per the Ghostty docs it
-# behaves best with the mono (NFM) build rather than the proportional "NF".
-# The proportional variant is what makes prompt icons / ASCII art columns sit
-# off-grid; NFM keeps every glyph exactly one cell wide.
+# ── Font & Typography ──────────────────────────────────────
+# MONOSPACED Nerd Font variant (NFM): Ghostty does its own
+# cell-alignment for Nerd Font glyphs, so the mono build keeps
+# every icon exactly one cell wide (lazygit/btop/starship
+# borders stay on-grid). The proportional "NF" build made
+# prompt icons / ASCII-art columns drift off-grid.
 font-family = JetBrainsMono Nerd Font Mono
-# Fallback so any glyph the primary font lacks falls through to the symbols
-# font Ghostty ships with, instead of rendering as tofu.
+font-family-bold = JetBrainsMono Nerd Font Mono
+font-family-italic = JetBrainsMono Nerd Font Mono
+font-family-bold-italic = JetBrainsMono Nerd Font Mono
+# Symbols Nerd Font fallback: any glyph the primary font lacks
+# (extra NF icons) drops to the symbols font instead of tofu.
 font-family = Symbols Nerd Font
-font-size = 16
+font-size = 14
 font-thicken = true
+# Ligatures + slashed/relaxed zero for a modern code look.
 font-feature = calt
 font-feature = liga
 font-feature = zero
 
-# ── Theme & Colors ────────────────────────────────────────
+# ── Theme ──────────────────────────────────────────────────
+# Used when no Chroma theme is applied yet (install.sh --theme
+# writes ~/.config/ghostty/theme.ghostty, included below).
 theme = Catppuccin Mocha
-cursor-color = #F5C2E7
-cursor-text = cell-background
-selection-foreground = cell-background
-selection-background = #F5C2E7
-palette-generate = true
 minimum-contrast = 1.1
+palette-generate = true
 
-# ── Background & Transparency ─────────────────────────────
+# ── Background & Transparency ──────────────────────────────
 background-opacity = 0.88
+# blur intensity 30 (background-blur-radius is not a Ghostty key)
 background-blur = 30
 alpha-blending = linear-corrected
 
-# ── Window & Appearance ───────────────────────────────────
-window-padding-x = 10
-window-padding-y = 8
+# ── Window & Appearance ────────────────────────────────────
+window-padding-x = 12
+window-padding-y = 10
 window-padding-balance = true
-window-decoration = false
 macos-titlebar-style = transparent
 macos-non-native-fullscreen = true
 macos-option-as-alt = left
@@ -43,32 +48,40 @@ window-save-state = always
 window-step-resize = true
 window-vsync = true
 
-# ── Cursor ────────────────────────────────────────────────
+# ── Cursor & Mouse ─────────────────────────────────────────
 cursor-style = bar
 cursor-style-blink = true
 cursor-opacity = 0.85
+cursor-click-to-move = true
 mouse-hide-while-typing = true
 copy-on-select = clipboard
+clipboard-read = allow
+clipboard-write = allow
 
-# ── Split & Window Polish ─────────────────────────────────
+# ── Splits & Window Polish ─────────────────────────────────
 unfocused-split-opacity = 0.92
 split-divider-color = #313244
 split-preserve-zoom = navigation
 grapheme-width-method = unicode
 
-# ── Shell Integration & Behavior ──────────────────────────
+# ── Shell Integration ──────────────────────────────────────
 shell-integration = detect
-cursor-click-to-move = true
-confirm-close-surface = false
-clipboard-read = allow
-clipboard-write = allow
+shell-integration-features = cursor,sudo,title,path
+
+# ── Command Finished Notifications ─────────────────────────
 notify-on-command-finish = unfocused
 notify-on-command-finish-after = 10s
 
-# ── Scrollback ────────────────────────────────────────────
-scrollback-limit = 10000000
+# ── Scrollback (50M chars ~50MB) ───────────────────────────
+scrollback-limit = 50000000
 
-# ── Keybindings: Splits ───────────────────────────────────
+# ── Quick Terminal (Quake-style dropdown) ──────────────────
+quick-terminal-position = top
+quick-terminal-screen = mouse
+quick-terminal-autohide = true
+quick-terminal-animation-duration = 0.15
+
+# ── Keybindings: Splits ────────────────────────────────────
 keybind = cmd+d=new_split:right
 keybind = cmd+shift+d=new_split:down
 keybind = cmd+shift+h=goto_split:left
@@ -82,7 +95,7 @@ keybind = cmd+alt+j=resize_split:down,5
 keybind = cmd+shift+z=toggle_split_zoom
 keybind = cmd+shift+e=equalize_splits
 
-# ── Keybindings: Tabs ─────────────────────────────────────
+# ── Keybindings: Tabs ──────────────────────────────────────
 keybind = cmd+t=new_tab
 keybind = cmd+w=close_surface
 keybind = cmd+shift+[=previous_tab
@@ -94,13 +107,20 @@ keybind = cmd+4=goto_tab:4
 keybind = cmd+5=goto_tab:5
 keybind = cmd+9=last_tab
 
-# ── Keybindings: Font Size ────────────────────────────────
+# ── Keybindings: Font Size ─────────────────────────────────
 keybind = cmd+plus=increase_font_size:1
 keybind = cmd+minus=decrease_font_size:1
 keybind = cmd+0=reset_font_size
 
-# ── Keybindings: Search ───────────────────────────────────
+# ── Keybindings: Search ────────────────────────────────────
 keybind = cmd+f=start_search
 
-# ── Keybindings: Quick Terminal ───────────────────────────
+# ── Keybindings: Quick Terminal ────────────────────────────
 keybind = ctrl+`=toggle_quick_terminal
+
+# ── Chroma theme hook (managed by beautify/install.sh) ─────
+# install.sh --theme <name> writes the palette to
+# ~/.config/ghostty/theme.ghostty (this include is optional,
+# so Ghostty starts fine before any theme is applied). Included
+# keys override the main config above.
+config-file = ?theme.ghostty

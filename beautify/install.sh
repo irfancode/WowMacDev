@@ -119,10 +119,13 @@ apply_theme() {
     info "Applying theme '${THEME}'..."
     local tdir="$THEMES_DIR/$THEME"
 
-    # Ghostty
+    # Ghostty — the main config is symlinked from the repo stack and carries
+    # font/keybinding settings, so we must NOT overwrite it with the pure
+    # palette. Instead write ~/.config/ghostty/theme.ghostty and let the main
+    # config pull it in via `config-file = ?theme.ghostty`.
     if [ -d "${tdir}/ghostty" ]; then
         if command -v ghostty >/dev/null 2>&1 || [ "$DRYDR" = true ]; then
-            apply "$tdir/ghostty/config" "$HOME/.config/ghostty/config"
+            apply "$tdir/ghostty/config" "$HOME/.config/ghostty/theme.ghostty"
         fi
     fi
     # Alacritty (+ append if user already has a config)
@@ -226,13 +229,14 @@ if [ "$DO_THEME" = true ]; then apply_theme; fi
 if [ "$DO_STACK" = true ]; then install_stack; fi
 
 if [ "$DO_FONT" = true ] && [ "$OS" = macos ] && [ "$DRYDR" = false ]; then
-    if ! command -v fontinstall.sh >/dev/null 2>&1; then
-        # fallback: brew install jetbrains nerd font
-        brew install font-jetbrains-mono-nerd-font 2>/dev/null && ok "Installed JetBrainsMono Nerd Font" || true
-    fi
-    if ! fc-list 2>/dev/null | grep -qi "JetBrains.*Nerd"; then
-        brew install font-jetbrains-mono-nerd-font 2>/dev/null && ok "Installed JetBrainsMono Nerd Font"
-    fi
+    install_font() {
+        local cask="$1" pat="$2"
+        if ! fc-list 2>/dev/null | grep -qi "$pat"; then
+            brew install "$cask" 2>/dev/null && ok "Installed $cask"
+        fi
+    }
+    install_font font-jetbrains-mono-nerd-font "JetBrains.*Nerd"
+    install_font font-symbols-only-nerd-font "Symbols Nerd Font"
 fi
 
 if [ "$DO_STACK" = true ]; then

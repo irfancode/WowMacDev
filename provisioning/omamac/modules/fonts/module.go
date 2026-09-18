@@ -45,6 +45,8 @@ func caskFor(name string) string {
 		return "font-monaspace-nerd-font"
 	case "geist mono":
 		return "font-geist-mono-nerd-font"
+	case "symbols", "symbols nerd font":
+		return "font-symbols-only-nerd-font"
 	}
 	return "font-" + strings.ToLower(strings.ReplaceAll(strings.TrimSpace(name), " ", "-")) + "-nerd-font"
 }

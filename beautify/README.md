@@ -21,6 +21,8 @@ beautify/
 │   │   └── nvim/      # Neovim colorscheme (chroma.lua)
 ├── config/
 │   ├── ghostty/config          # Ghostty terminal config
+│   │   #   font: JetBrainsMono Nerd Font Mono + Symbols Nerd Font fallback
+│   │   #   theme: backs onto config-file = ?theme.ghostty (see install.sh)
 │   ├── zellij/                 # Zellij multiplexer + Catppuccin theme
 │   ├── starship.toml           # Starship prompt — Chroma 'spectrum' palette
 │   ├── fastfetch/config.jsonc  # fastfetch system-info layout + logo
@@ -87,6 +89,20 @@ To use the Neovim theme with LazyVim, drop `nvim/chroma.lua` into `~/.config/nvi
 
 ## Recent changes
 
+- **Best-in-class 2026 Ghostty config** (`config/ghostty/config`, mirrored in
+  `provisioning/config/ghostty/config`): switched to the **monospaced** Nerd
+  Font build — `JetBrainsMono Nerd Font Mono` (+ bold/italic variants) with a
+  `Symbols Nerd Font` fallback so every glyph renders at exactly one cell width
+  (icons no longer drift off-grid). Added 1.3.x polish: `background-blur = 30`,
+  `alpha-blending = linear-corrected`, `palette-generate`, `minimum-contrast`,
+  grapheme-comparing, split/quick-terminal polish and full Cmd-based
+  keybindings. Font casks: `font-jetbrains-mono-nerd-font` +
+  `font-symbols-only-nerd-font` (install.sh + Brewfile + omamac defaults).
+- **Ghostty theme no longer clobbers the main config**: previously
+  `install.sh --theme` copied the palette over `~/.config/ghostty/config`,
+  wiping the font/keybinding stack. It now writes
+  `~/.config/ghostty/theme.ghostty`, which the main config pulls in with an
+  optional `config-file = ?theme.ghostty` include.
 - **Hyprland + Neovim variants** for all 10 themes: `themes/<name>/hyprland/`
   (window border colors from the palette) and `themes/<name>/nvim/chroma.lua`
   (self-contained 16-color colorscheme). `install.sh` copies both into

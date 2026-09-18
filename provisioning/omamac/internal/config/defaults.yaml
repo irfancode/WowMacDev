@@ -24,6 +24,7 @@ homebrew:
     - zsh-syntax-highlighting
   casks:
     - font-jetbrains-mono-nerd-font
+    - font-symbols-only-nerd-font
     - font-fira-code-nerd-font
     - font-hack-nerd-font
     - font-cascadia-code-nf
