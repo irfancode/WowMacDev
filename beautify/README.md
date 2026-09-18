@@ -23,6 +23,8 @@ beautify/
 │   ├── ghostty/config          # Ghostty terminal config
 │   │   #   font: JetBrainsMono Nerd Font Mono + Symbols Nerd Font fallback
 │   │   #   theme: backs onto config-file = ?theme.ghostty (see install.sh)
+│   ├── hyper/hyper.js          # Hyper 3.x base config (font/cursor/splits)
+│   │   #   same NFM font; palette injected by scripts/hyper-apply-theme.js
 │   ├── zellij/                 # Zellij multiplexer + Catppuccin theme
 │   ├── starship.toml           # Starship prompt — Chroma 'spectrum' palette
 │   ├── fastfetch/config.jsonc  # fastfetch system-info layout + logo
@@ -89,6 +91,16 @@ To use the Neovim theme with LazyVim, drop `nvim/chroma.lua` into `~/.config/nvi
 
 ## Recent changes
 
+- **Best-in-class 2026 Hyper config** (`config/hyper/hyper.js`, mirrored in
+  `provisioning/config/hyper/hyper.js`): full 3.4/3.5 config with
+  `JetBrainsMono Nerd Font Mono` + `Symbols Nerd Font` fallback (icons remain
+  exactly one cell wide), font smoothing/ligatures, cursor bar, padding,
+  copy-on-select, 10k scrollback, splits/tabs/font-size keymaps. install_stack
+  seeds `~/.hyper.js` if missing.
+- **Hyper theme no longer overwrites your config**: `install.sh --theme` used
+  to replace `~/.hyper.js` with a bare palette (dropping font/cursor/padding).
+  It now runs `scripts/hyper-apply-theme.js`, which swaps only the Chroma
+  palette keys and preserves the rich base config and any user edits.
 - **Best-in-class 2026 Ghostty config** (`config/ghostty/config`, mirrored in
   `provisioning/config/ghostty/config`): switched to the **monospaced** Nerd
   Font build — `JetBrainsMono Nerd Font Mono` (+ bold/italic variants) with a

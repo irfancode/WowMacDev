@@ -148,9 +148,20 @@ apply_theme() {
     # macOS Terminal.app
     f_term="$(ls "$tdir"/terminal/*.terminal 2>/dev/null | head -1)"
     [ -n "$f_term" ] && apply "$f_term" "$HOME/.config/terminal/Chroma-${THEME}.terminal"
-    # Hyper / Foot handled if .hyper.js / foot.ini exist
+    # Hyper — inject the palette into ~/.hyper.js instead of replacing the
+    # config, so the rich base (font/cursor/window/splits) and user edits
+    # survive theme switches. Seeded from config/hyper/hyper.js if missing.
     f_hyper="$(ls "$tdir"/hyper/*.js 2>/dev/null | head -1)"
-    [ -n "$f_hyper" ] && apply "$f_hyper" "$HOME/.hyper.js"
+    if [ -n "$f_hyper" ]; then
+        if [ "$DRYDR" = true ]; then
+            info "[dry] inject palette from $(basename "$f_hyper") into $HOME/.hyper.js"
+        elif command -v node >/dev/null 2>&1; then
+            node "$SCRIPT_DIR/scripts/hyper-apply-theme.js" "$f_hyper" >/dev/null \
+                && ok "Applied Chroma '${THEME}' palette to $HOME/.hyper.js"
+        else
+            apply "$f_hyper" "$HOME/.hyper.js"
+        fi
+    fi
     f_foot="$(ls "$tdir"/foot/*.ini 2>/dev/null | head -1)"
     [ -n "$f_foot" ] && apply "$f_foot" "$HOME/.config/foot/foot.ini"
     # Hyprland window borders
@@ -215,6 +226,12 @@ install_stack() {
         ln -sf "$CONFIG_DIR/zellij/themes/catppuccin-mocha.kdl" "$HOME/.config/zellij/themes/catppuccin-mocha.kdl"
         ln -sf "$CONFIG_DIR/starship.toml" "$HOME/.config/starship.toml"
         ln -sf "$CONFIG_DIR/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
+        # Hyper: seed a rich base config only if the user has none yet. When a
+        # theme exists, ~/.hyper.js is written by apply_theme, so don't clobber.
+        if [ ! -f "$HOME/.hyper.js" ]; then
+            cp "$CONFIG_DIR/hyper/hyper.js" "$HOME/.hyper.js"
+            ok "Created $HOME/.hyper.js (Hyper base config)"
+        fi
         if [[ -f "$HOME/.zshrc" ]] && ! diff -q "$HOME/.zshrc" "$CONFIG_DIR/zshrc" &>/dev/null; then
             cp "$HOME/.zshrc" "$HOME/.zshrc.bak.$(date +%s)"
         fi
@@ -222,6 +239,9 @@ install_stack() {
         ok "Config files linked"
     else
         info "dry: linking configs (ghostty, zellij, starship, zshrc)"
+        if [ ! -f "$HOME/.hyper.js" ]; then
+            info "dry: seeding $HOME/.hyper.js from config/hyper/hyper.js"
+        fi
     fi
 }
 
