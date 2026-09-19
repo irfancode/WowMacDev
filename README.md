@@ -59,6 +59,9 @@ an OpenAI-compatible API server and CLI (see `brew info apfel`).
 
 ## Recent Changes
 
+- **Ran `brew upgrade`** — openjdk 27, gradle 9.7.1, node 26.9.0, awscli 2.36.49,
+  jemalloc, packer 1.16.1 (hashicorp tap trust configured), plus Chrome, Edge,
+  Spark, Dia, WhatsApp casks; exports and snapshot refreshed.
 - **Installed** git, gh, jq, yq, ripgrep, fd, wget, tree, openjdk@21, scala, sbt,
   maven, gradle, postgresql@17, redis, kafka and the Docker Desktop,
   IntelliJ IDEA, and Microsoft Edge casks — synced into the Brewfile, sync

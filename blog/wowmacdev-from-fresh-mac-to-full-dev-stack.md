@@ -132,6 +132,10 @@ notice every day:
   the runtimes/data tier — OpenJDK 21, Scala, sbt, Maven, Gradle,
   PostgreSQL 17, Redis, Kafka — with IntelliJ IDEA and Docker Desktop joining
   the GUI editors.
+- **Stays up to date.** Regular `brew upgrade` passes — most recently openjdk 27,
+  node 26.9.0, gradle, awscli 2.36.49 and packer 1.16.1 — keep the repo's sync
+  exports and snapshot aligned with the live machine (hashicorp tap trust
+  configured for packer + terraform).
 
 The point of all of it: the tooling should get out of your way the moment the
 terminal opens.
