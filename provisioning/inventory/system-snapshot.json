@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-09-18T12:00:00Z",
+  "captured_at": "2026-09-19T08:25:00Z",
   "hostname": "Singularity",
   "os": {
     "name": "macOS",
@@ -36,7 +36,7 @@
     "others": ["Visual Studio Code", "Zed"]
   },
   "package_managers": {
-    "homebrew_formulae": 177,
+    "homebrew_formulae": 180,
     "homebrew_casks": 29,
     "mas_apps": ["uBlock Origin Lite"],
     "cargo_packages": ["du-dust"],
@@ -63,11 +63,11 @@
     "visual-studio-code", "whatsapp", "zed", "zen", "zoom"
   ],
   "dev_toolchains": {
-    "node": "v22.23.1",
+    "node": "v26.9.0",
     "python": "3.14.6 (default), 3.13.14, 3.12.13",
     "go": "1.26.4",
     "rust": "1.96.0",
-    "java": "OpenJDK 21.0.12.1 (keg-only) + Temurin toolchain via brew",
+    "java": "OpenJDK 27 (brew) + openjdk@21 / openjdk@25 keg-only",
     "scala": "3.9.0 (scala-cli 1.16.0)",
     "sbt": "2.0.9",
     "maven": "3.9.16",
@@ -77,9 +77,10 @@
     "redis": "8.10.2",
     "kafka": "4.3.1",
     "k8s": "kubectl v1.36.2, kind, helm v4.2.2, helmfile, kustomize, k9s",
-    "terraform": "1.15.7",
+    "terraform": "1.16.3",
+    "packer": "1.16.1",
     "ansible": "core 2.21.1",
-    "aws": "aws-cli 2.35.11",
+    "aws": "aws-cli 2.36.49",
     "azure": "azure-cli 2.87.0",
     "gcloud": "latest (via cask)"
   },

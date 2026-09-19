@@ -1,3 +1,4 @@
+abseil
 ada-url
 age
 aichat
@@ -50,6 +51,7 @@ harfbuzz
 hdrhistogram_c
 helm
 helmfile
+highway
 htop
 httpie
 icu4c@76
@@ -120,6 +122,7 @@ nvm
 oniguruma
 openjdk
 openjdk@21
+openjdk@25
 openssl@3
 packer
 pcre2
