@@ -33,6 +33,7 @@ BLUE='\033[0;34m'; PURPLE='\033[0;35m'; CYAN='\033[0;36m'; BOLD='\033[1m'; NC='\
 ok()  { printf "${GREEN}✓${NC} %s\n" "$1"; }
 info(){ printf "${BLUE}→${NC} %s\n" "$1"; }
 warn(){ printf "${YELLOW}▲${NC} %s\n" "$1"; }
+fail(){ printf "${RED}✗${NC} %s\n" "$1" >&2; }
 
 THEME=""
 DO_STACK=true
@@ -74,7 +75,8 @@ while [ $# -gt 0 ]; do
 done
 
 # ── Interactive theme picker ──────────────────────────────────────────────
-if [ "$DO_THEME" = true ] && [ "$THEME" = "none" ]; then
+# Runs when no --theme was given (THEME is still empty).
+if [ "$DO_THEME" = true ] && [ -z "$THEME" ]; then
     if [ "$DRYDR" = true ]; then
         THEME="${AVAILABLE[0]}"
         info "Theme (dry-run): $THEME"
@@ -214,7 +216,14 @@ install_stack() {
         fi
     fi
 
-    for p in ghostty zellij starship zoxide eza bat fd fzf ripgrep lazygit; do
+    # Shell stack, search, containers, Kubernetes, cloud.
+    for p in starship zoxide eza bat fd fzf ripgrep lazygit direnv stern; do
+        install_pkg "$p"
+    done
+    # Zsh plugins. These are formatters under share/, and 95-plugins.zsh
+    # sources them from the Homebrew prefix, so they must match the one
+    # the user is about to configure.
+    for p in zsh-autosuggestions zsh-syntax-highlighting; do
         install_pkg "$p"
     done
 
@@ -225,6 +234,10 @@ install_stack() {
         ln -sf "$CONFIG_DIR/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
         ln -sf "$CONFIG_DIR/zellij/themes/catppuccin-mocha.kdl" "$HOME/.config/zellij/themes/catppuccin-mocha.kdl"
         ln -sf "$CONFIG_DIR/starship.toml" "$HOME/.config/starship.toml"
+        # The light prompt is selected by the `profile light` shell
+        # function via STARSHIP_CONFIG; Starship has no per-profile
+        # config, so it needs its own symlink.
+        ln -sf "$CONFIG_DIR/starship.light.toml" "$HOME/.config/starship.light.toml"
         ln -sf "$CONFIG_DIR/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
         # Hyper: seed a rich base config only if the user has none yet. When a
         # theme exists, ~/.hyper.js is written by apply_theme, so don't clobber.
@@ -232,21 +245,51 @@ install_stack() {
             cp "$CONFIG_DIR/hyper/hyper.js" "$HOME/.hyper.js"
             ok "Created $HOME/.hyper.js (Hyper base config)"
         fi
-        if [[ -f "$HOME/.zshrc" ]] && ! diff -q "$HOME/.zshrc" "$CONFIG_DIR/zshrc" &>/dev/null; then
-            cp "$HOME/.zshrc" "$HOME/.zshrc.bak.$(date +%s)"
+        # Keep the previous .zshrc next to the config it came from rather
+        # than scattering timestamped copies through $HOME.
+        if [ -e "$HOME/.zshrc" ] && ! diff -q "$HOME/.zshrc" "$CONFIG_DIR/zshrc" &>/dev/null; then
+            local bak="$CONFIG_DIR/.backup-$(date +%Y%m%d-%H%M%S)"
+            mkdir -p "$bak"
+            cp "$HOME/.zshrc" "$bak/zshrc"
+            ok "Previous .zshrc saved to $bak/zshrc"
         fi
         ln -sf "$CONFIG_DIR/zshrc" "$HOME/.zshrc"
         ok "Config files linked"
     else
-        info "dry: linking configs (ghostty, zellij, starship, zshrc)"
+        info "dry: linking configs (ghostty, zellij, starship + light, zshrc)"
         if [ ! -f "$HOME/.hyper.js" ]; then
             info "dry: seeding $HOME/.hyper.js from config/hyper/hyper.js"
         fi
     fi
 }
 
+# ── 3. Apple Terminal profiles ────────────────────────────────────────────
+# Terminal.app stores its profiles in com.apple.Terminal's plist, which
+# needs archived NSFont/NSColor objects. The Swift script writes them
+# correctly; hand-editing the plist does not.
+install_terminal_profiles() {
+    local script="$SCRIPT_DIR/scripts/make-terminal-profiles.swift"
+    if [ "$OS" != macos ]; then
+        return
+    fi
+    if [ ! -f "$script" ]; then
+        warn "Terminal profile script not found: $script"
+        return
+    fi
+    if ! command -v swift >/dev/null 2>&1; then
+        warn "swift not found; skipping Apple Terminal profiles"
+        return
+    fi
+    if [ "$DRYDR" = true ]; then
+        info "dry: swift $script"
+        return
+    fi
+    swift "$script" && ok "Apple Terminal Dev:* profiles created"
+}
+
 if [ "$DO_THEME" = true ]; then apply_theme; fi
 if [ "$DO_STACK" = true ]; then install_stack; fi
+if [ "$DO_STACK" = true ]; then install_terminal_profiles; fi
 
 if [ "$DO_FONT" = true ] && [ "$OS" = macos ] && [ "$DRYDR" = false ]; then
     install_font() {
@@ -262,8 +305,9 @@ fi
 if [ "$DO_STACK" = true ]; then
     echo ""
     echo -e "${PURPLE}══ Setup Complete ══${NC}"
-    echo "  Terminal: Ghostty · Prompt: Starship · Multiplexer: Zellij ($THEME)"
-    echo "  Tools: eza, bat, fd, fzf, ripgrep, lazygit, zoxide"
+    echo "  Terminal: Apple Terminal (Dev:Default · Dev:Light · …) / Ghostty"
+    echo "  Prompt: Starship · Plugins: autosuggestions, syntax-highlighting, direnv"
+    echo "  Tools: eza, bat, fd, fzf, ripgrep, lazygit, zoxide, stern"
     echo ""
-    echo "Next: restart your shell, then:  open -a Ghostty   # then:  zj"
+    echo "Next: open a new shell, then run  profile light  (or  profile  for the list)"
 fi

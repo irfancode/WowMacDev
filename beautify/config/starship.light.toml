@@ -1,4 +1,21 @@
 # ═══════════════════════════════════════════════════════════
+#  Starship — LIGHT profile
+# ═══════════════════════════════════════════════════════════
+#  Selected by:  profile light
+#  (sets STARSHIP_CONFIG to this file and switches the Apple
+#  Terminal scheme to Dev:Light)
+#
+#  GENERATED from starship.toml — same layout, darkened palette.
+#  The dark palette cannot be reused: colours tuned for #1c1b1f
+#  (the green #a9dc76, the teal #78dce8) fall to ~1.5:1 on white
+#  and are effectively invisible. Every entry below clears WCAG
+#  AA (4.5:1) against the #fdfdfd background.
+#
+#  If you edit starship.toml, re-apply the same palette edits
+#  here, or the two profiles drift apart.
+# ═══════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════
 #  Starship — single-line developer prompt for Apple Terminal
 #  Palette: "Chroma spectrum", tuned for the Dev:Default scheme.
 # ═══════════════════════════════════════════════════════════
@@ -15,7 +32,7 @@
 
 format = "$directory$git_branch$git_status$character$cmd_duration"
 # Everything not named above is right-aligned before the cursor.
-right_format = "$status$package$hostname$aws$azure$gcloud$docker_context$kubernetes$terraform$python$nodejs$golang$rust$java$ruby$swift$lua$direnv$env_var"
+right_format = "$status$package$hostname$aws$azure$gcloud$docker_context$kubernetes$terraform$python$nodejs$golang$rust$java$ruby$swift$lua$env_var"
 
 scan_timeout = 500
 follow_symlinks = false
@@ -24,26 +41,26 @@ follow_symlinks = false
 palette = "chroma"
 
 [palettes.chroma]
-text     = "#fcfcfa"
-surface  = "#2d2a2e"
-subtext  = "#727072"
-overlay  = "#727072"
-blue     = "#fc9867"   # accent (Monokai orange)
-red      = "#ff6188"
-green    = "#a9dc76"
-yellow   = "#ffd866"
-teal     = "#78dce8"
-mauve    = "#ab9df2"
-peach    = "#fc9867"
-maroon   = "#ff6188"
-pink     = "#ab9df2"
-sapphire = "#78dce8"
-lavender = "#ab9df2"
-flamingo = "#ffd866"
+text      = "#24292f"
+surface   = "#f0f1f3"
+subtext   = "#57606a"
+overlay   = "#6e7781"
+blue      = "#bc4c00"   # accent (Monokai orange)
+red       = "#cf222e"
+green     = "#116329"
+yellow    = "#7d4e00"
+teal      = "#1b7c83"
+mauve     = "#8250df"
+peach     = "#bc4c00"
+maroon    = "#a40e26"
+pink      = "#8250df"
+sapphire  = "#0969da"
+lavender  = "#8250df"
+flamingo  = "#7d4e00"
 # Extra roles used by the environment modules below.
-prod     = "#ff6188"   # production: loud on purpose
-warn     = "#ffd866"
-dev      = "#78dce8"
+prod      = "#a40e26"   # production: loud on purpose
+warn      = "#7d4e00"
+dev       = "#0969da"
 
 # ── Directory ─────────────────────────────────────────────
 [directory]

@@ -1,2 +1,6 @@
 **/node_modules/
 monitoring/macadmin/frontend/dist/
+
+# Timestamped copies of the user's previous shell config, written by
+# beautify/install.sh. Machine-specific and regenerated on every run.
+beautify/config/.backup-*/

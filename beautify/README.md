@@ -27,8 +27,27 @@ beautify/
 │   │   #   same NFM font; palette injected by scripts/hyper-apply-theme.js
 │   ├── zellij/                 # Zellij multiplexer + Catppuccin theme
 │   ├── starship.toml           # Starship prompt — Chroma 'spectrum' palette
+│   ├── starship.light.toml     # high-contrast light prompt (profile light)
 │   ├── fastfetch/config.jsonc  # fastfetch system-info layout + logo
-│   └── zshrc                   # shell aliases, fzf/zoxide integration
+│   ├── zshrc                   # thin loader: sources config/zsh/*.zsh in order
+│   └── zsh/                    # ← the shell, split by concern
+│       ├── 00-paths.zsh        #   PATH, de-duplicated and ordered
+│       ├── 05-exports.zsh     #   LESS/GIT_PAGER/AWS_PAGER…
+│       ├── 10-history.zsh      #   history file, sharing, trimming
+│       ├── 20-keys.zsh        #   ZLE key bindings
+│       ├── 30-tools.zsh       #   eza/bat/fd/rg aliases, watch
+│       ├── 45-git.zsh         #   git aliases
+│       ├── 50-fzf.zsh         #   fzf + history/file/dir pickers
+│       ├── 55-zoxide.zsh      #   zoxide
+│       ├── 60-cloud.zsh       #   AWS/Azure/GCP awareness
+│       ├── 65-k8s.zsh         #   kubectl helpers + production guard
+│       ├── 70-docker.zsh      #   docker helpers + guarded cleanup
+│       ├── 80-functions.zsh   #   env-show, hget, killport, afzf…
+│       ├── 90-prompt.zsh      #   Starship init + `profile`
+│       └── 95-plugins.zsh     #   autosuggestions, direnv, syntax-highlighting
+├── scripts/
+│   ├── make-terminal-profiles.swift   # creates the Dev:* Apple Terminal profiles
+│   └── hyper-apply-theme.js
 └── nix/                        # home-manager + nix-darwin flake
 ```
 
@@ -78,6 +97,113 @@ Each theme ships ready-made configs for **Ghostty, Alacritty, Kitty, Foot, Hyper
 
 To use the Neovim theme with LazyVim, drop `nvim/chroma.lua` into `~/.config/nvim/colors/chroma.lua` and set `vim.cmd.colorscheme("chroma-spectrum")` (or whatever theme) in your config; `install.sh --theme <name>` copies it automatically.
 
+## The shell (Apple Terminal workstation)
+
+`config/zshrc` is only a loader. It locates itself, then sources every
+`config/zsh/NN-*.zsh` in numeric order, so each file stays small enough to read
+in one sitting and a change is confined to one place.
+
+```zsh
+_zshrc="${ZDOTDIR:-$HOME}/.zshrc"
+ZSH_CONFIG_DIR="${_zshrc:A:h}/zsh"
+typeset -gU path PATH          # no duplicate PATH entries
+for _f in "$ZSH_CONFIG_DIR"/[0-9][0-9]-*.zsh; do source "$_f"; done
+```
+
+Modules are plain `.zsh` files, not plugins, so there is no load order to
+remember beyond the filename. The two kiro-cli `zshrc.pre/post` hooks are
+preserved at the very top and bottom.
+
+### Terminal profiles
+
+`scripts/make-terminal-profiles.swift` creates five Apple Terminal profiles
+under the `Dev:` prefix. Terminal stores its profiles in
+`com.apple.Terminal`'s plist as archived `NSFont`/`NSColor` objects, which
+cannot be hand-written — hence the Swift script rather than plist surgery.
+
+| Profile | Use |
+|---|---|
+| `Dev:Default` | everyday work |
+| `Dev:Production` | production alerting colours |
+| `Dev:Remote` | high-contrast, for SSH boxes |
+| `Dev:Light` | light background, AA-contrast prompt |
+| `Dev:Focus` | no decorations |
+
+Switch at any time with `profile <name>`, or run `profile` to list them. This
+sets `STARSHIP_CONFIG` for the current shell *and* retints the running Terminal
+windows, so the prompt and the window background always agree.
+
+```zsh
+profile            # list
+profile light      # light window + starship.light.toml
+profile default    # back to normal
+```
+
+Starship has no per-profile configuration, which is why
+`~/.config/starship.light.toml` is a second symlink to the tracked file.
+
+### Prompt
+
+`config/starship.toml` is a single line. On the left: the last command's status,
+directory, git branch with dirty state, and the command duration when it was
+slow. On the right: host, cloud account, container, Kubernetes context, and
+runtime versions — each appearing only when it is actually active.
+
+Kubernetes contexts are colour-coded, and anything matching `prod`/`production`
+is bold red. The `package` module is **disabled**: it forces a tree walk on
+every prompt, and its timeout warnings are worse than the information is worth.
+
+### Key bindings
+
+| Keys | Action |
+|---|---|
+| `Ctrl+R` | fzf search over history |
+| `Ctrl+T` | fzf pick files, insert into the buffer |
+| `Alt+C` | fzf jump to a directory |
+| `Ctrl+A` / `Ctrl+E` | start / end of line (Emacs muscle memory) |
+| `Alt+E` | edit the whole line in `$EDITOR` |
+| `Ctrl+Y` | paste from the system clipboard |
+| `→` (End) | accept the autosuggestion |
+| `Alt+←` / `Alt+→` | move by word |
+
+### Safety guards
+
+The old config had destructive commands behind friendly aliases. These are now
+functions that refuse and explain:
+
+- **`docker-clean`** used to be an unguarded `docker system prune -af`. It now
+  reports what would go, asks for confirmation, and keeps volumes.
+- **`kubectl`** in a production-looking context now requires typing `prod`
+  before a mutating verb runs. Read-only verbs pass through untouched, and
+  `KUBE_FORCE=1` bypasses it deliberately.
+- **`awsprod`** refuses to run unless the profile actually looks like
+  production.
+- **`hget`** and the cloud helpers never mutate state or make a network call
+  you did not ask for.
+
+`cloud-env-report` reads the SDK config files on disk rather than shelling out,
+so it stays instant and cannot make a stray network call from your prompt.
+
+## Safety, update, uninstall
+
+```bash
+# update
+git -C /Users/irfan/WowMacDev pull
+cd /Users/irfan/WowMacDev/beautify && ./install.sh --only-stack   # relink + reinstall
+
+# rebuild the Terminal profiles after a font or colour change
+swift scripts/make-terminal-profiles.swift
+
+# uninstall
+rm ~/.zshrc ~/.config/starship.toml ~/.config/starship.light.toml
+rm -rf ~/.config/starship
+# then restore the old shell config from the newest backup:
+ls -t config/.backup-*/ && cp config/.backup-<newest>/zshrc ~/.zshrc
+```
+
+`install.sh` never overwrites a previous `.zshrc` silently: it copies it into
+`config/.backup-<timestamp>/zshrc` first.
+
 ## Fixes applied during consolidation
 
 - **zshrc**: fixed `AICHAVT_*` → `AICHAT_*` typo; replaced the machine-specific
@@ -126,16 +252,29 @@ To use the Neovim theme with LazyVim, drop `nvim/chroma.lua` into `~/.config/nvi
   retargeted the palette from `catppuccin_mocha` to the Chroma `spectrum`
   palette so the prompt matches the Ghostty theme exactly.
 - **Starship scan/performance tuning** (`config/starship.toml`): the `package`
-  module scans the directory on every prompt; its default 30 ms budget aborts
-  under transient I/O load (iCloud, Spotlight, builds) and prints warnings.
-  Bumped `scan_timeout` to 500 ms and set `follow_symlinks = false` so the
-  prompt never blocks or warns. Mirrored in
-  `provisioning/config/starship/starship.toml`.
+  module scans the directory on every prompt and its timeout warnings are worse
+  than the information is worth, so it is now `disabled = true` rather than
+  merely given a bigger `scan_timeout`. `follow_symlinks = false` keeps the
+  remaining git module from walking into linked trees.
 - **Shell integration hooks** (`config/zshrc`): kiro-cli now sources its
   `zshrc.pre.zsh` / `zshrc.post.zsh` blocks at the top/bottom of the file and
   `opencode`'s `bin/` is on `PATH` — both kept at the very edges so the rest of
-  the config stays portable. Mirrored in
-  `provisioning/config/zsh/.zshrc`.
+  the config stays portable. The rest of the shell moved into `config/zsh/`
+  (see above), and the loader resolves its own directory so it works from any
+  `ZDOTDIR`.
+- **zsh-autosuggestions and zsh-syntax-highlighting are now actually loaded.**
+  Both were installed via Homebrew in the old setup but never sourced, so they
+  were dead weight while Powerlevel10k was installed and unused.
+- **direnv now really works.** The previous hand-rolled `chpwd` hook activated
+  a `.envrc` only by accident and never cleared the environment when you left
+  the directory. It is replaced with direnv's own `eval "$(direnv hook zsh)"`,
+  loaded before syntax-highlighting so the ZLE widgets it installs are wrapped.
+- **PATH is de-duplicated and ordered.** It contained `.local/bin` three times
+  and `.docker/bin` seven times, and `/usr/local/bin` came before
+  `/opt/homebrew/bin`, so an old binary could shadow the one you just
+  installed. `typeset -gU path PATH` plus an explicit order fixes both.
+- **New `Dev:*` Apple Terminal profiles** with a light variant of the prompt
+  (see above), selectable in one command via `profile`.
 - **New fastfetch config** (`config/fastfetch/config.jsonc`): auto logo with a
   palette-index tint, ordered vertically-padded stats, and custom keys. Shipped
   through both `beautify/install.sh` and `provisioning/bootstrap.sh`, so a
