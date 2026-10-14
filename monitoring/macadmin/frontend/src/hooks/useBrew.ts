@@ -15,7 +15,9 @@ api.interceptors.request.use((config) => {
   const token = localStorage.getItem('macadmin-auth')
   if (token) {
     try {
-      const { accessToken } = JSON.parse(token)
+      // zustand persist stores { state: { accessToken }, version }
+      const parsed = JSON.parse(token)
+      const accessToken = parsed?.accessToken ?? parsed?.state?.accessToken
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`
       }

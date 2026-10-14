@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 import psutil
 import platform
+import re
 import subprocess
 from datetime import datetime
 
@@ -76,6 +77,11 @@ async def get_system_info(current_user: dict = Depends(get_current_user)):
     except:
         hardware_info = "Unknown"
     
+    # Structured fields parsed from the raw command output
+    def _grab(pattern: str, text: str):
+        match = re.search(pattern, text)
+        return match.group(1).strip() if match else None
+
     return {
         "platform": platform.system(),
         "platform_release": platform.release(),
@@ -85,6 +91,13 @@ async def get_system_info(current_user: dict = Depends(get_current_user)):
         "hostname": platform.node(),
         "macos_info": macos_info,
         "hardware_info": hardware_info,
+        # Fields consumed by the dashboard System Info card
+        "os_version": _grab(r"ProductVersion:\s*(.+)", macos_info),
+        "build_version": _grab(r"BuildVersion:\s*(.+)", macos_info),
+        "model": _grab(r"Model Name:\s*(.+)", hardware_info),
+        "chip": _grab(r"Chip:\s*(.+)", hardware_info),
+        "cores": _grab(r"Total Number of Cores:\s*(.+)", hardware_info),
+        "memory": _grab(r"Memory:\s*(.+)", hardware_info),
     }
 
 @router.get("/processes")

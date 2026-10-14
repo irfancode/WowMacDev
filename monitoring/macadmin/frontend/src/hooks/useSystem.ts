@@ -14,7 +14,9 @@ api.interceptors.request.use((config) => {
   const token = localStorage.getItem('macadmin-auth')
   if (token) {
     try {
-      const { accessToken } = JSON.parse(token)
+      // zustand persist stores { state: { accessToken }, version }
+      const parsed = JSON.parse(token)
+      const accessToken = parsed?.accessToken ?? parsed?.state?.accessToken
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`
       }
@@ -51,7 +53,7 @@ export function useTopProcesses() {
   return useQuery({
     queryKey: ['system', 'processes', 'top'],
     queryFn: async () => {
-      const { data } = await api.get('/processes')
+      const { data } = await api.get('/processes/')
       return data
     },
     refetchInterval: 5000,
@@ -62,7 +64,7 @@ export function useAvailableUpdates() {
   return useQuery({
     queryKey: ['system', 'updates'],
     queryFn: async () => {
-      const { data } = await api.get('/updates')
+      const { data } = await api.get('/updates/')
       return data
     },
     refetchInterval: 60 * 60 * 1000,
