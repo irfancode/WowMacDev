@@ -22,6 +22,8 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = True
+        # .env also carries deployment/VITE_* keys that the API doesn't consume
+        extra = "ignore"
 
 @lru_cache()
 def get_settings() -> Settings:
