@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+
 interface User {
   id: string
   username: string
@@ -33,7 +35,7 @@ export const useAuthStore = create<AuthState>()(
           const body = new URLSearchParams()
           body.append('username', username)
           body.append('password', password)
-          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+          const response = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body,
@@ -73,7 +75,7 @@ export const useAuthStore = create<AuthState>()(
             return
           }
 
-          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/me`, {
+          const response = await fetch(`${API_URL}/api/auth/me`, {
             headers: { 'Authorization': `Bearer ${accessToken}` },
           })
 
